@@ -1,0 +1,61 @@
+
+# Compilation
+NAME			=	computorv2
+CC			=	clang++
+FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11
+HEADER			=	-I$(PATH_INC)
+
+
+# Color Code and template code
+_YELLOW		=	\033[38;5;184m
+_GREEN		=	\033[38;5;46m
+_RESET		=	\033[0m
+_INFO		=	[$(_YELLOW)INFO$(_RESET)]
+_SUCCESS	=	[$(_GREEN)SUCCESS$(_RESET)]
+
+
+# Path directories
+PATH_INC		=	include
+PATH_SRC		=	src
+PATH_OBJ		=	obj
+
+
+# Source
+SRCS_HELLO		=	hello.cpp
+
+SRC			=	$(addprefix $(PATH_SRC)/, main.cpp) \
+				$(addprefix $(PATH_SRC)/hello/, $(SRCS_HELLO))
+
+OBJ			=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRC:.cpp=.o)))
+
+# Headers
+INC_FILES		=	hello.hpp
+
+INC			=	$(addprefix $(PATH_INC)/, $(INC_FILES))
+
+
+# Rules
+all			:	$(NAME)
+
+$(NAME)			:	$(OBJ) $(INC)
+				@$(CC) $(FLAGS) $(HEADER) $(SRC) -o $(NAME)
+				@echo "$(_INFO) Creation of the executable"
+				@echo "$(_SUCCESS) program created"
+
+$(PATH_OBJ)/%.o		:	$(PATH_SRC)/*/%.cpp $(INC)
+				@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
+				@echo "$(_INFO) Compilation of $*"
+
+$(PATH_OBJ)/%.o		:	$(PATH_SRC)/%.cpp $(INC)
+				@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
+				@echo "$(_INFO) Compilation of $*"
+
+clean			:
+				@rm -rf $(PATH_OBJ)/*.o
+				@ echo "$(_INFO) Delete temporary files"
+
+fclean			:	clean
+				@rm -rf $(NAME)
+				@ echo "$(_INFO) Delete executable"
+
+re			:	fclean all
