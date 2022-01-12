@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/07 10:54:02 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2022/01/12 18:06:26 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ int	main(void)
 		std::string line;
 		if (!std::getline(std::cin, line))
 			break;
+		if (!line.compare("up"))
+			std::cout << "get up command" << std::endl;
 		std::cout << "line : [" << line << "]" << std::endl;
 	}
-	std::cout << std::endl << "Goodbye, I hope you had a nice time here!" << std::endl;
+	std::cout << std::endl << "End of the program" << std::endl;
 	return (0);
 }

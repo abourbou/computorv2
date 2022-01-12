@@ -1,7 +1,7 @@
 
 # Compilation
 NAME			=	computorv2
-CC			=	clang++
+CC				=	clang++
 FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11
 HEADER			=	-I$(PATH_INC)
 
@@ -19,34 +19,39 @@ PATH_INC		=	include
 PATH_SRC		=	src
 PATH_OBJ		=	obj
 
+#Computorv1 integration
+SRCS_COMPUTORV1	=	computorv1_functions.cpp polyn_equation.cpp
+INC_COMPUTORV1	=	computorv1_functions.hpp polyn_equation.hpp
 
 # Source
 SRCS_HELLO		=	hello.cpp
 
-SRC			=	$(addprefix $(PATH_SRC)/, main.cpp) \
-				$(addprefix $(PATH_SRC)/hello/, $(SRCS_HELLO))
+SRC				=	$(addprefix $(PATH_SRC)/, main.cpp) \
+					$(addprefix $(PATH_SRC)/computorv1/, $(SRCS_COMPUTORV1))\
+					$(addprefix $(PATH_SRC)/hello/, $(SRCS_HELLO))
 
-OBJ			=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRC:.cpp=.o)))
+OBJ				=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRC:.cpp=.o)))
 
 # Headers
 INC_FILES		=	hello.hpp
 
-INC			=	$(addprefix $(PATH_INC)/, $(INC_FILES))
+INC				=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
+					$(addprefix $(PATH_INC)/, $(INC_COMPUTORV1))
 
 
 # Rules
-all			:	$(NAME)
+all				:	$(NAME)
 
 $(NAME)			:	$(OBJ) $(INC)
 				@$(CC) $(FLAGS) $(HEADER) $(SRC) -o $(NAME)
 				@echo "$(_INFO) Creation of the executable"
 				@echo "$(_SUCCESS) program created"
 
-$(PATH_OBJ)/%.o		:	$(PATH_SRC)/*/%.cpp $(INC)
+$(PATH_OBJ)/%.o	:	$(PATH_SRC)/*/%.cpp $(INC)
 				@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
 				@echo "$(_INFO) Compilation of $*"
 
-$(PATH_OBJ)/%.o		:	$(PATH_SRC)/%.cpp $(INC)
+$(PATH_OBJ)/%.o	:	$(PATH_SRC)/%.cpp $(INC)
 				@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 				@echo "$(_INFO) Compilation of $*"
 
@@ -58,4 +63,4 @@ fclean			:	clean
 				@rm -rf $(NAME)
 				@ echo "$(_INFO) Delete executable"
 
-re			:	fclean all
+re				:	fclean all

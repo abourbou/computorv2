@@ -1,0 +1,159 @@
+#list of the cmd
+
+// syntax test //
+syntax is the form of the command + name var and func + unvalid name var and func (i, exit, + with bonus)
+
+a ==?
+a42 = 5
+x == 2
+a = b = c
+a = 5 and A =?					=>	must be 5 (insensitive to case)
+a ?=
+a = 4 ? + 5
+= a
+a =
+!WARNING! 4 = 5 =? is a valid syntax for resolution of polyn
+
+
+
+
+// assignment variable//
+
+* simple without error*
+a = 4
+b = 4.5
+b = a
+b = -5
+c = 0
+d = -0
+d = -0.0000
+
+a = 4i - 5
+b = -5 + 4i
+c = a - b						=>	must be null
+b = i
+b = 0 * i						=> 	must be null and an integer
+
+a = [[4]]
+a = [[4, 3]]
+a = [[4]; [3]]
+b = [[1,2];[3,2];[4,5]]
+b =[[4,3,5,8,7,-8]]
+c =[[4];[8];[-4.5];[0.0]]
+
+* simple syntax error *
+b = notexit 					=> 	var doesn't exit ERROR
+3 = 4
+i = 4
+c42 = 4
+a = [[4,]]
+a = [[4]a[4]]
+b = [4]
+c = [[4,2];]
+d = [[[4,2,]]]
+a = [[]]
+a = [[4]
+
+* calcul + value variable * => not really usefull to test complicated calcul, same as calculation
+*		 *    but type must be correctly assign
+a = 2 * 4.5 					=> 	a must be show and use as an integer
+b = 2 * [[4,5]] 				=> must be a matrice
+a = 4 + i
+b = i - a; varC = b * [[1]]		=> must be -4 and be an integer so next computation mustn't be an error
+z = z + 2 						=> error
+i = 2
+f(a) = x then f = 3				=> don't allow it, it is too confusing to have var and function with the same name
+
+
+
+
+
+
+// assignment function // 
+* simple *
+f(x) = 5 x
+f(W) = 5 w - 2
+f(x) = 4
+g(x) = varA - x					=> error, varA is not defined
+i(x) = 4x						=>error
+g(what) = what * what
+g(x) =?
+
+* advanced *
+varA = 27 AND varB = 53
+
+g(x) = x ^2 - 4 / 3 + 3 % 5
+y = [[4, 2]]
+f(z) = z * y					=> must send z * [[4, 2]]
+f(z) =?
+f(x) = 2*x^5 + 4x^2 - 5*x + 4	=> must send 2 * x^5 + 4 * x^2 - 5*x + 4
+funB(y) = 43 * y / (4 % 2 * y)	=> must send 43 * y / (4 % 2 * y)
+funA(x) = varA + varB * 4 - 1 / 2 + x	=> must send 238.5 + x
+f(x) = 3x - 1
+g(x) = f(0) + 5x						=> must send -1 + 5x
+w = 5 AND f(w) = 4w	AND f(w) =?			=> must be 20
+f(x) = 2*(x + 3*(x - 4)) AND p = 2
+f(3) - f(p) + 2= ?
+f(x) = 2 *x * i
+f(2) = ?
+
+* test none static var in function *
+varA = 2 AND f(x) = varA AND varA= 5
+f(x)=?										=> must send 2, none static in function
+
+
+
+
+
+// computation //
+valid operations : * + - / % ** ()
+for this part :
+x = 2i AND w = 5 e = -6 h = 0 AND A = [[2,3];[3,4]] AND B = [[1,0];[0,1]] AND C = [[1, 2]]
+
+* valid *
+2 * [[4,4]] =?
+4 - 3 - ( 2 * 3 ) ^ 2 *( 2 - 4 ) + 4 = ?
+2i - 4 =?
+x ^ 2 =?
+x ^ 2 * [[2,3]]
+e * h =?
+h / 4 =?
+5 + 4 * 3 =?
+
+
+A *B =?
+C**A=?
+
+
+* error *
+2 / 0 =?
+e % 0 =?
+4 ** 2 =?
+4 +* 5 =?
+A ** B =?
+A**C =?
+
+* error type *
+x * A =?			=> error complex with matrix
+x + A =?
+w + A =?
+
+
+
+
+
+// resolution polyn equation degree <= 2 //
+
+
+
+
+
+// exit the program //
+ctrl C
+ctrl \
+ctrl D
+exit
+"  exit" 						=> doit exit
+exit =  4 						=> error : exit must not be a variable
+
+// bonus (to do at the end of the project) //
