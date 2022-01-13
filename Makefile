@@ -34,7 +34,7 @@ SRC				=	$(addprefix $(PATH_SRC)/, main.cpp) \
 OBJ				=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRC:.cpp=.o)))
 
 # Headers
-INC_FILES		=	exception_classes.hpp parsing.hpp
+INC_FILES		=	parsing.hpp
 
 INC				=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
 					$(addprefix $(PATH_INC)/, $(INC_COMPUTORV1))

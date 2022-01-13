@@ -16,7 +16,7 @@ std::string	regulate_string(std::string line)
 	{
 		char &c = *it;
 		if (!isalnum(c) && allowed_symboles.find(c) == std::string::npos && !isspace(c))
-			throw(ForbiddenCharacter());
+			throw(std::runtime_error("Forbidden character"));
 		c = toupper(c);
 		if (isspace(c) && it + 1 != line.end() && isspace(*(it + 1)))
 		{
@@ -30,13 +30,48 @@ std::string	regulate_string(std::string line)
 	}
 	if (isspace(*line.begin()))
 		line.erase(line.begin());
-	if (isspace(*line.end()))
-		line.erase(line.end());
+	if (isspace(*(line.end() - 1)))
+		line.erase(line.end() - 1);
 	return(line);
 }
 
+/**
+ * @brief Find the task asked :
+ * assignation, computation, resolution equation etc...
+ * 
+ * @param line 
+ * @return int 
+ */
 int		find_task(std::string line)
 {
-	std::cout << "line : " << line << std::endl;
-	return (Command);
+	auto nb_equal = std::count(line.begin(), line.end(), '=');
+	if (nb_equal == 0)
+		return (Command);
+	else if (nb_equal == 1)
+	{
+		auto nb_interrogation = std::count(line.begin(), line.end(), '?');
+		auto it_equal = std::find(line.begin(), line.end(), '=');
+		if (nb_interrogation == 0)
+		{
+			if (std::count(line.begin(), it_equal, '(' ) > 0 ||
+				std::count(line.begin(), it_equal, ')') > 0)
+				return(Assign_func);
+			return(Assign_var);
+		}
+		else if (nb_interrogation == 1)
+		{
+			auto it_interrog = std::find(line.begin(), line.end(), '?');
+			if (it_interrog + 1 != line.end())
+				throw(std::runtime_error("? symbol must be at the end of the command"));
+			if (it_equal + 1 == it_interrog || (isspace(*(it_equal + 1)) && it_equal + 2 == it_interrog))
+				return (Computation);
+			return (Resolv_Polyn);
+		}
+		throw(std::runtime_error("more than one question mark sign"));
+	}
+	else
+	{
+		throw(std::runtime_error("More than one equal sign"));
+	}
+	return (Assign_func);
 }

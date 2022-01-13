@@ -13,5 +13,6 @@ a = 4 ? + 5
 a =
 a = 4 + 5 $
 42 + 5! =?
+4 = 5 ?
 
 !WARNING! 4 = 5 =? is a valid syntax for resolution of polyn
