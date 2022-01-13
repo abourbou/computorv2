@@ -1,0 +1,17 @@
+
+// syntax test //
+syntax is the form of the command + name var and func + unvalid name var and func (i, exit, + with bonus)
+
+a ==?
+a42 = 5
+x == 2
+a = b = c
+a = 5 and A =?					=>	must be 5 (insensitive to case)
+a ?=
+a = 4 ? + 5
+= a
+a =
+a = 4 + 5 $
+42 + 5! =?
+
+!WARNING! 4 = 5 =? is a valid syntax for resolution of polyn

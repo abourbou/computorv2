@@ -20,20 +20,21 @@ PATH_SRC		=	src
 PATH_OBJ		=	obj
 
 #Computorv1 integration
-SRCS_COMPUTORV1	=	computorv1_functions.cpp polyn_equation.cpp
+SRC_COMPUTORV1	=	computorv1_functions.cpp polyn_equation.cpp
 INC_COMPUTORV1	=	computorv1_functions.hpp polyn_equation.hpp
 
 # Source
-SRCS_HELLO		=	hello.cpp
+SRC_EXTER_FCT	=	string_functions.cpp
+SRC_PARSING		=	parsing_line.cpp
 
 SRC				=	$(addprefix $(PATH_SRC)/, main.cpp) \
-					$(addprefix $(PATH_SRC)/computorv1/, $(SRCS_COMPUTORV1))\
-					$(addprefix $(PATH_SRC)/hello/, $(SRCS_HELLO))
+					$(addprefix $(PATH_SRC)/computorv1/, $(SRC_COMPUTORV1))\
+					$(addprefix $(PATH_SRC)/parsing/, $(SRC_PARSING))
 
 OBJ				=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRC:.cpp=.o)))
 
 # Headers
-INC_FILES		=	hello.hpp
+INC_FILES		=	exception_classes.hpp parsing.hpp
 
 INC				=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
 					$(addprefix $(PATH_INC)/, $(INC_COMPUTORV1))
@@ -64,3 +65,6 @@ fclean			:	clean
 				@ echo "$(_INFO) Delete executable"
 
 re				:	fclean all
+
+exec			:	all
+					./$(NAME)

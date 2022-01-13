@@ -1,0 +1,9 @@
+#list of the cmd
+
+// exit the program //
+ctrl C
+ctrl \
+ctrl D
+exit
+"  exit" 						=> doit exit
+exit =  4 						=> error : exit must not be a variable

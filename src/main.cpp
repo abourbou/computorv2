@@ -6,13 +6,13 @@
 /*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/12 18:06:26 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/13 16:47:22 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <csignal>
-#include "hello.hpp"
+#include "parsing.hpp"
 
 void signal_handler(int signal_num)
 {
@@ -23,6 +23,7 @@ void signal_handler(int signal_num)
 int	main(void)
 {
 	bool	exit = false;
+	int		task;
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 
@@ -34,9 +35,19 @@ int	main(void)
 		std::string line;
 		if (!std::getline(std::cin, line))
 			break;
-		if (!line.compare("up"))
-			std::cout << "get up command" << std::endl;
 		std::cout << "line : [" << line << "]" << std::endl;
+		try
+		{
+			line = regulate_string(line);
+			std::cout << "line after regulation : [" << line << "]" << std::endl;
+			task = find_task(line);
+			std::cout << "task : " << task << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << "Error on the line : ";
+			std::cerr << e.what() << std::endl;
+		}
 	}
 	std::cout << std::endl << "End of the program" << std::endl;
 	return (0);
