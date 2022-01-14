@@ -5,7 +5,6 @@ CC				=	clang++
 FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11
 HEADER			=	-I$(PATH_INC)
 
-
 # Color Code and template code
 _YELLOW		=	\033[38;5;184m
 _GREEN		=	\033[38;5;46m
@@ -26,19 +25,22 @@ INC_COMPUTORV1	=	computorv1_functions.hpp polyn_equation.hpp
 # Source
 SRC_EXTER_FCT	=	string_functions.cpp
 SRC_PARSING		=	parsing_line.cpp
+SRC_CLASS		=	Ivariable.cpp
 
 SRC				=	$(addprefix $(PATH_SRC)/, main.cpp) \
-					$(addprefix $(PATH_SRC)/computorv1/, $(SRC_COMPUTORV1))\
-					$(addprefix $(PATH_SRC)/parsing/, $(SRC_PARSING))
+					$(addprefix $(PATH_SRC)/computorv1/, $(SRC_COMPUTORV1)) \
+					$(addprefix $(PATH_SRC)/parsing/, $(SRC_PARSING)) \
+					$(addprefix $(PATH_SRC)/class/, $(SRC_CLASS))
 
 OBJ				=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRC:.cpp=.o)))
 
 # Headers
 INC_FILES		=	parsing.hpp
+INC_CLASS		=	variable/Ivariable.hpp \
+					binary_tree.hpp Ivariable.hpp
 
 INC				=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
-					$(addprefix $(PATH_INC)/, $(INC_COMPUTORV1))
-
+					$(addprefix $(PATH_INC)/, $(INC_COMPUTORV1)) \
 
 # Rules
 all				:	$(NAME)
@@ -48,14 +50,17 @@ $(NAME)			:	$(OBJ) $(INC)
 				@echo "$(_INFO) Creation of the executable"
 				@echo "$(_SUCCESS) program created"
 
+$(PATH_OBJ)/%.o	:	$(PATH_SRC)/%.cpp $(INC)
+				$(CC) $(FLAGS) $(HEADER) -c $< -o $@
+				@echo "$(_INFO) Compilation of $*"
+
 $(PATH_OBJ)/%.o	:	$(PATH_SRC)/*/%.cpp $(INC)
 				@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
 				@echo "$(_INFO) Compilation of $*"
 
-$(PATH_OBJ)/%.o	:	$(PATH_SRC)/%.cpp $(INC)
-				@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
+$(PATH_OBJ)/%.o	:	$(PATH_SRC)/*/*/%.cpp $(INC)
+				@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
 				@echo "$(_INFO) Compilation of $*"
-
 clean			:
 				@rm -rf $(PATH_OBJ)/*.o
 				@ echo "$(_INFO) Delete temporary files"

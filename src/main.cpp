@@ -6,13 +6,14 @@
 /*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/14 08:16:54 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 10:39:12 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <csignal>
 #include "parsing.hpp"
+#include "polyn_equation.hpp"
 
 void signal_handler(int signal_num)
 {
