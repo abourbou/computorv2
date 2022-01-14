@@ -6,7 +6,7 @@
 /*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/13 22:26:14 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 08:16:54 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	main(void)
 {
 	bool	exit = false;
 	int		task;
-	std::string	tracking = "line";
+	std::string	current_task = "line";
 	std::string line;
-	std::string		localisation[] = {"command","assignation of a variable", 
+	std::string		list_task[] = {"command","assignation of a variable", 
 	"assignation of a function", "computation", "resolution of a polynom"};
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
@@ -35,7 +35,7 @@ int	main(void)
 	while(!exit)
 	{
 		std::cout << "> ";
-		tracking = "line";
+		current_task = "line";
 
 		if (!std::getline(std::cin, line))
 			break;
@@ -45,12 +45,12 @@ int	main(void)
 			line = regulate_string(line);
 			std::cout << "line after regulation : [" << line << "]" << std::endl;
 			task = find_task(line);
-			tracking = localisation[task];
-			std::cout << "task : " << tracking << std::endl;
+			current_task = list_task[task];
+			std::cout << "task : " << current_task << std::endl;
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << "Error on the " + tracking + " : ";
+			std::cerr << "Error on the " + current_task + " : ";
 			std::cerr << e.what() << std::endl;
 		}
 	}
