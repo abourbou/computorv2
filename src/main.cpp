@@ -6,14 +6,13 @@
 /*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/14 10:39:12 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/14 10:55:52 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <csignal>
 #include "parsing.hpp"
-#include "polyn_equation.hpp"
 
 void signal_handler(int signal_num)
 {
@@ -21,13 +20,25 @@ void signal_handler(int signal_num)
 	exit(signal_num);
 }
 
+void	exec_task(int task, bool &exit, std::string line)
+{
+	//static list_variable list;
+
+	if (task == 0)
+		exec_command(line, exit);
+	else
+	{
+		std::cout << "Cannot executate task n" << task << " for now" << std::endl;
+	}
+}
+
 int	main(void)
 {
-	bool	exit = false;
-	int		task;
+	bool		exit = false;
+	int			n_task;
 	std::string	current_task = "line";
-	std::string line;
-	std::string		list_task[] = {"command","assignation of a variable", 
+	std::string	line;
+	std::string	list_task[] = {"command","assignation of a variable", 
 	"assignation of a function", "computation", "resolution of a polynom"};
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
@@ -45,9 +56,10 @@ int	main(void)
 		{
 			line = regulate_string(line);
 			std::cout << "line after regulation : [" << line << "]" << std::endl;
-			task = find_task(line);
-			current_task = list_task[task];
+			n_task = find_task(line);
+			current_task = list_task[n_task];
 			std::cout << "task : " << current_task << std::endl;
+			exec_task(n_task, exit, line);
 		}
 		catch(const std::exception& e)
 		{
