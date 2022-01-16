@@ -38,10 +38,10 @@ class Polyn_Equation{
 		Polyn_Equation &operator=(const Polyn_Equation &rhs);
 
 		//variables
-		//int : degree of the polynm, float : value at this degree
-		//example : 2.5 * X ^ 3 => int : 3, float : 2.5
-		std::multimap<int, float> _left_side;
-		std::multimap<int, float> _right_side;
+		//int : degree of the polynm, double : value at this degree
+		//example : 2.5 * X ^ 3 => int : 3, double : 2.5
+		std::multimap<int, double> _left_side;
+		std::multimap<int, double> _right_side;
 		int max_degree = 0;
 		bool _is_reduce = false;
 
@@ -49,7 +49,7 @@ class Polyn_Equation{
 		size_t	is_an_equation(std::string const &str_equation) const;
 		void	parse_side(bool is_right_side, std::string str_side);
 		void	parse_term(bool is_right_side, std::string str_term);
-		void	send_to_struct(bool str_side, float coefficient, int degree);
+		void	send_to_struct(bool str_side, double coefficient, int degree);
 
 	public:
 		Polyn_Equation(std::string);

@@ -6,14 +6,14 @@
 /*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/16 09:47:41 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/16 15:07:24 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <csignal>
 #include "parsing.hpp"
-#include "polyn_equation.hpp"
+#include "rational.hpp"
 
 void signal_handler(int signal_num)
 {
@@ -43,6 +43,18 @@ int	main(void)
 	"function assignation", "computation", "polynom resolution"};
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
+
+	//TEST
+	rational a(2);
+	rational b(4);
+	std::cout << "a : " << a << std::endl;
+	std::cout << "b : " << b << std::endl;
+	std::cout << "a + b : " << *(a + &b) << std::endl;
+	std::cout << "a - b : " << *(a - &b) << std::endl;
+	std::cout << "a * b : " << *(a * &b) << std::endl;
+	std::cout << "a / b : " << *(a / &b) << std::endl;
+	std::cout << "a % b : " << *(a % &b) << std::endl;
+	//END TEST
 
 	std::cout << "Welcome to computorv2!" << std::endl << std::endl;
 	while(!exit)

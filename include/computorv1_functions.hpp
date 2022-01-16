@@ -11,9 +11,9 @@
 #include <iomanip>
 
 void		erase_white_space(std::string &str_equation);
-bool		is_a_float(float number);
-float		ft_abs(float number);
+bool		is_an_int(double number);
+double		ft_abs(double number);
 double		ft_sqrt(double number);
-std::string	float_to_string(float number, int precision = 6);
+std::string	double_to_string(double number, int precision = 6);
 
 #endif

@@ -20,25 +20,24 @@ void	erase_white_space(std::string &str_equation)
 }
 
 /**
- * is an int or a float
- * return 0 if it is an int or 1 if it is a float
+ * is an int or a double
+ * return 1 if it is an int or 0 if it is a double
  */
 
-bool	is_a_float(float number)
+bool	is_an_int(double number)
 {
 	int	convert = static_cast<int>(number);
-	float	convert_float = static_cast<float>(convert);
-	if (convert_float == number)
-		return (0);
-	return (1);
-
+	double	convert_double = static_cast<double>(convert);
+	if (convert_double == number)
+		return (1);
+	return (0);
 }
 
 
 /**
  * *Absolute function
  */
-float	ft_abs(float number)
+double	ft_abs(double number)
 {
 	if (number < 0)
 		return (-1 * number);
@@ -85,13 +84,13 @@ double ft_sqrt(double number)
 }
 
 /**
- * @brief float_to_string
- * convert the float to a string in a correct format
+ * @brief double_to_string
+ * convert the double to a string in a correct format
  *
  * @param number @param precision
  * @return std::string number converted to string
  */
-std::string	float_to_string(float number, int precision)
+std::string	double_to_string(double number, int precision)
 {
 	std::ostringstream ss;
 	std::string buffer_number;

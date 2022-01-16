@@ -53,10 +53,10 @@ std::string	Polyn_Equation::convert_string(void) const
 			}
 		}
 		if (iterator->first == 0)
-			s_equation += float_to_string(iterator->second);
+			s_equation += double_to_string(iterator->second);
 		else if (iterator->second != 1)
 		{
-			s_equation += float_to_string(iterator->second);
+			s_equation += double_to_string(iterator->second);
 			s_equation += " * ";
 		}
 		if (iterator->first == 1)
@@ -64,7 +64,7 @@ std::string	Polyn_Equation::convert_string(void) const
 		else if (iterator->first > 1)
 		{
 			s_equation += "X^";
-			s_equation += float_to_string(iterator->first);
+			s_equation += double_to_string(iterator->first);
 		}
 	}
 
@@ -87,10 +87,10 @@ std::string	Polyn_Equation::convert_string(void) const
 			}
 		}
 		if (iterator->first == 0)
-			s_equation += float_to_string(iterator->second);
+			s_equation += double_to_string(iterator->second);
 		else if (iterator->second != 1)
 		{
-			s_equation += float_to_string(iterator->second);
+			s_equation += double_to_string(iterator->second);
 			s_equation += " * ";
 		}
 		if (iterator->first == 1)
@@ -98,7 +98,7 @@ std::string	Polyn_Equation::convert_string(void) const
 		else if (iterator->first > 1)
 		{
 			s_equation += "X^";
-			s_equation += float_to_string(iterator->first);
+			s_equation += double_to_string(iterator->first);
 		}
 	}
 	return (s_equation);
@@ -169,7 +169,7 @@ void	Polyn_Equation::parse_side(bool is_right_side, std::string str_side)
 
 void	Polyn_Equation::parse_term(bool is_right_side, std::string str_term)
 {
-	float	coefficient;
+	double	coefficient;
 	size_t	indice = 1;
 	size_t	indice_degree = 0;
 
@@ -186,7 +186,7 @@ void	Polyn_Equation::parse_term(bool is_right_side, std::string str_term)
 		}
 		catch(const std::exception& e)
 		{
-			throw(InvalidTerm(is_right_side, "unvalid float for the coefficient"));
+			throw(InvalidTerm(is_right_side, "unvalid double for the coefficient"));
 		}
 	}
 
@@ -240,7 +240,7 @@ void	Polyn_Equation::parse_term(bool is_right_side, std::string str_term)
  * send the term with his coefficient and his degree
  * to the map of the corresponding side
  */
-void	Polyn_Equation::send_to_struct(bool is_right_side, float coefficient, int degree)
+void	Polyn_Equation::send_to_struct(bool is_right_side, double coefficient, int degree)
 {
 	auto& multimap = (is_right_side) ? _right_side : _left_side;
 	auto iterator = multimap.begin();
@@ -248,7 +248,7 @@ void	Polyn_Equation::send_to_struct(bool is_right_side, float coefficient, int d
 	iterator = multimap.find(degree);
 	if (iterator == multimap.end())
 	{
-		multimap.insert(std::pair<int, float>(degree, coefficient));
+		multimap.insert(std::pair<int, double>(degree, coefficient));
 		if (degree > max_degree)
 			max_degree = degree;
 	}
@@ -280,7 +280,7 @@ void	Polyn_Equation::reduce_it(void)
 		if (iterator_left != _left_side.end())
 			iterator_left->second -= iterator_right->second;
 		else
-			_left_side.insert(std::pair<int, float>(iterator_right->first, -1 * iterator_right->second));
+			_left_side.insert(std::pair<int, double>(iterator_right->first, -1 * iterator_right->second));
 	}
 
 	//erase empty ones and the right side
@@ -295,9 +295,9 @@ void	Polyn_Equation::reduce_it(void)
 			_left_side.erase(buffer);
 	}
 	if (_left_side.size() == 0)
-		_left_side.insert(std::pair<int, float>(0, 0));
+		_left_side.insert(std::pair<int, double>(0, 0));
 	_right_side.clear();
-	_right_side.insert(std::pair<int, float>(0, 0));
+	_right_side.insert(std::pair<int, double>(0, 0));
 
 	//search the max degree
 	max_degree = _left_side.rbegin()->first;
@@ -309,16 +309,16 @@ void	Polyn_Equation::reduce_it(void)
  * @param real_number
  * @param imaginary_number
  */
-void	print_complex_solution(float real_number, float imaginary_number)
+void	print_complex_solution(double real_number, double imaginary_number)
 {
 	std::cout << Green << " ";
 	if (real_number != 0)
 	{
-		std::cout << float_to_string(real_number) << (imaginary_number > 0 ? " + " : " - ");
+		std::cout << double_to_string(real_number) << (imaginary_number > 0 ? " + " : " - ");
 		if (ft_abs(imaginary_number) == 1)
 			std::cout << "i";
 		else
-			std::cout << float_to_string(ft_abs(imaginary_number)) + "i";
+			std::cout << double_to_string(ft_abs(imaginary_number)) + "i";
 	}
 	else
 	{
@@ -326,7 +326,7 @@ void	print_complex_solution(float real_number, float imaginary_number)
 		if (ft_abs(imaginary_number) == 1)
 			std::cout << "i";
 		else
-			std::cout << float_to_string(ft_abs(imaginary_number)) + "i";
+			std::cout << double_to_string(ft_abs(imaginary_number)) + "i";
 	}
 	std::cout << Color_Off << std::endl;
 }
@@ -338,9 +338,9 @@ void	print_complex_solution(float real_number, float imaginary_number)
 void	Polyn_Equation::solve_it(void) const
 {
 	auto	iterator = _left_side.cbegin();
-	float	a = 0;
-	float	b = 0;
-	float	c = 0;
+	double	a = 0;
+	double	b = 0;
+	double	c = 0;
 
 	if (max_degree == 0)
 	{
@@ -359,7 +359,7 @@ void	Polyn_Equation::solve_it(void) const
 				b = iterator->second;
 		}
 		std::cout << "The solution is:" << std::endl;
-		std::cout << Green << float_to_string(-1 * b / a) << Color_Off << std::endl;
+		std::cout << Green << double_to_string(-1 * b / a) << Color_Off << std::endl;
 	}
 	else if (max_degree == 2)
 	{
@@ -372,8 +372,8 @@ void	Polyn_Equation::solve_it(void) const
 			else
 				c = iterator->second;
 		}
-		float delta = b * b - 4 * a * c;
-		std::cout << UWhite "Discriminant" << Green " : " << float_to_string(delta) << Color_Off << std::endl;
+		double delta = b * b - 4 * a * c;
+		std::cout << UWhite "Discriminant" << Green " : " << double_to_string(delta) << Color_Off << std::endl;
 		if (delta < 0)
 		{
 			std::cout << "Discriminant is strictly negative, there is two complex solutions :" << std::endl;
@@ -383,13 +383,13 @@ void	Polyn_Equation::solve_it(void) const
 		else if (delta == 0)
 		{
 			std::cout << "Discriminant is null, there is one solution :" << std::endl;
-			std::cout << Green << float_to_string(-1 * b / (2 * a)) << Color_Off << std::endl;
+			std::cout << Green << double_to_string(-1 * b / (2 * a)) << Color_Off << std::endl;
 		}
 		else
 		{
 			std::cout << "Discriminant is positive, there is two solutions :" << std::endl;
-			std::cout << Green << float_to_string((-1 * b + ft_sqrt(delta)) / (2 * a)) << Color_Off << std::endl;
-			std::cout << Green << float_to_string((-1 * b - ft_sqrt(delta)) / (2 * a)) << Color_Off << std::endl;
+			std::cout << Green << double_to_string((-1 * b + ft_sqrt(delta)) / (2 * a)) << Color_Off << std::endl;
+			std::cout << Green << double_to_string((-1 * b - ft_sqrt(delta)) / (2 * a)) << Color_Off << std::endl;
 		}
 	}
 	else
