@@ -1,7 +1,7 @@
 #include "rational.hpp"
 
 //coplien
-rational::rational(std::string str) : Ivariable()
+rational::rational(std::string str) : Ivalue()
 {
 	size_t		idx;
 	size_t		length = str.length();
@@ -15,7 +15,7 @@ rational::rational(std::string str) : Ivariable()
 		throw(std::runtime_error("invalid caracters at the end"));
 }
 
-rational::rational(double value) : Ivariable()
+rational::rational(double value) : Ivalue()
 {
 	this->_value = value;
 }
@@ -31,12 +31,12 @@ rational	&rational::operator=(const rational &rhs)
 	return(*this);
 }
 
-rational::rational(const rational &rhs) : Ivariable(rhs), _value(rhs._value)
+rational::rational(const rational &rhs) : Ivalue(rhs), _value(rhs._value)
 {
 }
 
 //math operations
-Ivariable	*rational::operator+(const Ivariable *rhs) const
+Ivalue	*rational::operator+(const Ivalue *rhs) const
 {
 	const rational	*r_other_var;
 
@@ -46,7 +46,7 @@ Ivariable	*rational::operator+(const Ivariable *rhs) const
 		throw(std::runtime_error("invalid type for addition"));
 }
 
-Ivariable	*rational::operator-(const Ivariable *rhs) const
+Ivalue	*rational::operator-(const Ivalue *rhs) const
 {
 	const rational	*r_other_var;
 
@@ -56,7 +56,7 @@ Ivariable	*rational::operator-(const Ivariable *rhs) const
 		throw(std::runtime_error("invalid type for addition"));
 }
 
-Ivariable	*rational::operator*(const Ivariable *rhs) const
+Ivalue	*rational::operator*(const Ivalue *rhs) const
 {
 	const rational	*r_other_var;
 
@@ -66,7 +66,7 @@ Ivariable	*rational::operator*(const Ivariable *rhs) const
 		throw(std::runtime_error("invalid type for addition"));
 }
 
-Ivariable	*rational::operator/(const Ivariable *rhs) const
+Ivalue	*rational::operator/(const Ivalue *rhs) const
 {
 	const rational	*r_other_var;
 
@@ -80,7 +80,7 @@ Ivariable	*rational::operator/(const Ivariable *rhs) const
 		throw(std::runtime_error("invalid type for addition"));
 }
 
-Ivariable	*rational::operator%(const Ivariable *rhs) const
+Ivalue	*rational::operator%(const Ivalue *rhs) const
 {
 	const rational	*r_other_var;
 	int				a;

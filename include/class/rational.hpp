@@ -2,11 +2,11 @@
 # define RATIONAL_HPP
 
 #include <string>
-#include "Ivariable.hpp"
+#include "Ivalue.hpp"
 #include "computorv1_functions.hpp"
 #include <cmath>
 
-class rational : public Ivariable
+class rational : public Ivalue
 {
 	private:
 		//forbidden
@@ -25,11 +25,11 @@ class rational : public Ivariable
 		rational &operator=(const rational &rhs);
 
 	//math operations
-		virtual Ivariable *operator+(const Ivariable *rhs) const;
-		virtual Ivariable *operator-(const Ivariable *rhs) const;
-		virtual Ivariable *operator*(const Ivariable *rhs) const;
-		virtual Ivariable *operator/(const Ivariable *rhs) const;
-		virtual Ivariable *operator%(const Ivariable *rhs) const;
+		virtual Ivalue *operator+(const Ivalue *rhs) const;
+		virtual Ivalue *operator-(const Ivalue *rhs) const;
+		virtual Ivalue *operator*(const Ivalue *rhs) const;
+		virtual Ivalue *operator/(const Ivalue *rhs) const;
+		virtual Ivalue *operator%(const Ivalue *rhs) const;
 	
 	//convert the variable into a string
 		virtual std::string	to_string(void) const;

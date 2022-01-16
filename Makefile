@@ -24,8 +24,8 @@ SRC_COMPUTORV1	=	computorv1_functions.cpp polyn_equation.cpp
 # Source
 SRC_EXTER_FCT	=	string_functions.cpp
 SRC_PARSING		=	parsing_line.cpp
-SRC_VARIABLE	=	Ivariable.cpp rational.cpp
-SRC_EXECUTION	=	exec_command.cpp
+SRC_VARIABLE	=	Ivalue.cpp rational.cpp map_variable.cpp
+SRC_EXECUTION	=	exec_command.cpp exec_assign.cpp
 
 SRC				=	$(addprefix $(PATH_SRC)/, main.cpp) \
 					$(addprefix $(PATH_SRC)/computorv1/, $(SRC_COMPUTORV1)) \
@@ -41,8 +41,8 @@ PATH_INC_CLASS	=	include/class
 INC_FILES		=	parsing.hpp computorv1_functions.hpp \
 					binary_tree.hpp
 
-INC_CLASS		=	polyn_equation.hpp Ivariable.hpp \
-					rational.hpp
+INC_CLASS		=	polyn_equation.hpp Ivalue.hpp \
+					rational.hpp map_variable.hpp
 
 INC				=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
 					$(addprefix $(PATH_INC_CLASS)/, $(INC_CLASS))

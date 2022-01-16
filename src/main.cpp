@@ -6,7 +6,7 @@
 /*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/16 15:07:24 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/16 22:38:25 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	exec_task(int task, bool &exit, std::string line)
 {
 	//static list_variable list;
 
-	if (task == 0)
+	if (task == Task::Command)
 		exec_command(line, exit);
+	else if (task == Task::Assign_var)
+		exec_assign_value(line);
 	else
 	{
 		std::cout << "Cannot executate task n" << task << " for now" << std::endl;
@@ -37,30 +39,18 @@ int	main(void)
 {
 	bool		exit = false;
 	int			n_task;
-	std::string	current_task = "line";
+	std::string	current_task = "parsing";
 	std::string	line;
 	std::string	list_task[] = {"command","variable assignation", 
 	"function assignation", "computation", "polynom resolution"};
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 
-	//TEST
-	rational a(2);
-	rational b(4);
-	std::cout << "a : " << a << std::endl;
-	std::cout << "b : " << b << std::endl;
-	std::cout << "a + b : " << *(a + &b) << std::endl;
-	std::cout << "a - b : " << *(a - &b) << std::endl;
-	std::cout << "a * b : " << *(a * &b) << std::endl;
-	std::cout << "a / b : " << *(a / &b) << std::endl;
-	std::cout << "a % b : " << *(a % &b) << std::endl;
-	//END TEST
-
 	std::cout << "Welcome to computorv2!" << std::endl << std::endl;
 	while(!exit)
 	{
 		std::cout << "> ";
-		current_task = "line";
+		current_task = "parsing";
 
 		if (!std::getline(std::cin, line))
 			break;
@@ -76,7 +66,7 @@ int	main(void)
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << "Error on the " + current_task + " : ";
+			std::cerr << "Error in the " + current_task << std::endl;
 			std::cerr << e.what() << std::endl;
 		}
 	}

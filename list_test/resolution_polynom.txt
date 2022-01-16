@@ -1,0 +1,15 @@
+//resolution
+
+4X + 3 = -5 ?
+
+4exit + 23exit = 45 ? //error exit can't be a variable
+
+4W^2 - 3 ? = 4
+
+4RE^5 - 3 = 0 ?
+
+4VAR^2 - exp(4) = 0 ? //error?
+
+4z / (3z - 1) - 0 ? //error not autorized
+
+4z - 3u = 0 ? //error more than one variable
