@@ -3,7 +3,7 @@
 NAME			=	computorv2
 CC				=	clang++
 FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11
-HEADER			=	-I$(PATH_INC)
+HEADER			=	-I$(PATH_INC) -I$(PATH_INC_CLASS)
 
 # Color Code and template code
 _YELLOW		=	\033[38;5;184m
@@ -20,29 +20,32 @@ PATH_OBJ		=	obj
 
 #Computorv1 integration
 SRC_COMPUTORV1	=	computorv1_functions.cpp polyn_equation.cpp
-INC_COMPUTORV1	=	computorv1_functions.hpp polyn_equation.hpp
 
 # Source
 SRC_EXTER_FCT	=	string_functions.cpp
 SRC_PARSING		=	parsing_line.cpp
-SRC_CLASS		=	Ivariable.cpp
+SRC_VARIABLE	=	Ivariable.cpp rational.cpp
 SRC_EXECUTION	=	exec_command.cpp
 
 SRC				=	$(addprefix $(PATH_SRC)/, main.cpp) \
 					$(addprefix $(PATH_SRC)/computorv1/, $(SRC_COMPUTORV1)) \
 					$(addprefix $(PATH_SRC)/parsing/, $(SRC_PARSING)) \
-					$(addprefix $(PATH_SRC)/class/, $(SRC_CLASS)) \
+					$(addprefix $(PATH_SRC)/variable/, $(SRC_VARIABLE)) \
 					$(addprefix $(PATH_SRC)/execution/, $(SRC_EXECUTION))
 
 OBJ				=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRC:.cpp=.o)))
 
 # Headers
-INC_FILES		=	parsing.hpp
-INC_CLASS		=	polyn_equation.hpp computorv1_functions.hpp parsing.hpp \
-					Ivariable.hpp binary_tree.hpp
+PATH_INC_CLASS	=	include/class
+
+INC_FILES		=	parsing.hpp computorv1_functions.hpp \
+					binary_tree.hpp
+
+INC_CLASS		=	polyn_equation.hpp Ivariable.hpp \
+					rational.hpp
 
 INC				=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
-					$(addprefix $(PATH_INC)/, $(INC_COMPUTORV1)) \
+					$(addprefix $(PATH_INC_CLASS)/, $(INC_CLASS))
 
 # Rules
 all				:	$(NAME)
@@ -75,3 +78,6 @@ re				:	fclean all
 
 exec			:	all
 					./$(NAME)
+
+test			:
+					@echo $(INC)

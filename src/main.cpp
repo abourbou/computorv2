@@ -6,13 +6,14 @@
 /*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/14 10:55:52 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/16 09:47:41 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <csignal>
 #include "parsing.hpp"
+#include "polyn_equation.hpp"
 
 void signal_handler(int signal_num)
 {
@@ -38,8 +39,8 @@ int	main(void)
 	int			n_task;
 	std::string	current_task = "line";
 	std::string	line;
-	std::string	list_task[] = {"command","assignation of a variable", 
-	"assignation of a function", "computation", "resolution of a polynom"};
+	std::string	list_task[] = {"command","variable assignation", 
+	"function assignation", "computation", "polynom resolution"};
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 

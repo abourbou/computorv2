@@ -3,7 +3,15 @@
 
 void	exec_command(std::string line, bool &exit)
 {
-	std::cout << "line in exec_command : " << line << std::endl;
 	if (line == "EXIT")
 		exit = true;
+	else if (line == "HISTORY" || line == "CHANGLE-ANGLE-MOD"
+				|| line == "LIST-VARIABLE")
+	{
+		std::cout << "This feature is not implemented yet" << std::endl;
+	}
+	else
+	{
+		throw(std::runtime_error("Unvalid command"));
+	}
 }
