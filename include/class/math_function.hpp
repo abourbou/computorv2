@@ -6,7 +6,7 @@
 
 class math_function: public Ivariable
 {
-	typedef Ivalue *function(Ivalue *arg);
+	typedef Ivalue *(function)(Ivalue *arg);
 
 	private:
 		//forbidden
@@ -15,7 +15,7 @@ class math_function: public Ivariable
 	protected:
 		std::string	_variable;
 		std::string	_str_expression;
-		function	_expression;
+		function	*_expression;
 
 	public:
 		//coplien

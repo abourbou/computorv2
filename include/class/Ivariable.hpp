@@ -2,6 +2,7 @@
 # define IVARIABLE_HPP
 
 #include <string>
+#include <stdexcept>
 
 class Ivariable
 {
