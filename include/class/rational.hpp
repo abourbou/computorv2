@@ -14,27 +14,26 @@ class rational : public Ivalue
 
 		//variable
 		double	_value;
-		bool	_is_int;
 
 	public:
-	//coplien
-		rational(std::string str);
-		rational(double value);
+		//coplien
+		rational(std::string str, bool is_constant);
+		rational(double value, bool is_constant);
 		rational(const rational &rhs);
 		virtual ~rational(void);
 		rational &operator=(const rational &rhs);
 
-	//math operations
+		//math operations
 		virtual Ivalue *operator+(const Ivalue *rhs) const;
 		virtual Ivalue *operator-(const Ivalue *rhs) const;
 		virtual Ivalue *operator*(const Ivalue *rhs) const;
 		virtual Ivalue *operator/(const Ivalue *rhs) const;
 		virtual Ivalue *operator%(const Ivalue *rhs) const;
-	
-	//convert the variable into a string
+
+		//convert the variable into a string
 		virtual std::string	to_string(void) const;
 };
 
-//std::ostream	&operator<<(std::ostream &o, const rational &rhs);
+std::ostream	&operator<<(std::ostream &o, const rational &rhs);
 
 #endif

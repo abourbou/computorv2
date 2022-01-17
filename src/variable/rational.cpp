@@ -1,7 +1,7 @@
 #include "rational.hpp"
 
 //coplien
-rational::rational(std::string str) : Ivalue()
+rational::rational(std::string str, bool is_constant) : Ivalue(is_constant)
 {
 	size_t		idx;
 	size_t		length = str.length();
@@ -15,7 +15,7 @@ rational::rational(std::string str) : Ivalue()
 		throw(std::runtime_error("invalid caracters at the end"));
 }
 
-rational::rational(double value) : Ivalue()
+rational::rational(double value, bool is_constant) : Ivalue(is_constant)
 {
 	this->_value = value;
 }
@@ -26,6 +26,8 @@ rational::~rational(void)
 
 rational	&rational::operator=(const rational &rhs)
 {
+	if (this->_constant == true)
+		throw(std::runtime_error("can not reassign a const variable"));
 	this->_value = rhs._value;
 
 	return(*this);
@@ -41,7 +43,7 @@ Ivalue	*rational::operator+(const Ivalue *rhs) const
 	const rational	*r_other_var;
 
 	if ((r_other_var = dynamic_cast<const rational*>(rhs)))
-		return(new rational(this->_value + r_other_var->_value));
+		return(new rational(this->_value + r_other_var->_value, false));
 	else
 		throw(std::runtime_error("invalid type for addition"));
 }
@@ -51,7 +53,7 @@ Ivalue	*rational::operator-(const Ivalue *rhs) const
 	const rational	*r_other_var;
 
 	if ((r_other_var = dynamic_cast<const rational*>(rhs)))
-		return(new rational(this->_value - r_other_var->_value));
+		return(new rational(this->_value - r_other_var->_value, false));
 	else
 		throw(std::runtime_error("invalid type for addition"));
 }
@@ -61,7 +63,7 @@ Ivalue	*rational::operator*(const Ivalue *rhs) const
 	const rational	*r_other_var;
 
 	if ((r_other_var = dynamic_cast<const rational*>(rhs)))
-		return(new rational(this->_value * r_other_var->_value));
+		return(new rational(this->_value * r_other_var->_value, false));
 	else
 		throw(std::runtime_error("invalid type for addition"));
 }
@@ -74,7 +76,7 @@ Ivalue	*rational::operator/(const Ivalue *rhs) const
 	{
 		if (r_other_var->_value == 0)
 			throw(std::runtime_error("cannot divide by zero"));
-		return(new rational(this->_value / r_other_var->_value));
+		return(new rational(this->_value / r_other_var->_value, false));
 	}
 	else
 		throw(std::runtime_error("invalid type for addition"));
@@ -94,7 +96,7 @@ Ivalue	*rational::operator%(const Ivalue *rhs) const
 		b = r_other_var->_value;
 		if (b == 0)
 			throw("% 0 is undefined");
-		return(new rational(a % b));
+		return(new rational(a % b, false));
 	}
 	else
 		throw(std::runtime_error("invalid type for addition"));
@@ -106,8 +108,8 @@ std::string	rational::to_string(void) const
 	return(double_to_string(this->_value));
 }
 
-/* std::ostream	&operator<<(std::ostream &o, const rational &rhs)
+std::ostream	&operator<<(std::ostream &o, const rational &rhs)
 {
 	o << rhs.to_string();
 	return (o);
-} */
+}

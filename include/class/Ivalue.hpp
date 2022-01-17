@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ivalue.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:26:17 by root              #+#    #+#             */
-/*   Updated: 2022/01/16 22:53:50 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 13:56:18 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 
 #include <string>
 #include <stdexcept>
+#include "Ivariable.hpp"
 
-class	Ivalue
+class	Ivalue : public Ivariable
 {
 	private:
-
-	public:
 	//coplien
 		Ivalue(void);
+
+	public:
+		Ivalue(bool is_constant);
 		Ivalue(const Ivalue &rhs);
 		virtual ~Ivalue(void);
 		Ivalue &operator=(const Ivalue &rhs);

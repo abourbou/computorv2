@@ -10,8 +10,12 @@ class map_variable
 		std::map<std::string, Ivalue>	map;
 
 	public:
+		//coplien
 		map_variable(void);
 		~map_variable();
+
+		//members
+		
 };
 
 #endif

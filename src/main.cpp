@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/16 22:38:25 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/17 13:57:57 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(void)
 	int			n_task;
 	std::string	current_task = "parsing";
 	std::string	line;
-	std::string	list_task[] = {"command","variable assignation", 
+	std::string	list_task[] = {"command","variable assignation",
 	"function assignation", "computation", "polynom resolution"};
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);

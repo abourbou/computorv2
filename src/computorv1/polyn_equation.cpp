@@ -345,7 +345,7 @@ void	Polyn_Equation::solve_it(void) const
 	if (max_degree == 0)
 	{
 		if (_left_side.begin()->second == 0)
-			std::cout << "There is an infinite number of solutions" << std::endl;
+			std::cout << "All the numbers on R are solutions" << std::endl;
 		else
 			std::cout << "There is no solution" << std::endl;
 	}
