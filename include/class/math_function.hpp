@@ -13,21 +13,22 @@ class math_function: public Ivariable
 		math_function(void);
 
 	protected:
-		std::string	_variable;
-		std::string	_str_expression;
-		function	*_expression;
+		std::string	_var;
+		std::string	_expr;
+		function	*_f;
 
 	public:
 		//coplien
-		math_function(std::string expression, bool is_const);
-		math_function(function f, bool is_const);
+		math_function(std::string var, std::string expression, bool is_const);
+		math_function(std::string var, std::string expresson, function f, bool is_const);
 		math_function(const math_function &rhs);
 		math_function &operator=(const math_function &rhs);
 		virtual ~math_function();
 
 		//members
-		std::string	to_string(std::string var);
-		Ivalue		*computation(Ivalue *value);
+		std::string	to_string(void) const;
+		std::string	to_string(std::string var) const;
+		Ivalue				*computation(Ivalue *value);
 };
 
 #endif

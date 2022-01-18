@@ -1,0 +1,23 @@
+//CORRECTION
+
+x ==2
+23edd23-+-+
+= 2
+3 = 4
+x = 2
+x = g //with g not defined
+
+x = --2 =>f(x) = x * 2 => t = f(x) //error x not defined
+x=2 => x=?
+
+i = 2
+x = 2
+y = 4i
+z = [[2,3];[3,5]]
+
+x = 2 => y =x => y = ?
+x = 2 => x=5 => x = ?
+A = [[2,3]] => B = A => B = ?
+
+x = 2 => y = x * [[4,2]] => f(z) = z * y
+=> f(z) = z * y //must print z * [[8,4]]

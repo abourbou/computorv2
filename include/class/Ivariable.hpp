@@ -12,19 +12,19 @@ class Ivariable
 
 	protected:
 		//type : function or value
-		//constant :  cannot be for assignation
+		//const :  cannot be for assignation
 		const std::string _type;
-		const bool _constant;
+		const bool _const;
 
 	public:
 		//coplien
-		Ivariable(std::string type, bool is_constant);
+		Ivariable(std::string type, bool is_const);
 		Ivariable(const Ivariable &rhs);
 		virtual ~Ivariable();
 
 		//members
 		std::string get_type() const;
-
+		virtual std::string	to_string(void) const=0;
 };
 
 #endif

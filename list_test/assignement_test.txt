@@ -26,6 +26,8 @@ c =[[4];[8];[-4.5];[0.0]]
 * simple syntax error *
 b = notexit 					=> 	var doesn't exit ERROR
 3 = 4
+x = 4dsfadf
+x = fsdfd8
 i = 4
 c42 = 4
 a = [[4,]]

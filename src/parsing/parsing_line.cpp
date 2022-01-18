@@ -9,7 +9,7 @@
 
 std::string	regulate_string(std::string line)
 {
-	std::string	allowed_symboles("+-*/%()[],;=?");
+	std::string	allowed_symboles("+-*/%^()[],;=?");
 
 	auto it = line.begin();
 	while (it < line.end())

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ivalue.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:26:17 by root              #+#    #+#             */
-/*   Updated: 2022/01/17 13:56:18 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2022/01/18 15:10:20 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class	Ivalue : public Ivariable
 		Ivalue(void);
 
 	public:
-		Ivalue(bool is_constant);
+		Ivalue(bool is_const);
 		Ivalue(const Ivalue &rhs);
 		virtual ~Ivalue(void);
 		Ivalue &operator=(const Ivalue &rhs);
@@ -35,6 +35,7 @@ class	Ivalue : public Ivariable
 		virtual Ivalue *operator*(const Ivalue *rhs) const;
 		virtual Ivalue *operator/(const Ivalue *rhs) const;
 		virtual Ivalue *operator%(const Ivalue *rhs) const;
+		virtual Ivalue *operator^(const Ivalue *rhs) const;
 		virtual Ivalue *matrice_multiplication(const Ivalue *rhs) const;
 
 	//convert the variable into a string
