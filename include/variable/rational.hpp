@@ -5,9 +5,9 @@
 #include <cmath>
 #include <algorithm>
 #include "Ivalue.hpp"
-#include "computorv1_functions.hpp"
-
-#define ft_abs(N) ((N<0)?(-N):(N))
+#include "complex.hpp"
+#include "math_utility.hpp"
+#include "string_function.hpp"
 
 class rational : public Ivalue
 {

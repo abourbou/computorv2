@@ -3,21 +3,29 @@
 //coplien
 /**
  * @brief Construct a new rational::rational object
- * 
- * @param str format accepted : [white space][number][white space]
+ *
+ * @param str format accepted : [white space][+-][number][white space]
  * @param is_const is the variable const
  */
 rational::rational(std::string str, bool is_const) : Ivalue(is_const)
 {
 	size_t		idx;
+	int		sign = 1;
 	size_t		length = str.length();
 
 	for	(auto it = str.end(); std::isspace(*it); --it)
 		--length;
 	if (length == 0)
 		throw(std::runtime_error("empty string"));
-	if (!isdigit(str[str.find_first_not_of(" \f\n\r\t\v")]))
+	idx = str.find_first_not_of(" \f\n\r\t\v");
+	if (!isdigit(str[idx]) && str[idx] != '+' && str[idx] != '-')
 		throw(std::runtime_error("invalid caracter at the beginning"));
+	if(str[idx] == '+' || str[idx] == '-')
+	{
+		if (str[idx] == '-')
+			sign = -1;
+		++idx;
+	}
 	this->_value = std::stod(str, &idx);
 	if (idx != length)
 		throw(std::runtime_error("invalid caracter at the end"));
@@ -52,9 +60,12 @@ double	rational::getvalue(void) const
 Ivalue	*rational::operator+(const Ivalue *rhs) const
 {
 	const rational	*r_var;
+	const complex	*c_var;
 
 	if ((r_var = dynamic_cast<const rational*>(rhs)))
 		return(new rational(this->_value + r_var->_value, false));
+	else if ((c_var = dynamic_cast<const complex*>(rhs)))
+		return(*c_var + this);
 	else
 		throw(std::runtime_error("invalid type for addition"));
 }
@@ -62,26 +73,40 @@ Ivalue	*rational::operator+(const Ivalue *rhs) const
 Ivalue	*rational::operator-(const Ivalue *rhs) const
 {
 	const rational	*r_var;
+	const complex	*c_var;
 
 	if ((r_var = dynamic_cast<const rational*>(rhs)))
 		return(new rational(this->_value - r_var->_value, false));
+	else if ((c_var = dynamic_cast<const complex *>(rhs)))
+		return(new complex(this->_value - c_var->get_realpart(), c_var->get_imagpart(), false));
 	else
-		throw(std::runtime_error("invalid type for addition"));
+		throw(std::runtime_error("invalid type for substraction"));
 }
 
 Ivalue	*rational::operator*(const Ivalue *rhs) const
 {
 	const rational	*r_var;
+	const complex	*c_var;
 
 	if ((r_var = dynamic_cast<const rational*>(rhs)))
 		return(new rational(this->_value * r_var->_value, false));
+	else if((c_var = dynamic_cast<const complex*>(rhs)))
+	{
+		if (this->getvalue() == 0)
+			return(new rational(0, false));
+		return(new complex(this->_value * c_var->get_realpart(), this->_value * c_var->get_imagpart(), false));
+	}
 	else
-		throw(std::runtime_error("invalid type for addition"));
+		throw(std::runtime_error("invalid type for multiplication"));
 }
 
 Ivalue	*rational::operator/(const Ivalue *rhs) const
 {
 	const rational	*r_var;
+	const complex	*c_var;
+	double		a;
+	double		c;
+	double		d;
 
 	if ((r_var = dynamic_cast<const rational*>(rhs)))
 	{
@@ -89,8 +114,17 @@ Ivalue	*rational::operator/(const Ivalue *rhs) const
 			throw(std::runtime_error("cannot divide by zero"));
 		return(new rational(this->_value / r_var->_value, false));
 	}
+	else if ((c_var = dynamic_cast<const complex*>(rhs)))
+	{
+		a = this->_value;
+		c = c_var->get_realpart();
+		d = c_var->get_imagpart();
+		if (a == 0)
+			return(new rational(0, false));
+		return(new complex((a * c) / (c *c + d * d), ((- a * d) / (c *c + d * d)), false));
+	}
 	else
-		throw(std::runtime_error("invalid type for addition"));
+		throw(std::runtime_error("invalid type for division"));
 }
 
 Ivalue	*rational::operator%(const Ivalue *rhs) const

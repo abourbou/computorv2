@@ -30,7 +30,9 @@ class complex : public Ivalue
 		virtual Ivalue *operator*(const Ivalue *rhs) const;
 		virtual Ivalue *operator/(const Ivalue *rhs) const;
 
-		//convert the variable into a string
+		//members
+		double			get_realpart(void) const;
+		double			get_imagpart(void) const;
 		virtual std::string	to_string(void) const;
 };
 

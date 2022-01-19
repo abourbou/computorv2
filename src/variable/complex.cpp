@@ -6,31 +6,46 @@
 /**
  * @brief Construct a new complex::complex object
  * with a string of the form : 5.0i
- * @param str format accepted : [white space][number][white space][i][white space]
- * @param is_const 
+ * @param str format accepted : ([white space][+-][number])[white space])[i]([white space])
+ * @param is_const
  */
 complex::complex(std::string str, bool is_const) : Ivalue(is_const)
 {
 	size_t	pos;
+	int	sign = 1;
 
 	pos = str.find_first_not_of(" \f\n\r\t\v");
-	if (pos == std::string::npos || !isdigit(str[pos]) )
+	if (str[pos] == '+' || str[pos] == '-')
+	{
+		if (str[pos] == '-')
+			sign = -1;
+		++pos;
+	}
+	if (pos == std::string::npos || (!isdigit(str[pos]) && str[pos] != 'i'))
 		throw(std::runtime_error("invalid string for complex creation"));
 	this->_real_part = 0;
-	this->_imag_part = std::stod(str, &pos);
+	this->_imag_part = 1 * sign;
+	if (str[pos] != 'i')
+		this->_imag_part = std::stod(str, &pos) * sign;
 	pos = str.find_first_not_of(" \f\n\r\t\v", pos);
 	if (pos == std::string::npos || str[pos] != 'i'
-			|| str.find_first_not_of(" \f\n\r\t\v", pos) != std::string::npos)
+			|| str.find_first_not_of(" \f\n\r\t\v", pos + 1) != std::string::npos)
 		throw(std::runtime_error("invalid string for complex creation"));
 	if(_imag_part == 0)
-		throw(std::runtime_error("this is not a complex number"));
+		throw(std::runtime_error("trying to create complex number with real value"));
 }
 
 complex::complex(double real_part, double imag_part, bool is_const) : Ivalue(is_const), _real_part(real_part), _imag_part(imag_part)
-{}
+{
+	if(_imag_part == 0)
+		throw(std::runtime_error("trying to create complex number with real value"));
+}
 
 complex::complex(const complex &rhs): Ivalue(rhs), _real_part(rhs._real_part), _imag_part(rhs._imag_part)
-{}
+{
+	if(_imag_part == 0)
+		throw(std::runtime_error("trying to create complex number with real value"));
+}
 
 complex::~complex(void){}
 
@@ -146,17 +161,38 @@ Ivalue *complex::operator/(const Ivalue *rhs) const
 	return(new complex(real_part, imag_part, false));
 }
 
+//members
+
+double		complex::get_realpart(void) const
+{
+	return(this->_real_part);
+}
+
+double		complex::get_imagpart(void) const
+{
+	return(this->_imag_part);
+}
+
 std::string	complex::to_string(void) const
 {
-	std::string str;
+	std::string str = "";
 
 	if (this->_real_part)
-		str = double_to_string(this->_real_part);
-	if (this->_imag_part > 0)
-		str += " - ";
+	{
+		str += '(';
+		str += double_to_string(this->_real_part);
+		if (this->_imag_part > 0)
+			str += " + ";
+		else
+			str += " - ";
+		str += double_to_string(this->_imag_part);
+		str += "i)";
+	}
 	else
-		str += " + ";
-	str += double_to_string(ft_abs(this->_imag_part));
+	{
+		str += double_to_string(this->_imag_part);
+		str += "i";
+	}
 
 	return(str);
 }

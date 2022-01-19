@@ -51,7 +51,7 @@ Ivalue *Ivalue::operator^(const Ivalue *rhs) const
 	throw(std::runtime_error("% is invalid operation"));
 }
 
-Ivalue *Ivalue::matrice_multiplication(const Ivalue *rhs) const
+Ivalue *Ivalue::matrix_mult(const Ivalue *rhs) const
 {
 	(void)rhs;
 	throw(std::runtime_error("** is invalid operation"));

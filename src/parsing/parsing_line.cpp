@@ -2,9 +2,9 @@
 
 /**
  * @brief check if the line doesn't have forbidden character + put it in a correct way
- * 
- * @param line 
- * @return std::string 
+ *
+ * @param line
+ * @return std::string
  */
 
 std::string	regulate_string(std::string line)
@@ -38,9 +38,9 @@ std::string	regulate_string(std::string line)
 /**
  * @brief Find the task asked :
  * assignation, computation, resolution equation etc...
- * 
- * @param line 
- * @return int 
+ *
+ * @param line
+ * @return int
  */
 int		find_task(std::string line)
 {

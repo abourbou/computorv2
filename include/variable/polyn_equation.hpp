@@ -6,7 +6,8 @@
 #include <exception>
 #include <iostream>
 #include <algorithm>
-#include "computorv1_functions.hpp"
+#include "math_utility.hpp"
+#include "string_function.hpp"
 
 //Color off
 #define Color_Off "\033[0m"       // Text Reset

@@ -1,19 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/05 15:54:10 by abourbou          #+#    #+#             */
-/*   Updated: 2022/01/17 13:57:57 by abourbou         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include <iostream>
 #include <csignal>
 #include "parsing.hpp"
 #include "rational.hpp"
+#include "complex.hpp"
+#include "matrix.hpp"
 
 void signal_handler(int signal_num)
 {
@@ -25,9 +16,9 @@ void	exec_task(int task, bool &exit, std::string line)
 {
 	//static list_variable list;
 
-	if (task == Task::Command)
+	if (task == Command)
 		exec_command(line, exit);
-	else if (task == Task::Assign_var)
+	else if (task == Assign_var)
 		exec_assign_value(line);
 	else
 	{
@@ -45,6 +36,18 @@ int	main(void)
 	"function assignation", "computation", "polynom resolution"};
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
+
+	//TEST MATRICES
+	try{
+		matrix a("[[4]]", false);
+		std::cout << a << std::endl;
+	}
+	catch(std::exception &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	//TEST COMPLEX
+
 
 	std::cout << "Welcome to computorv2!" << std::endl << std::endl;
 	while(!exit)
