@@ -37,18 +37,6 @@ int	main(void)
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 
-	//TEST MATRICES
-	try{
-		matrix a("[[4]]", false);
-		std::cout << a << std::endl;
-	}
-	catch(std::exception &e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	//TEST COMPLEX
-
-
 	std::cout << "Welcome to computorv2!" << std::endl << std::endl;
 	while(!exit)
 	{

@@ -10,6 +10,7 @@
 matrix::matrix(std::string str, bool is_const) : Ivalue(is_const)
 {
 	size_t	i = 0;
+	size_t	buffer;
 	size_t	nbr_lign = 0;
 	size_t	length_lign = 0;
 	std::vector<double>	vect_buffer;
@@ -23,31 +24,33 @@ matrix::matrix(std::string str, bool is_const) : Ivalue(is_const)
 	{
 		vect_buffer.clear();
 		length_lign = 0;
+		if (nbr_lign != 0 && str[i++] != ';')
+			throw(std::runtime_error("invalid matrix"));
 		if (str[i] != '[')
 			throw(std::runtime_error("invalid matrix"));
 		++i;
-		while (i != ']' && i <str.size())
+		while (i != ']' && i < str.size())
 		{
-			if (!isdigit(str[i]))
+			if (!isdigit(str[i]) && str[i] != '-' && str[i] != '+')
 				throw(std::runtime_error("invalid matrix"));
-			vect_buffer.push_back(std::stod(&str[i], &i));
+			vect_buffer.push_back(std::stod(&str[i], &buffer));
+			i += buffer;
 			++length_lign;
-			if (i != ',')
+			if (str[i] != ',')
 				break;
 			++i;
 		}
 		if (_size[1] == 0)
 			_size[1] = length_lign;
-		else if (_size[1] != length_lign)
+		else if (length_lign != _size[1])
 			throw(std::runtime_error("invalid matrix"));
-		if (i != ']')
+		if (str[i] != ']')
 			throw(std::runtime_error("invalid matrix"));
 		this->_array.push_back(vect_buffer);
 		++i;
 		++nbr_lign;
 	}
 	_size[0] = nbr_lign;
-	std::cout << "nbr lign : " << _size[0] << "length lign : " << _size[1] <<std::endl;
 }
 
 //operation
@@ -65,7 +68,7 @@ std::string	matrix::to_string(void) const
 			str += ' ';
 			str += double_to_string(_array[i][j]);
 			str += ' ';
-			if (j != _size[i] - 1)
+			if (j < _size[1] - 1)
 				str += ',';
 		}
 		str += "]\n";
