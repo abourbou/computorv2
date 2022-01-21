@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ivalue.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:26:17 by root              #+#    #+#             */
-/*   Updated: 2022/01/19 16:52:08 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2022/01/20 11:28:06 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ class	Ivalue : public Ivariable
 		virtual Ivalue *operator%(const Ivalue *rhs) const;
 		virtual Ivalue *operator^(const Ivalue *rhs) const;
 		virtual Ivalue *matrix_mult(const Ivalue *rhs) const;
-
-	//convert the variable into a string
-		virtual std::string	to_string(void) const =0;
 };
 
 std::ostream	&operator<<(std::ostream &o, const Ivalue &rhs);

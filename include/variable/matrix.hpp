@@ -22,10 +22,10 @@ class matrix	: public Ivalue
 	public:
 		//coplien
 		matrix(std::string str, bool is_const);
-		// matrix(size_t size[2], double value);
-		// matrix(const matrix &rhs);
-		// virtual ~matrix();
-		// matrix &operator=(const matrix &rhs);
+		matrix(size_t size[2], double value, bool is_const);
+		matrix(const matrix &rhs);
+		virtual ~matrix();
+		matrix &operator=(const matrix &rhs);
 
 		// //math operations
 		// virtual Ivalue *operator+(const Ivalue *rhs) const;

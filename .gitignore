@@ -28,6 +28,7 @@
 
 #vscode
 .vscode
+workspace.code-workspace
 
 # Executables
 *.exe

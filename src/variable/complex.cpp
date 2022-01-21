@@ -16,11 +16,7 @@ complex::complex(std::string str, bool is_const) : Ivalue(is_const)
 
 	pos = str.find_first_not_of(" \f\n\r\t\v");
 	if (str[pos] == '+' || str[pos] == '-')
-	{
-		if (str[pos] == '-')
-			sign = -1;
 		++pos;
-	}
 	if (pos == std::string::npos || (!isdigit(str[pos]) && str[pos] != 'i'))
 		throw(std::runtime_error("invalid string for complex creation"));
 	this->_real_part = 0;
@@ -185,7 +181,7 @@ std::string	complex::to_string(void) const
 			str += " + ";
 		else
 			str += " - ";
-		str += double_to_string(this->_imag_part);
+		str += double_to_string(ft_abs(this->_imag_part));
 		str += "i)";
 	}
 	else
