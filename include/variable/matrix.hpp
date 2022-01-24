@@ -8,6 +8,8 @@
 #include "complex.hpp"
 #include "string_function.hpp"
 
+class rational;
+
 class matrix	: public Ivalue
 {
 	private:
@@ -21,24 +23,24 @@ class matrix	: public Ivalue
 
 	public:
 		//coplien
-		matrix(std::string str, bool is_const);
-		matrix(size_t size[2], double value, bool is_const);
+		matrix(std::string str);
+		matrix(size_t size[2], double value);
 		matrix(const matrix &rhs);
 		virtual ~matrix();
 		matrix &operator=(const matrix &rhs);
 
-		// //math operations
-		// virtual Ivalue *operator+(const Ivalue *rhs) const;
-		// virtual Ivalue *operator-(const Ivalue *rhs) const;
-		// virtual Ivalue *operator*(const Ivalue *rhs) const;
-		// virtual Ivalue *matrix_mult(const Ivalue *rhs) const;
+		//math operations
+		virtual Ivalue *operator+(const Ivalue *rhs) const;
+		virtual Ivalue *operator-(const Ivalue *rhs) const;
+		virtual Ivalue *operator*(const Ivalue *rhs) const;
+		virtual Ivalue *matrix_mult(const Ivalue *rhs) const;
 
-		// //member
-		// //std::vector<std::vector<double> >	clone(void) const;
+		//member
+		//std::vector<std::vector<double> >	clone(void) const;
 		virtual std::string	to_string(void) const;
 		std::string		to_string_inline(void) const;
 };
 
-std::ostream	&operator<<(std::ostream &o, const complex &rhs);
+std::ostream	&operator<<(std::ostream &o, const matrix &rhs);
 
 #endif

@@ -9,7 +9,7 @@
  * @param str format accepted : ([white space][+-][number])[white space])[i]([white space])
  * @param is_const
  */
-complex::complex(std::string str, bool is_const) : Ivalue(is_const)
+complex::complex(std::string str) : Ivalue()
 {
 	size_t	pos;
 	int	sign = 1;
@@ -31,7 +31,7 @@ complex::complex(std::string str, bool is_const) : Ivalue(is_const)
 		throw(std::runtime_error("trying to create complex number with real value"));
 }
 
-complex::complex(double real_part, double imag_part, bool is_const) : Ivalue(is_const), _real_part(real_part), _imag_part(imag_part)
+complex::complex(double real_part, double imag_part) : Ivalue(), _real_part(real_part), _imag_part(imag_part)
 {
 	if(_imag_part == 0)
 		throw(std::runtime_error("trying to create complex number with real value"));
@@ -47,9 +47,6 @@ complex::~complex(void){}
 
 complex	&complex::operator=(const complex &rhs)
 {
-	if (this->_const == true)
-		throw(std::runtime_error("can not reassign a const variable"));
-
 	this->_real_part = rhs._real_part;
 	this->_imag_part = rhs._imag_part;
 	return(*this);
@@ -76,8 +73,8 @@ Ivalue *complex::operator+(const Ivalue *rhs) const
 	else
 		throw(std::runtime_error("invalid type for addition"));
 	if (imag_part == 0)
-		return(new rational(real_part, false));
-	return(new complex(real_part, imag_part, false));
+		return(new rational(real_part));
+	return(new complex(real_part, imag_part));
 }
 
 Ivalue *complex::operator-(const Ivalue *rhs) const
@@ -100,8 +97,8 @@ Ivalue *complex::operator-(const Ivalue *rhs) const
 	else
 		throw(std::runtime_error("invalid type for subtraction"));
 	if (imag_part == 0)
-		return(new rational(real_part, false));
-	return(new complex(real_part, imag_part, false));
+		return(new rational(real_part));
+	return(new complex(real_part, imag_part));
 }
 Ivalue *complex::operator*(const Ivalue *rhs) const
 {
@@ -123,8 +120,8 @@ Ivalue *complex::operator*(const Ivalue *rhs) const
 	else
 		throw(std::runtime_error("invalid type for multiplication"));
 	if (imag_part == 0)
-		return(new rational(real_part, false));
-	return(new complex(real_part, imag_part, false));
+		return(new rational(real_part));
+	return(new complex(real_part, imag_part));
 }
 Ivalue *complex::operator/(const Ivalue *rhs) const
 {
@@ -153,8 +150,8 @@ Ivalue *complex::operator/(const Ivalue *rhs) const
 	else
 		throw(std::runtime_error("invalid type for divison"));
 	if (imag_part == 0)
-		return(new rational(real_part, false));
-	return(new complex(real_part, imag_part, false));
+		return(new rational(real_part));
+	return(new complex(real_part, imag_part));
 }
 
 //members

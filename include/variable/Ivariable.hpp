@@ -14,11 +14,10 @@ class Ivariable
 		//type : function or value
 		//const :  cannot be for assignation
 		const std::string _type;
-		const bool _const;
 
 	public:
 		//coplien
-		Ivariable(std::string type, bool is_const);
+		Ivariable(std::string type);
 		Ivariable(const Ivariable &rhs);
 		virtual ~Ivariable();
 

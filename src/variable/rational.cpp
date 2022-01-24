@@ -7,7 +7,7 @@
  * @param str format accepted : [white space][+-][number][white space]
  * @param is_const is the variable const
  */
-rational::rational(std::string str, bool is_const) : Ivalue(is_const)
+rational::rational(std::string str) : Ivalue()
 {
 	size_t		idx;
 	int		sign = 1;
@@ -31,7 +31,7 @@ rational::rational(std::string str, bool is_const) : Ivalue(is_const)
 		throw(std::runtime_error("invalid caracter at the end"));
 }
 
-rational::rational(double value, bool is_const) : Ivalue(is_const), _value(value)
+rational::rational(double value) : Ivalue(), _value(value)
 {}
 
 rational::~rational(void)
@@ -39,8 +39,6 @@ rational::~rational(void)
 
 rational	&rational::operator=(const rational &rhs)
 {
-	if (this->_const == true)
-		throw(std::runtime_error("can not reassign a const variable"));
 	this->_value = rhs._value;
 
 	return(*this);
@@ -63,7 +61,7 @@ Ivalue	*rational::operator+(const Ivalue *rhs) const
 	const complex	*c_var;
 
 	if ((r_var = dynamic_cast<const rational*>(rhs)))
-		return(new rational(this->_value + r_var->_value, false));
+		return(new rational(this->_value + r_var->_value));
 	else if ((c_var = dynamic_cast<const complex*>(rhs)))
 		return(*c_var + this);
 	else
@@ -76,9 +74,9 @@ Ivalue	*rational::operator-(const Ivalue *rhs) const
 	const complex	*c_var;
 
 	if ((r_var = dynamic_cast<const rational*>(rhs)))
-		return(new rational(this->_value - r_var->_value, false));
+		return(new rational(this->_value - r_var->_value));
 	else if ((c_var = dynamic_cast<const complex *>(rhs)))
-		return(new complex(this->_value - c_var->get_realpart(), c_var->get_imagpart(), false));
+		return(new complex(this->_value - c_var->get_realpart(), c_var->get_imagpart()));
 	else
 		throw(std::runtime_error("invalid type for substraction"));
 }
@@ -87,15 +85,18 @@ Ivalue	*rational::operator*(const Ivalue *rhs) const
 {
 	const rational	*r_var;
 	const complex	*c_var;
+	const matrix	*m_var;
 
 	if ((r_var = dynamic_cast<const rational*>(rhs)))
-		return(new rational(this->_value * r_var->_value, false));
+		return(new rational(this->_value * r_var->_value));
 	else if((c_var = dynamic_cast<const complex*>(rhs)))
 	{
 		if (this->getvalue() == 0)
-			return(new rational(0, false));
-		return(new complex(this->_value * c_var->get_realpart(), this->_value * c_var->get_imagpart(), false));
+			return(new rational(0));
+		return(new complex(this->_value * c_var->get_realpart(), this->_value * c_var->get_imagpart()));
 	}
+	else if ((m_var = dynamic_cast<const matrix*>(rhs)))
+		return (*m_var * this);
 	else
 		throw(std::runtime_error("invalid type for multiplication"));
 }
@@ -112,7 +113,7 @@ Ivalue	*rational::operator/(const Ivalue *rhs) const
 	{
 		if (r_var->_value == 0)
 			throw(std::runtime_error("cannot divide by zero"));
-		return(new rational(this->_value / r_var->_value, false));
+		return(new rational(this->_value / r_var->_value));
 	}
 	else if ((c_var = dynamic_cast<const complex*>(rhs)))
 	{
@@ -120,8 +121,8 @@ Ivalue	*rational::operator/(const Ivalue *rhs) const
 		c = c_var->get_realpart();
 		d = c_var->get_imagpart();
 		if (a == 0)
-			return(new rational(0, false));
-		return(new complex((a * c) / (c *c + d * d), ((- a * d) / (c *c + d * d)), false));
+			return(new rational(0));
+		return(new complex((a * c) / (c *c + d * d), ((- a * d) / (c *c + d * d))));
 	}
 	else
 		throw(std::runtime_error("invalid type for division"));
@@ -141,7 +142,7 @@ Ivalue	*rational::operator%(const Ivalue *rhs) const
 		b = r_var->_value;
 		if (b == 0)
 			throw("% 0 is undefined");
-		return(new rational(a % b, false));
+		return(new rational(a % b));
 	}
 	else
 		throw(std::runtime_error("invalid type for addition"));
@@ -160,7 +161,7 @@ Ivalue	*rational::operator^(const Ivalue *rhs) const
 			throw(std::runtime_error("^ operation with negatives number is not implemented yet"));
 		for(int i = r_var->_value; i > 0; --i)
 			result *= this->_value;
-		return(new rational(result, false));
+		return(new rational(result));
 	}
 	else
 		throw(std::runtime_error("invalid type for pow"));

@@ -1,16 +1,13 @@
 #include "Ivalue.hpp"
 
 //basic
-Ivalue::Ivalue(bool is_const): Ivariable("value", is_const) {}
+Ivalue::Ivalue(void): Ivariable("value") {}
 Ivalue::Ivalue(const Ivalue &rhs): Ivariable(rhs) {}
 Ivalue::~Ivalue(void){}
 Ivalue &Ivalue::operator=(const Ivalue &rhs)
 {
 	(void)rhs;
-	if (this->_const == true)
-		throw(std::runtime_error("can not reassign a const variable"));
-	else
-		throw(std::runtime_error("= is invalid operation"));
+	throw(std::runtime_error("= is invalid operation"));
 	return(*this);
 }
 

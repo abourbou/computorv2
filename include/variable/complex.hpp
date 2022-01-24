@@ -18,8 +18,8 @@ class complex : public Ivalue
 
 	public:
 		//coplien
-		complex(std::string str, bool is_const);
-		complex(double real_part, double imag_part, bool is_const);
+		complex(std::string str);
+		complex(double real_part, double imag_part);
 		complex(const complex &rhs);
 		virtual ~complex(void);
 		complex &operator=(const complex &rhs);

@@ -6,8 +6,11 @@
 #include <algorithm>
 #include "Ivalue.hpp"
 #include "complex.hpp"
+#include "matrix.hpp"
 #include "math_utility.hpp"
 #include "string_function.hpp"
+
+class matrix;
 
 class rational : public Ivalue
 {
@@ -21,8 +24,8 @@ class rational : public Ivalue
 
 	public:
 		//coplien
-		rational(std::string str, bool is_const);
-		rational(double value, bool is_const);
+		rational(std::string str);
+		rational(double value);
 		rational(const rational &rhs);
 		virtual ~rational(void);
 		rational &operator=(const rational &rhs);

@@ -19,8 +19,8 @@ class cfunction: public Ivariable
 
 	public:
 		//coplien
-		cfunction(std::string var, std::string expression, bool is_const);
-		cfunction(std::string var, std::string expresson, function f, bool is_const);
+		cfunction(std::string var, std::string expression);
+		cfunction(std::string var, std::string expresson, function f);
 		cfunction(const cfunction &rhs);
 		cfunction &operator=(const cfunction &rhs);
 		virtual ~cfunction();

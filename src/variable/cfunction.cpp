@@ -10,7 +10,7 @@
  * @param expr			string representing the function, will be interpreted by the computor ex: 4X^2 / (5 X)
  * @param is_const		can the function change expression
  */
-cfunction::cfunction(std::string var, std::string expr, bool is_const) : Ivariable("function", is_const)
+cfunction::cfunction(std::string var, std::string expr) : Ivariable("function")
 {
 	//TODO
 	(void)var;
@@ -28,7 +28,7 @@ cfunction::cfunction(std::string var, std::string expr, bool is_const) : Ivariab
  * @param f				represent the math function
  * @param is_const		can the function change expression
  */
-cfunction::cfunction(std::string var, std::string expr, function f, bool is_const): Ivariable("function", is_const),
+cfunction::cfunction(std::string var, std::string expr, function f): Ivariable("function"),
 																					_var(var), _expr(expr), _f(f)
 {}
 
@@ -38,8 +38,6 @@ cfunction::cfunction(const cfunction &rhs): Ivariable(rhs), _var(rhs._var),
 
 cfunction	&cfunction::operator=(const cfunction &rhs)
 {
-	if (this->_const == true)
-		throw(std::runtime_error("can not reassign a const variable"));
 	this->_var = rhs._var;
 	this->_expr = rhs._expr;
 	this->_f = rhs._f;

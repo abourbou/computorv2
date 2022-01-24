@@ -6,7 +6,7 @@
 /*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:26:17 by root              #+#    #+#             */
-/*   Updated: 2022/01/20 11:28:06 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/21 10:54:08 by root             ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ class	Ivalue : public Ivariable
 {
 	private:
 	//coplien
-		Ivalue(void);
 
 	public:
-		Ivalue(bool is_const);
+		Ivalue(void);
 		Ivalue(const Ivalue &rhs);
 		virtual ~Ivalue(void);
 		Ivalue &operator=(const Ivalue &rhs);
