@@ -6,8 +6,8 @@
 #include <exception>
 #include <iostream>
 #include <algorithm>
-#include "math_utility.hpp"
 #include "string_function.hpp"
+#include "math_utility.hpp"
 
 //Color off
 #define Color_Off "\033[0m"       // Text Reset
@@ -39,18 +39,18 @@ class Polyn_Equation{
 		Polyn_Equation &operator=(const Polyn_Equation &rhs);
 
 		//variables
-		//int : degree of the polynm, double : value at this degree
-		//example : 2.5 * X ^ 3 => int : 3, double : 2.5
-		std::multimap<int, double> _left_side;
-		std::multimap<int, double> _right_side;
-		int max_degree = 0;
+		//size_t : degree of the polynm, double : value at this degree
+		//example : 2.5 * X ^ 3 => size_t : 3, double : 2.5
+		std::map<size_t, double> _left_side;
+		std::map<size_t, double> _right_side;
+		size_t max_degree = 0;
 		bool _is_reduce = false;
 
 		//private members use by other
 		size_t	is_an_equation(std::string const &str_equation) const;
 		void	parse_side(bool is_right_side, std::string str_side);
 		void	parse_term(bool is_right_side, std::string str_term);
-		void	send_to_struct(bool str_side, double coefficient, int degree);
+		void	send_to_struct(bool str_side, double coefficient, size_t degree);
 
 	public:
 		Polyn_Equation(std::string);
@@ -58,7 +58,7 @@ class Polyn_Equation{
 		void reduce_it();
 		void solve_it() const;
 		std::string	convert_string(void) const;
-		int	get_max_degree(void) const;
+		size_t	get_max_degree(void) const;
 
 		/**
 		 * Exceptions

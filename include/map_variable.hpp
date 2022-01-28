@@ -2,12 +2,12 @@
 # define MAP_VARIABLE_HPP
 
 #include <map>
-#include "Ivalue.hpp"
+#include "IValue.hpp"
 
 class map_variable
 {
 	private:
-		std::map<std::string, Ivalue>	map;
+		std::map<std::string, IValue>	map;
 
 	public:
 		//coplien

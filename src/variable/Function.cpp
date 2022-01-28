@@ -1,5 +1,5 @@
 
-#include "cfunction.hpp"
+#include "Function.hpp"
 
 //coplien
 
@@ -10,7 +10,7 @@
  * @param expr			string representing the function, will be interpreted by the computor ex: 4X^2 / (5 X)
  * @param is_const		can the function change expression
  */
-cfunction::cfunction(std::string var, std::string expr) : Ivariable("function")
+Function::Function(std::string var, std::string expr) : IVariable("function")
 {
 	//TODO
 	(void)var;
@@ -28,15 +28,15 @@ cfunction::cfunction(std::string var, std::string expr) : Ivariable("function")
  * @param f				represent the math function
  * @param is_const		can the function change expression
  */
-cfunction::cfunction(std::string var, std::string expr, function f): Ivariable("function"),
+Function::Function(std::string var, std::string expr, function f): IVariable("function"),
 																					_var(var), _expr(expr), _f(f)
 {}
 
-cfunction::cfunction(const cfunction &rhs): Ivariable(rhs), _var(rhs._var),
+Function::Function(const Function &rhs): IVariable(rhs), _var(rhs._var),
 					_expr(rhs._expr), _f(rhs._f)
 {}
 
-cfunction	&cfunction::operator=(const cfunction &rhs)
+Function	&Function::operator=(const Function &rhs)
 {
 	this->_var = rhs._var;
 	this->_expr = rhs._expr;
@@ -45,23 +45,23 @@ cfunction	&cfunction::operator=(const cfunction &rhs)
 	return(*this);
 }
 
-cfunction::~cfunction(void){}
+Function::~Function(void){}
 
-std::string	cfunction::to_string(void) const
+std::string	Function::to_string(void) const
 {
 	//TODO
 	return(_expr);
 }
 
 
-std::string	cfunction::to_string(std::string var) const
+std::string	Function::to_string(std::string var) const
 {
 	//TODO
 	(void)var;
 	return(_expr);
 }
 
-Ivalue	*cfunction::computation(Ivalue *value)
+IValue	*Function::computation(IValue *value)
 {
 	//TODO
 	(void)value;

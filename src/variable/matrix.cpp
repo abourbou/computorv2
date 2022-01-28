@@ -1,20 +1,20 @@
 
-#include "matrix.hpp"
+#include "Matrix.hpp"
 
 /**
- * @brief Construct a new matrix object
+ * @brief Construct a new Matrix object
  *
  * @param str format accepted : [[a,b];[c,d]]
  * @param is_const
  */
-matrix::matrix(std::string str) : Ivalue()
+Matrix::Matrix(std::string str) : IValue()
 {
 	size_t	i = 0, buffer, nbr_lign = 0, length_lign = 0;
 	std::vector<double>	vect_buffer;
 
 	erase_white_space(str);
 	if (str.empty() || str.front() != '[' || str.back() != ']')
-		throw(std::runtime_error("invalid matrix"));
+		throw(std::runtime_error("invalid Matrix"));
 	str.erase(0, 1);
 	str.erase(str.size() - 1, 1);
 	while(i < str.size())
@@ -22,14 +22,14 @@ matrix::matrix(std::string str) : Ivalue()
 		vect_buffer.clear();
 		length_lign = 0;
 		if (nbr_lign != 0 && str[i++] != ';')
-			throw(std::runtime_error("invalid matrix"));
+			throw(std::runtime_error("invalid Matrix"));
 		if (str[i] != '[')
-			throw(std::runtime_error("invalid matrix"));
+			throw(std::runtime_error("invalid Matrix"));
 		++i;
 		while (i != ']' && i < str.size())
 		{
 			if (!isdigit(str[i]) && str[i] != '-' && str[i] != '+')
-				throw(std::runtime_error("invalid matrix"));
+				throw(std::runtime_error("invalid Matrix"));
 			vect_buffer.push_back(std::stod(&str[i], &buffer));
 			i += buffer;
 			++length_lign;
@@ -40,9 +40,9 @@ matrix::matrix(std::string str) : Ivalue()
 		if (_size[1] == 0)
 			_size[1] = length_lign;
 		else if (length_lign != _size[1])
-			throw(std::runtime_error("invalid matrix"));
+			throw(std::runtime_error("invalid Matrix"));
 		if (str[i] != ']')
-			throw(std::runtime_error("invalid matrix"));
+			throw(std::runtime_error("invalid Matrix"));
 		this->_array.push_back(vect_buffer);
 		++i;
 		++nbr_lign;
@@ -50,21 +50,21 @@ matrix::matrix(std::string str) : Ivalue()
 	_size[0] = nbr_lign;
 }
 
-matrix::matrix(size_t size[2], double value): Ivalue()
+Matrix::Matrix(size_t size[2], double value): IValue()
 {
 	std::vector<double> buffer;
 
 	_size[0] = size[0];
 	_size[1] = size[1];
 	if (_size[0] == 0 || _size[1] == 0)
-		throw(std::runtime_error("invalid matrix"));
+		throw(std::runtime_error("invalid Matrix"));
 	buffer = std::vector<double>(_size[1], value);
 	_array.reserve(_size[0]);
 	for(size_t i = 0; i < _size[0]; ++i)
 		_array.push_back(buffer);
 }
 
-matrix::matrix(const matrix &rhs) : Ivalue(rhs)
+Matrix::Matrix(const Matrix &rhs) : IValue(rhs)
 {
 	std::vector<double> buffer;
 
@@ -79,14 +79,14 @@ matrix::matrix(const matrix &rhs) : Ivalue(rhs)
 	}
 }
 
-matrix::~matrix(void)
+Matrix::~Matrix(void)
 {
 	std::vector<std::vector<double> > buffer;
 
 	_array.swap(buffer);
 }
 
-matrix	&matrix::operator=(const matrix &rhs)
+Matrix	&Matrix::operator=(const Matrix &rhs)
 {
 	std::vector<double> buffer;
 
@@ -104,96 +104,96 @@ matrix	&matrix::operator=(const matrix &rhs)
 
 //operation
 
-Ivalue	*matrix::operator+(const Ivalue *rhs) const
+IValue	*Matrix::operator+(const IValue *rhs) const
 {
-	const matrix *m_var;
-	matrix *new_matrix;
+	const Matrix *m_var;
+	Matrix *new_Matrix;
 
-	if ((m_var = dynamic_cast<const matrix *>(rhs)))
+	if ((m_var = dynamic_cast<const Matrix *>(rhs)))
 	{
 		if (m_var->_size[0] != _size[0] || m_var->_size[1] != _size[1])
 			throw(std::runtime_error("different size matrices, can't add"));
-		new_matrix = new matrix(*this);
+		new_Matrix = new Matrix(*this);
 		for (size_t i = 0; i < _size[0]; ++i)
 		{
 			for (size_t j = 0; j < _size[1]; ++j)
-				new_matrix->_array[i][j] += m_var->_array[i][j];
+				new_Matrix->_array[i][j] += m_var->_array[i][j];
 		}
-		return(new_matrix);
+		return(new_Matrix);
 	}
 	else
 		throw(std::runtime_error("invalid type for addition"));
 }
 
-Ivalue	*matrix::operator-(const Ivalue *rhs) const
+IValue	*Matrix::operator-(const IValue *rhs) const
 {
-	const matrix *m_var;
-	matrix *new_matrix;
+	const Matrix *m_var;
+	Matrix *new_Matrix;
 
-	if ((m_var = dynamic_cast<const matrix *>(rhs)))
+	if ((m_var = dynamic_cast<const Matrix *>(rhs)))
 	{
 		if (m_var->_size[0] != _size[0] || m_var->_size[1] != _size[1])
 			throw(std::runtime_error("different size matrices, can't sub"));
-		new_matrix = new matrix(*this);
+		new_Matrix = new Matrix(*this);
 		for (size_t i = 0; i < _size[0]; ++i)
 		{
 			for (size_t j = 0; j < _size[1]; ++j)
-				new_matrix->_array[i][j] -= m_var->_array[i][j];
+				new_Matrix->_array[i][j] -= m_var->_array[i][j];
 		}
-		return(new_matrix);
+		return(new_Matrix);
 	}
 	else
 		throw(std::runtime_error("invalid type for substraction"));
 }
 
-Ivalue	*matrix::operator*(const Ivalue *rhs) const
+IValue	*Matrix::operator*(const IValue *rhs) const
 {
-	const matrix *m_var;
-	const rational *r_var;
-	matrix *new_matrix;
+	const Matrix *m_var;
+	const Rational *r_var;
+	Matrix *new_Matrix;
 
-	if ((m_var = dynamic_cast<const matrix *>(rhs)))
+	if ((m_var = dynamic_cast<const Matrix *>(rhs)))
 	{
 		if (m_var->_size[0] != _size[0] || m_var->_size[1] != _size[1])
 			throw(std::runtime_error("matrices of different size, can't mult"));
-		new_matrix = new matrix(*this);
+		new_Matrix = new Matrix(*this);
 		for (size_t i = 0; i < _size[0]; ++i)
 		{
 			for (size_t j = 0; j < _size[1]; ++j)
-				new_matrix->_array[i][j] *= m_var->_array[i][j];
+				new_Matrix->_array[i][j] *= m_var->_array[i][j];
 		}
-		return(new_matrix);
+		return(new_Matrix);
 	}
-	else if ((r_var = dynamic_cast<const rational*>(rhs)))
+	else if ((r_var = dynamic_cast<const Rational*>(rhs)))
 	{
-		new_matrix = new matrix(*this);
+		new_Matrix = new Matrix(*this);
 		for (size_t i = 0; i < _size[0]; ++i)
 		{
 			for (size_t j = 0; j < _size[1]; ++j)
-				new_matrix->_array[i][j] *= r_var->getvalue();
+				new_Matrix->_array[i][j] *= r_var->getvalue();
 		}
-		return(new_matrix);
+		return(new_Matrix);
 	}
 	else
 		throw(std::runtime_error("invalid type for multiplication"));
 }
 
-Ivalue *matrix::matrix_mult(const Ivalue *rhs) const
+IValue *Matrix::Matrix_mult(const IValue *rhs) const
 {
-	const matrix *m_var;
-	matrix *new_matrix;
+	const Matrix *m_var;
+	Matrix *new_Matrix;
 
-	if ((m_var = dynamic_cast<const matrix *>(rhs)))
+	if ((m_var = dynamic_cast<const Matrix *>(rhs)))
 	{
 		if (_size[1] != m_var->_size[0])
 			throw(std::runtime_error("matrice with invalid size for matricial multiplication"));
 		size_t	new_size[2] = {_size[0], m_var->_size[1]};
-		new_matrix = new matrix(new_size, 0);
+		new_Matrix = new Matrix(new_size, 0);
 		for (size_t i = 0; i < new_size[0]; ++i)
 			for (size_t j = 0; j < m_var->_size[1]; ++j)
 				for (size_t k = 0; k < _size[1]; ++k)
-					new_matrix->_array[i][j] += _array[i][k] * m_var->_array[k][j];
-		return (new_matrix);
+					new_Matrix->_array[i][j] += _array[i][k] * m_var->_array[k][j];
+		return (new_Matrix);
 	}
 	else
 		throw(std::runtime_error("invalid type for matricial multiplication"));
@@ -201,7 +201,7 @@ Ivalue *matrix::matrix_mult(const Ivalue *rhs) const
 }
 
 //member
-std::string	matrix::to_string(void) const
+std::string	Matrix::to_string(void) const
 {
 	std::string	str = "";
 
@@ -224,14 +224,14 @@ std::string	matrix::to_string(void) const
 }
 
 //for the function incase we need to show it
-std::string	matrix::to_string_inline(void) const
+std::string	Matrix::to_string_inline(void) const
 {
 	std::string	str = "";
 
 	return(str);
 }
 
-std::ostream	&operator<<(std::ostream &o, const matrix &rhs)
+std::ostream	&operator<<(std::ostream &o, const Matrix &rhs)
 {
 	o << rhs.to_string();
 	return (o);

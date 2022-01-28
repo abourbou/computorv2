@@ -34,4 +34,5 @@ workspace.code-workspace
 *.exe
 *.out
 *.app
+*.dSYM
 computorv2

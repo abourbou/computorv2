@@ -3,41 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   Ivalue.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 09:26:17 by root              #+#    #+#             */
-/*   Updated: 2022/01/21 10:54:08 by root             ###   ########lyon.fr   */
+/*   Updated: 2022/01/28 10:07:48 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IVALUE_HPP
-# define IVALUE_HPP
+#ifndef IValue_HPP
+# define IValue_HPP
 
 #include <string>
 #include <stdexcept>
-#include "Ivariable.hpp"
+#include "IVariable.hpp"
 
-class	Ivalue : public Ivariable
+class	IValue : public IVariable
 {
 	private:
 	//coplien
 
 	public:
-		Ivalue(void);
-		Ivalue(const Ivalue &rhs);
-		virtual ~Ivalue(void);
-		Ivalue &operator=(const Ivalue &rhs);
+		IValue(void);
+		IValue(const IValue &rhs);
+		virtual ~IValue(void);
+		IValue &operator=(const IValue &rhs);
 
 	//operator
-		virtual Ivalue *operator+(const Ivalue *rhs) const;
-		virtual Ivalue *operator-(const Ivalue *rhs) const;
-		virtual Ivalue *operator*(const Ivalue *rhs) const;
-		virtual Ivalue *operator/(const Ivalue *rhs) const;
-		virtual Ivalue *operator%(const Ivalue *rhs) const;
-		virtual Ivalue *operator^(const Ivalue *rhs) const;
-		virtual Ivalue *matrix_mult(const Ivalue *rhs) const;
+		virtual IValue *operator+(const IValue *rhs) const;
+		virtual IValue *operator-(const IValue *rhs) const;
+		virtual IValue *operator*(const IValue *rhs) const;
+		virtual IValue *operator/(const IValue *rhs) const;
+		virtual IValue *operator%(const IValue *rhs) const;
+		virtual IValue *operator^(const IValue *rhs) const;
+		virtual IValue *Matrix_mult(const IValue *rhs) const;
 };
 
-std::ostream	&operator<<(std::ostream &o, const Ivalue &rhs);
+std::ostream	&operator<<(std::ostream &o, const IValue &rhs);
 
 #endif

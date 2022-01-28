@@ -1,10 +1,10 @@
-#include "Ivalue.hpp"
+#include "IValue.hpp"
 
 //basic
-Ivalue::Ivalue(void): Ivariable("value") {}
-Ivalue::Ivalue(const Ivalue &rhs): Ivariable(rhs) {}
-Ivalue::~Ivalue(void){}
-Ivalue &Ivalue::operator=(const Ivalue &rhs)
+IValue::IValue(void): IVariable("value") {}
+IValue::IValue(const IValue &rhs): IVariable(rhs) {}
+IValue::~IValue(void){}
+IValue &IValue::operator=(const IValue &rhs)
 {
 	(void)rhs;
 	throw(std::runtime_error("= is invalid operation"));
@@ -12,49 +12,49 @@ Ivalue &Ivalue::operator=(const Ivalue &rhs)
 }
 
 //operator
-Ivalue *Ivalue::operator+(const Ivalue *rhs) const
+IValue *IValue::operator+(const IValue *rhs) const
 {
 	(void)rhs;
 	throw(std::runtime_error("+ is invalid operation"));
 }
 
-Ivalue *Ivalue::operator-(const Ivalue *rhs) const
+IValue *IValue::operator-(const IValue *rhs) const
 {
 	(void)rhs;
 	throw(std::runtime_error("- is invalid operation"));
 }
 
-Ivalue *Ivalue::operator*(const Ivalue *rhs) const
+IValue *IValue::operator*(const IValue *rhs) const
 {
 	(void)rhs;
 	throw(std::runtime_error("* is invalid operation"));
 }
 
-Ivalue *Ivalue::operator/(const Ivalue *rhs) const
+IValue *IValue::operator/(const IValue *rhs) const
 {
 	(void)rhs;
 	throw(std::runtime_error("/ is invalid operation"));
 }
 
-Ivalue *Ivalue::operator%(const Ivalue *rhs) const
+IValue *IValue::operator%(const IValue *rhs) const
 {
 	(void)rhs;
 	throw(std::runtime_error("% is invalid operation"));
 }
 
-Ivalue *Ivalue::operator^(const Ivalue *rhs) const
+IValue *IValue::operator^(const IValue *rhs) const
 {
 	(void)rhs;
 	throw(std::runtime_error("% is invalid operation"));
 }
 
-Ivalue *Ivalue::matrix_mult(const Ivalue *rhs) const
+IValue *IValue::Matrix_mult(const IValue *rhs) const
 {
 	(void)rhs;
 	throw(std::runtime_error("** is invalid operation"));
 }
 
-std::ostream	&operator<<(std::ostream &o, const Ivalue &rhs)
+std::ostream	&operator<<(std::ostream &o, const IValue &rhs)
 {
 	o << rhs.to_string();
 	return(o);

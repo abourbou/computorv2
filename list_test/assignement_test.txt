@@ -41,7 +41,7 @@ a = [[4]
 * calcul + value variable * => not really usefull to test complicated calcul, same as calculation
 *		 *    but type must be correctly assign
 a = 2 * 4.5 					=> 	a must be show and use as an integer
-b = 2 * [[4,5]] 				=> must be a matrix
+b = 2 * [[4,5]] 				=> must be a Matrix
 a = 4 + i
 b = i - a; varC = b * [[1]]		=> must be -4 and be an integer so next computation mustn't be an error
 z = z + 2 						=> error

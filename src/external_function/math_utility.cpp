@@ -85,3 +85,32 @@ void as_fraction(double number, int cycles, double precision){
     }
     std::cout<<"x: "<< number <<"\tFraction: " << sign * vec_1[0]<<'/'<< vec_1[1]<< std::endl;
 }
+
+
+bool	is_zero(double number)
+{
+	if (number < PRECISION && number > -1 * PRECISION)
+		return(true);
+	return(false);
+}
+
+bool	is_greater(double number, double comparison)
+{
+	if (number > comparison + PRECISION)
+		return(true);
+	return (false);
+}
+
+bool	is_less(double number, double comparison)
+{
+	if (number < comparison - PRECISION)
+		return(true);
+	return (false);
+}
+
+bool	is_same(double number, double comparison)
+{
+	if (is_zero(number - comparison))
+		return(true);
+	return (false);
+}

@@ -29,6 +29,6 @@ A ** B =?
 A**C =?
 
 * error type *
-x * A =?			=> error complex with matrix
+x * A =?			=> error Complex with Matrix
 x + A =?
 w + A =?

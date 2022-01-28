@@ -1,15 +1,15 @@
-#ifndef COMPLEX_HPP
-# define COMPLEX_HPP
+#ifndef Complex_HPP
+# define Complex_HPP
 
-#include "Ivalue.hpp"
-#include "rational.hpp"
+#include "IValue.hpp"
+#include "Rational.hpp"
 #include <string>
 
-class complex : public Ivalue
+class Complex : public IValue
 {
 	private:
 		//forbidden
-		complex(void);
+		Complex(void);
 
 	protected:
 		//variable
@@ -18,17 +18,17 @@ class complex : public Ivalue
 
 	public:
 		//coplien
-		complex(std::string str);
-		complex(double real_part, double imag_part);
-		complex(const complex &rhs);
-		virtual ~complex(void);
-		complex &operator=(const complex &rhs);
+		Complex(std::string str);
+		Complex(double real_part, double imag_part);
+		Complex(const Complex &rhs);
+		virtual ~Complex(void);
+		Complex &operator=(const Complex &rhs);
 
 		//math operations
-		virtual Ivalue *operator+(const Ivalue *rhs) const;
-		virtual Ivalue *operator-(const Ivalue *rhs) const;
-		virtual Ivalue *operator*(const Ivalue *rhs) const;
-		virtual Ivalue *operator/(const Ivalue *rhs) const;
+		virtual IValue *operator+(const IValue *rhs) const;
+		virtual IValue *operator-(const IValue *rhs) const;
+		virtual IValue *operator*(const IValue *rhs) const;
+		virtual IValue *operator/(const IValue *rhs) const;
 
 		//members
 		double			get_realpart(void) const;
@@ -36,7 +36,7 @@ class complex : public Ivalue
 		virtual std::string	to_string(void) const;
 };
 
-std::ostream	&operator<<(std::ostream &o, const complex &rhs);
+std::ostream	&operator<<(std::ostream &o, const Complex &rhs);
 
 
 #endif

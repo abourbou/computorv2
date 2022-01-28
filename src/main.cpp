@@ -2,9 +2,9 @@
 #include <iostream>
 #include <csignal>
 #include "parsing.hpp"
-#include "rational.hpp"
-#include "complex.hpp"
-#include "matrix.hpp"
+#include "Rational.hpp"
+#include "Complex.hpp"
+#include "Matrix.hpp"
 
 void signal_handler(int signal_num)
 {

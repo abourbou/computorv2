@@ -1,20 +1,20 @@
-#ifndef matrix_HPP
-# define matrix_HPP
+#ifndef Matrix_HPP
+# define Matrix_HPP
 
 #include <vector>
 #include <string>
-#include "Ivalue.hpp"
-#include "rational.hpp"
-#include "complex.hpp"
+#include "IValue.hpp"
+#include "Rational.hpp"
+#include "Complex.hpp"
 #include "string_function.hpp"
 
-class rational;
+class Rational;
 
-class matrix	: public Ivalue
+class Matrix	: public IValue
 {
 	private:
 		//forbidden
-		matrix(void);
+		Matrix(void);
 
 	protected:
 		//variable
@@ -23,17 +23,17 @@ class matrix	: public Ivalue
 
 	public:
 		//coplien
-		matrix(std::string str);
-		matrix(size_t size[2], double value);
-		matrix(const matrix &rhs);
-		virtual ~matrix();
-		matrix &operator=(const matrix &rhs);
+		Matrix(std::string str);
+		Matrix(size_t size[2], double value);
+		Matrix(const Matrix &rhs);
+		virtual ~Matrix();
+		Matrix &operator=(const Matrix &rhs);
 
 		//math operations
-		virtual Ivalue *operator+(const Ivalue *rhs) const;
-		virtual Ivalue *operator-(const Ivalue *rhs) const;
-		virtual Ivalue *operator*(const Ivalue *rhs) const;
-		virtual Ivalue *matrix_mult(const Ivalue *rhs) const;
+		virtual IValue *operator+(const IValue *rhs) const;
+		virtual IValue *operator-(const IValue *rhs) const;
+		virtual IValue *operator*(const IValue *rhs) const;
+		virtual IValue *Matrix_mult(const IValue *rhs) const;
 
 		//member
 		//std::vector<std::vector<double> >	clone(void) const;
@@ -41,6 +41,6 @@ class matrix	: public Ivalue
 		std::string		to_string_inline(void) const;
 };
 
-std::ostream	&operator<<(std::ostream &o, const matrix &rhs);
+std::ostream	&operator<<(std::ostream &o, const Matrix &rhs);
 
 #endif

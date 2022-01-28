@@ -1,14 +1,14 @@
-#ifndef IVARIABLE_HPP
-# define IVARIABLE_HPP
+#ifndef IVariable_HPP
+# define IVariable_HPP
 
 #include <string>
 #include <stdexcept>
 
-class Ivariable
+class IVariable
 {
 	private:
-		Ivariable(void);
-		Ivariable &operator=(const Ivariable &rhs);
+		IVariable(void);
+		IVariable &operator=(const IVariable &rhs);
 
 	protected:
 		//type : function or value
@@ -17,9 +17,9 @@ class Ivariable
 
 	public:
 		//coplien
-		Ivariable(std::string type);
-		Ivariable(const Ivariable &rhs);
-		virtual ~Ivariable();
+		IVariable(std::string type);
+		IVariable(const IVariable &rhs);
+		virtual ~IVariable();
 
 		//members
 		std::string get_type() const;
