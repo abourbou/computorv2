@@ -1,5 +1,5 @@
-#ifndef Complex_HPP
-# define Complex_HPP
+#ifndef COMPLEX_HPP
+# define COMPLEX_HPP
 
 #include "IValue.hpp"
 #include "Rational.hpp"

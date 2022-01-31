@@ -1,5 +1,5 @@
-#ifndef IVariable_HPP
-# define IVariable_HPP
+#ifndef IVARIABLE_HPP
+# define IVARIABLE_HPP
 
 #include <string>
 #include <stdexcept>
@@ -12,7 +12,6 @@ class IVariable
 
 	protected:
 		//type : function or value
-		//const :  cannot be for assignation
 		const std::string _type;
 
 	public:

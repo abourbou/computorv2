@@ -1,5 +1,5 @@
-#ifndef Matrix_HPP
-# define Matrix_HPP
+#ifndef MATRIX_HPP
+# define MATRIX_HPP
 
 #include <vector>
 #include <string>

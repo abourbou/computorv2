@@ -1,7 +1,7 @@
 
 # Compilation
 NAME			=	computorv2
-CC			=	clang++
+CC				=	clang++
 FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11 -g3 -fsanitize=address
 HEADER			=	-I$(PATH_INC) -I$(PATH_INC_VAR)
 
@@ -20,64 +20,64 @@ PATH_OBJ		=	obj
 
 # Source
 SRC_PARSING		=	parsing_line.cpp
-SRC_VARIABLE		=	IValue.cpp IVariable.cpp Rational.cpp \
-				Function.cpp Matrix.cpp Complex.cpp
-#				Map_variable.cpp
+SRC_VARIABLE	=	IValue.cpp IVariable.cpp Rational.cpp \
+					Function.cpp Matrix.cpp Complex.cpp \
+					Map_variable.cpp
 
-SRC_EXECUTION		=	exec_command.cpp exec_assign.cpp
+SRC_EXECUTION	=	exec_command.cpp exec_assign.cpp
 
 SRC_EXTERNAL_FUNCTION	=	math_utility.cpp string_function.cpp Polyn_equation.cpp
 
-SRC			=	$(addprefix $(PATH_SRC)/, main.cpp) \
-				$(addprefix $(PATH_SRC)/computorv1/, $(SRC_COMPUTORV1)) \
-				$(addprefix $(PATH_SRC)/parsing/, $(SRC_PARSING)) \
-				$(addprefix $(PATH_SRC)/variable/, $(SRC_VARIABLE)) \
-				$(addprefix $(PATH_SRC)/execution/, $(SRC_EXECUTION)) \
-				$(addprefix $(PATH_SRC)/external_function/, $(SRC_EXTERNAL_FUNCTION))
+SRC				=	$(addprefix $(PATH_SRC)/, main.cpp) \
+					$(addprefix $(PATH_SRC)/computorv1/, $(SRC_COMPUTORV1)) \
+					$(addprefix $(PATH_SRC)/parsing/, $(SRC_PARSING)) \
+					$(addprefix $(PATH_SRC)/variable/, $(SRC_VARIABLE)) \
+					$(addprefix $(PATH_SRC)/execution/, $(SRC_EXECUTION)) \
+					$(addprefix $(PATH_SRC)/external_function/, $(SRC_EXTERNAL_FUNCTION))
 
-OBJ			=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRC:.cpp=.o)))
+OBJ				=	$(addprefix $(PATH_OBJ)/, $(notdir $(SRC:.cpp=.o)))
 
 # Headers
-PATH_INC_VAR		=	include/variable
+PATH_INC_VAR	=	include/variable
 
 INC_FILES		=	parsing.hpp math_utility.hpp string_function.hpp \
-				binary_tree.hpp map_variable.hpp
+					binary_tree.hpp
 
 INC_VAR			=	Polyn_equation.hpp IValue.hpp IVariable.hpp \
-				Rational.hpp  Function.hpp Complex.hpp Matrix.hpp
-#				Map_variable.hpp
+					Rational.hpp  Function.hpp Complex.hpp Matrix.hpp \
+					Map_variable.hpp
 
-INC			=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
-				$(addprefix $(PATH_INC_VAR)/, $(INC_VAR))
+INC				=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
+					$(addprefix $(PATH_INC_VAR)/, $(INC_VAR))
 
 # Rules
-all			:	$(NAME)
+all				:	$(NAME)
 
 $(NAME)			:	$(OBJ) $(INC)
-				@$(CC) $(FLAGS) $(HEADER) $(SRC) -o $(NAME)
-				@echo "$(_INFO) Creation of the executable"
-				@echo "$(_SUCCESS) program created"
+					@$(CC) $(FLAGS) $(HEADER) $(SRC) -o $(NAME)
+					@echo "$(_INFO) Creation of the executable"
+					@echo "$(_SUCCESS) program created"
 
-$(PATH_OBJ)/%.o		:	$(PATH_SRC)/%.cpp $(INC)
-				@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
-				@echo "$(_INFO) Compilation of $*"
+$(PATH_OBJ)/%.o	:	$(PATH_SRC)/%.cpp $(INC)
+					@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
+					@echo "$(_INFO) Compilation of $*"
 
-$(PATH_OBJ)/%.o		:	$(PATH_SRC)/*/%.cpp $(INC)
-				@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
-				@echo "$(_INFO) Compilation of $*"
+$(PATH_OBJ)/%.o	:	$(PATH_SRC)/*/%.cpp $(INC)
+					@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
+					@echo "$(_INFO) Compilation of $*"
 
-$(PATH_OBJ)/%.o		:	$(PATH_SRC)/*/*/%.cpp $(INC)
-				@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
-				@echo "$(_INFO) Compilation of $*"
+$(PATH_OBJ)/%.o	:	$(PATH_SRC)/*/*/%.cpp $(INC)
+					@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
+					@echo "$(_INFO) Compilation of $*"
 clean			:
-				@rm -rf $(PATH_OBJ)/*.o
-				@ echo "$(_INFO) Delete temporary files"
+					@rm -rf $(PATH_OBJ)/*.o
+					@ echo "$(_INFO) Delete temporary files"
 
 fclean			:	clean
-				@rm -rf $(NAME)
-				@ echo "$(_INFO) Delete executable"
+					@rm -rf $(NAME)
+					@ echo "$(_INFO) Delete executable"
 
-re			:	fclean all
+re				:	fclean all
 
 exec			:	all
 					./$(NAME)

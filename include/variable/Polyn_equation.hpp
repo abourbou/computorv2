@@ -1,5 +1,5 @@
-#ifndef EQUATION_HPP
-# define EQUATION_HPP
+#ifndef POLYN_EQUATION_HPP
+# define POLYN_EQUATION_HPP
 
 #include <string>
 #include <map>

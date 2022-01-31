@@ -1,5 +1,5 @@
-#ifndef Rational_HPP
-# define Rational_HPP
+#ifndef RATIONAL_HPP
+# define RATIONAL_HPP
 
 #include <string>
 #include <cmath>

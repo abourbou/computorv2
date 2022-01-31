@@ -1,5 +1,5 @@
-#ifndef Function_HPP
-#define Function_HPP
+#ifndef FUNCTION_HPP
+#define FUNCTION_HPP
 
 #include "IVariable.hpp"
 #include "IValue.hpp"

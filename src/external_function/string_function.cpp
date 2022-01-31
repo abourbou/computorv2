@@ -41,3 +41,19 @@ std::string	double_to_string(double number, int precision)
 		buffer_number = "0";
 	return(buffer_number);
 }
+
+void	to_upper(std::string &str)
+{
+	for(auto it = str.begin(); it != str.end(); ++it)
+		*it = toupper(*it);
+}
+
+bool	is_alpha(std::string str)
+{
+	for (auto it = str.begin(); it != str.end(); ++it)
+	{
+		if (!isalpha(*it))
+			return(false);
+	}
+	return (true);
+}

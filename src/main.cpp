@@ -5,6 +5,8 @@
 #include "Rational.hpp"
 #include "Complex.hpp"
 #include "Matrix.hpp"
+#include "Map_variable.hpp"
+#include "string_function.hpp"
 
 void signal_handler(int signal_num)
 {
@@ -28,6 +30,7 @@ void	exec_task(int task, bool &exit, std::string line)
 
 int	main(void)
 {
+	Map_variable	my_map;
 	bool		exit = false;
 	int			n_task;
 	std::string	current_task = "parsing";
@@ -36,6 +39,10 @@ int	main(void)
 	"function assignation", "computation", "polynom resolution"};
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
+
+	//TEST
+
+	//TEST
 
 	std::cout << "Welcome to computorv2!" << std::endl << std::endl;
 	while(!exit)
