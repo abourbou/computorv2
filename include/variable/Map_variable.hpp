@@ -1,3 +1,4 @@
+#pragma once
 #ifndef MAP_VARIABLE_HPP
 # define MAP_VARIABLE_HPP
 

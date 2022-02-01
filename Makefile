@@ -2,7 +2,7 @@
 # Compilation
 NAME			=	computorv2
 CC				=	clang++
-FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11 -g3 -fsanitize=address
+FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11
 HEADER			=	-I$(PATH_INC) -I$(PATH_INC_VAR)
 
 # Color Code and template code
@@ -54,20 +54,26 @@ INC				=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
 all				:	$(NAME)
 
 $(NAME)			:	$(OBJ) $(INC)
-					@$(CC) $(FLAGS) $(HEADER) $(SRC) -o $(NAME)
+					$(CC) $(FLAGS) $(HEADER) $(SRC) -o $(NAME)
 					@echo "$(_INFO) Creation of the executable"
 					@echo "$(_SUCCESS) program created"
+
+change_flag		:
+					$(eval FLAGS := $(FLAGS) -g3 -fsanitize=address)
+
+debug			:	change_flag all
+					@echo "$(_SUCCESS) program with debug mode"
 
 $(PATH_OBJ)/%.o	:	$(PATH_SRC)/%.cpp $(INC)
 					@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 					@echo "$(_INFO) Compilation of $*"
 
 $(PATH_OBJ)/%.o	:	$(PATH_SRC)/*/%.cpp $(INC)
-					@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
+					@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 					@echo "$(_INFO) Compilation of $*"
 
 $(PATH_OBJ)/%.o	:	$(PATH_SRC)/*/*/%.cpp $(INC)
-					@ $(CC) $(FLAGS) $(HEADER) -c $< -o $@
+					@$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 					@echo "$(_INFO) Compilation of $*"
 clean			:
 					@rm -rf $(PATH_OBJ)/*.o

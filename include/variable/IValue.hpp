@@ -1,3 +1,4 @@
+#pragma once
 #ifndef IVALUE_HPP
 # define IVALUE_HPP
 

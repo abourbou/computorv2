@@ -1,3 +1,4 @@
+#pragma once
 #ifndef POLYN_EQUATION_HPP
 # define POLYN_EQUATION_HPP
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef STRING_FUNCTION_HPP
 #define STRING_FUNCTION_HPP
 
