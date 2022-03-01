@@ -26,7 +26,7 @@ Map_variable::~Map_variable(void)
 void	Map_variable::add_var(std::string name, IVariable *pvar)
 {
 	t_info	buffer_info = {pvar, Changeable};
-	
+
 	if (!is_alpha(name))
 		throw(std::runtime_error("Variable must be only alphabetic caracters"));
 	to_upper(name);
@@ -44,7 +44,7 @@ void	Map_variable::add_var(std::string name, IVariable *pvar)
 		_map_var.insert(std::pair<std::string, t_info>(name, buffer_info));
 }
 
-const IVariable * Map_variable::get_var(std::string name) const
+const IVariable *Map_variable::get_var(std::string name) const
 {
 	if (!is_alpha(name))
 		throw(std::runtime_error("Variable must be only alphabetic caracters"));
@@ -65,6 +65,8 @@ void	Map_variable::show_map(void) const
 	for (auto it = _map_var.begin(); it != _map_var.end(); ++it)
 	{
 		if (it->second.secu_lvl != Forbidden)
-			std::cout << it->first << " : " << it->second.var->to_string() << std::endl;
+			std::cout << it->first << " : ";
+			it->second.var->display();
+			std::cout << std::endl;
 	}
 }

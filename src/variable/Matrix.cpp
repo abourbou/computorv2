@@ -200,10 +200,9 @@ IValue *Matrix::Matrix_mult(const IValue *rhs) const
 	return(0);
 }
 
-//member
 std::string	Matrix::to_string(void) const
 {
-	std::string	str = "";
+	std::string	str = "[";
 
 	for (size_t i =0; i < _size[0]; ++i)
 	{
@@ -218,17 +217,28 @@ std::string	Matrix::to_string(void) const
 				str += ',';
 		}
 		str += ']';
-		str += "\n";
+		if (i < _size[1] - 1)
+			str += ";";
 	}
+	str += "]";
 	return(str);
 }
 
-//for the function incase we need to show it
-std::string	Matrix::to_string_inline(void) const
+void	Matrix::display(std::string str) const
 {
-	std::string	str = "";
-
-	return(str);
+	(void)str;
+	for (size_t i =0; i < _size[0]; ++i)
+	{
+		std::cout << '[';
+		for(size_t j = 0; j < _size[1]; ++j)
+		{
+			//std::cout << " i : " << i << ", j : " << j << std::endl;
+			std::cout << ' ' + double_to_string(_array[i][j]) + ' ';
+			if (j < _size[1] - 1)
+				std::cout << ',';
+		}
+		std::cout << ']' << std::endl;
+	}
 }
 
 std::ostream	&operator<<(std::ostream &o, const Matrix &rhs)

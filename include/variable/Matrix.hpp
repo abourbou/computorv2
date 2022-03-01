@@ -39,7 +39,7 @@ class Matrix	: public IValue
 		//member
 		//std::vector<std::vector<double> >	clone(void) const;
 		virtual std::string	to_string(void) const;
-		std::string		to_string_inline(void) const;
+		virtual void display(std::string str = "") const;
 };
 
 std::ostream	&operator<<(std::ostream &o, const Matrix &rhs);

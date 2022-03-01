@@ -172,6 +172,12 @@ std::string	Rational::to_string(void) const
 	return(double_to_string(this->_value));
 }
 
+void		Rational::display(std::string var) const
+{
+	(void)var;
+	std::cout << this->to_string();
+}
+
 std::ostream	&operator<<(std::ostream &o, const Rational &rhs)
 {
 	o << rhs.to_string();

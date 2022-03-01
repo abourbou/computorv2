@@ -20,7 +20,7 @@ class	Map_variable
 		typedef struct	s_info
 		{
 			IVariable		*var;
-			type_secu_lvl	secu_lvl;
+			type_secu_lvl		secu_lvl;
 		}				t_info;
 		Map_variable(const Map_variable &rhs);
 		Map_variable &operator=(const Map_variable &rhs);

@@ -22,8 +22,9 @@ class IVariable
 		virtual ~IVariable();
 
 		//members
-		std::string get_type() const;
+		std::string		get_type() const;
 		virtual std::string	to_string(void) const=0;
+		virtual void		display(std::string var= "") const = 0;
 };
 
 #endif

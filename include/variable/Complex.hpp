@@ -35,6 +35,7 @@ class Complex : public IValue
 		double			get_realpart(void) const;
 		double			get_imagpart(void) const;
 		virtual std::string	to_string(void) const;
+		virtual void		display(std::string str = "") const;
 };
 
 std::ostream	&operator<<(std::ostream &o, const Complex &rhs);

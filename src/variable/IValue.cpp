@@ -45,7 +45,7 @@ IValue *IValue::operator%(const IValue *rhs) const
 IValue *IValue::operator^(const IValue *rhs) const
 {
 	(void)rhs;
-	throw(std::runtime_error("% is invalid operation"));
+	throw(std::runtime_error("^ is invalid operation"));
 }
 
 IValue *IValue::Matrix_mult(const IValue *rhs) const

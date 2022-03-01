@@ -2,11 +2,9 @@
 #include <iostream>
 #include <csignal>
 #include "parsing.hpp"
-#include "Rational.hpp"
-#include "Complex.hpp"
-#include "Matrix.hpp"
-#include "Map_variable.hpp"
 #include "string_function.hpp"
+#include "Map_variable.hpp"
+#include "test.hpp"
 
 void signal_handler(int signal_num)
 {
@@ -32,7 +30,7 @@ int	main(void)
 {
 	Map_variable	my_map;
 	bool		exit = false;
-	int			n_task;
+	int		n_task;
 	std::string	current_task = "parsing";
 	std::string	line;
 	std::string	list_task[] = {"command","variable assignation",
@@ -41,6 +39,7 @@ int	main(void)
 	signal(SIGQUIT, signal_handler);
 
 	//TEST
+	test_map_variable();
 
 	//TEST
 
@@ -52,7 +51,7 @@ int	main(void)
 
 		if (!std::getline(std::cin, line))
 			break;
-		std::cout << "line : [" << line << "]" << std::endl;
+		//std::cout << "line : [" << line << "]" << std::endl;
 		try
 		{
 			line = regulate_string(line);

@@ -54,14 +54,13 @@ std::string	Function::to_string(void) const
 }
 
 
-std::string	Function::to_string(std::string var) const
+void	Function::display(std::string var) const
 {
 	//TODO
 	(void)var;
-	return(_expr);
 }
 
-IValue	*Function::computation(IValue *value)
+IValue	*Function::computation(IValue *value) const
 {
 	//TODO
 	(void)value;

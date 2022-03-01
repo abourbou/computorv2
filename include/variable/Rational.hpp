@@ -42,8 +42,9 @@ class Rational : public IValue
 		virtual IValue *operator%(const IValue *rhs) const;
 		virtual IValue *operator^(const IValue *rhs) const;
 
-		//convert the variable into a string
+		//methods to visualize the value
 		virtual std::string	to_string(void) const;
+		virtual void		display(std::string var = "") const;
 };
 
 std::ostream	&operator<<(std::ostream &o, const Rational &rhs);

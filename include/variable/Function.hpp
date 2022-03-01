@@ -28,8 +28,8 @@ class Function: public IVariable
 
 		//members
 		std::string	to_string(void) const;
-		std::string	to_string(std::string var) const;
-		IValue		*computation(IValue *value);
+		IValue		*computation(IValue *value) const;
+		virtual void	display(std::string var = "x") const;
 };
 
 #endif
