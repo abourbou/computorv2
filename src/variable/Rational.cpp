@@ -34,6 +34,10 @@ Rational::Rational(std::string str) : IValue()
 Rational::Rational(double value) : IValue(), _value(value)
 {}
 
+Rational::Rational(const Rational &rhs) : IValue(rhs), _value(rhs._value)
+{
+}
+
 Rational::~Rational(void)
 {}
 
@@ -42,10 +46,6 @@ Rational	&Rational::operator=(const Rational &rhs)
 	this->_value = rhs._value;
 
 	return(*this);
-}
-
-Rational::Rational(const Rational &rhs) : IValue(rhs), _value(rhs._value)
-{
 }
 
 //getter - setter
@@ -166,6 +166,12 @@ IValue	*Rational::operator^(const IValue *rhs) const
 	else
 		throw(std::runtime_error("invalid type for pow"));
 }
+
+IVariable		*Rational::clone(void) const
+{
+	return (new Rational(*this));
+}
+
 //convert the variable into a string
 std::string	Rational::to_string(void) const
 {

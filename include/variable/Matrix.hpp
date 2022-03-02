@@ -37,7 +37,7 @@ class Matrix	: public IValue
 		virtual IValue *Matrix_mult(const IValue *rhs) const;
 
 		//member
-		//std::vector<std::vector<double> >	clone(void) const;
+		virtual IVariable	*clone(void) const;
 		virtual std::string	to_string(void) const;
 		virtual void display(std::string str = "") const;
 };

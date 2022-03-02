@@ -166,6 +166,11 @@ double		Complex::get_imagpart(void) const
 	return(this->_imag_part);
 }
 
+IVariable *Complex::clone(void) const
+{
+	return (new Complex(*this));
+}
+
 std::string	Complex::to_string(void) const
 {
 	std::string str = "";

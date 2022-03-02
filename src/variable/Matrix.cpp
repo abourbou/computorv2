@@ -70,7 +70,6 @@ Matrix::Matrix(const Matrix &rhs) : IValue(rhs)
 
 	_size[0] = rhs._size[0];
 	_size[1] = rhs._size[1];
-	std::vector<std::vector<double>>().swap(_array);
 	for (size_t i = 0; i < _size[0]; ++i)
 	{
 		std::vector<double>().swap(buffer);
@@ -81,9 +80,7 @@ Matrix::Matrix(const Matrix &rhs) : IValue(rhs)
 
 Matrix::~Matrix(void)
 {
-	std::vector<std::vector<double> > buffer;
-
-	_array.swap(buffer);
+	std::vector<std::vector<double> >().swap(_array);
 }
 
 Matrix	&Matrix::operator=(const Matrix &rhs)
@@ -200,6 +197,11 @@ IValue *Matrix::Matrix_mult(const IValue *rhs) const
 	return(0);
 }
 
+IVariable	*Matrix::clone(void) const
+{
+	return (new Matrix(*this));
+}
+
 std::string	Matrix::to_string(void) const
 {
 	std::string	str = "[";
@@ -217,7 +219,7 @@ std::string	Matrix::to_string(void) const
 				str += ',';
 		}
 		str += ']';
-		if (i < _size[1] - 1)
+		if (i < _size[0] - 1)
 			str += ";";
 	}
 	str += "]";

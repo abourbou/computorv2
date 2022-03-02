@@ -47,6 +47,11 @@ Function	&Function::operator=(const Function &rhs)
 
 Function::~Function(void){}
 
+IVariable *Function::clone(void) const
+{
+	return (new Function(*this));
+}
+
 std::string	Function::to_string(void) const
 {
 	//TODO

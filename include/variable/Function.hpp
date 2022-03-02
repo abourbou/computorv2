@@ -28,6 +28,7 @@ class Function: public IVariable
 
 		//members
 		std::string	to_string(void) const;
+		virtual IVariable *clone(void) const;
 		IValue		*computation(IValue *value) const;
 		virtual void	display(std::string var = "x") const;
 };

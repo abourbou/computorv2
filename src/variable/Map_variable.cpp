@@ -18,15 +18,16 @@ Map_variable::~Map_variable(void)
 {
 	for (auto it = _map_var.begin(); it != _map_var.end(); ++it)
 	{
-		if (it->second.var)
-			free(it->second.var);
+		if (it->second.secu_lvl != Forbidden)
+			delete(it->second.var);
 	}
 }
 
-void	Map_variable::add_var(std::string name, IVariable *pvar)
+void	Map_variable::add_var(std::string name, const IVariable *pvar)
 {
-	t_info	buffer_info = {pvar, Changeable};
+	t_info	buffer_info = {pvar->clone(), Changeable};
 
+	to_upper(name);
 	if (!is_alpha(name))
 		throw(std::runtime_error("Variable must be only alphabetic caracters"));
 	to_upper(name);
@@ -65,8 +66,10 @@ void	Map_variable::show_map(void) const
 	for (auto it = _map_var.begin(); it != _map_var.end(); ++it)
 	{
 		if (it->second.secu_lvl != Forbidden)
-			std::cout << it->first << " : ";
-			it->second.var->display();
+		{
+			std::cout << it->first << " : " << it->second.var->to_string();
+			//it->second.var->display();
 			std::cout << std::endl;
+		}
 	}
 }

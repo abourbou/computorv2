@@ -1,7 +1,7 @@
 
 # Compilation
 NAME			=	computorv2
-CC			=	clang++
+CC				=	clang++
 FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11
 HEADER			=	-I$(PATH_INC) -I$(PATH_INC_VAR) -I$(PATH_TEST)
 
@@ -19,28 +19,20 @@ PATH_SRC		=	src
 PATH_OBJ		=	obj
 PATH_TEST		=	test
 
-
-
 # Source
-SRC_EXECUTION		=	exec_command.cpp exec_assign.cpp
-
-#SRC_EXTERNAL_FUNCTION	=	math_utility.cpp string_function.cpp Polyn_equation.cpp
 
 SRC_TEST		=	$(wildcard $(PATH_TEST)/*.cpp)
 
-SRC			=	$(addprefix $(PATH_SRC)/, main.cpp) \
-				$(addprefix $(PATH_SRC)/computorv1/, $(SRC_COMPUTORV1)) \
-				$(addprefix $(PATH_SRC)/execution/, $(SRC_EXECUTION)) \
-				$(SRC_TEST)
-#				$(addprefix src/external_function/, $(SRC_EXTERNAL_FUNCTION)) \
-#$(addprefix $(PATH_SRC)/variable/, $(SRC_VARIABLE))
+SRC			=	$(addprefix $(PATH_SRC)/, main.cpp)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.cpp=.o))
 
 #include
-include src/variable/Include.mk
-include src/parsing/Include.mk
+include src/execution/Include.mk
 include src/external_function/Include.mk
+include src/parsing/Include.mk
+include src/variable/Include.mk
+include test/Include.mk
 
 # Headers
 PATH_INC_VAR		=	include/variable
@@ -74,11 +66,12 @@ debug			:	change_flag all
 
 $(PATH_OBJ)/%.o		: 	%.cpp    $(INC)
 				@mkdir -p $(dir $@)
-				$(CC) $(FLAGS) $(HEADER) -c -o $@ $<
-
-$(PATH_OBJ)/%.o		:	$(PATH_TEST)/%.cpp $(INC)
-				$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 				@echo "$(_INFO) Compilation of $*"
+				@$(CC) $(FLAGS) $(HEADER) -c -o $@ $<
+
+# $(PATH_OBJ)/%.o		:	$(PATH_TEST)/%.cpp $(INC)
+# 				$(CC) $(FLAGS) $(HEADER) -c $< -o $@
+# 				@echo "$(_INFO) Compilation of $*"
 clean			:
 				@rm -rf $(PATH_OBJ)/**/**/*.o
 				@ echo "$(_INFO) Delete temporary files"
