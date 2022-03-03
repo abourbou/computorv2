@@ -1,4 +1,5 @@
 #include "parsing.hpp"
+#include "string_function.hpp"
 
 /**
  * @brief check if the line doesn't have forbidden character + put it in a correct way
@@ -27,10 +28,7 @@ std::string	regulate_string(std::string line)
 		}
 		++it;
 	}
-	if (isspace(*line.begin()))
-		line.erase(line.begin());
-	if (isspace(*(line.end() - 1)))
-		line.erase(line.end() - 1);
+	erase_white_space(line);
 	return(line);
 }
 
@@ -62,7 +60,7 @@ int		find_task(std::string line)
 			auto it_interrog = std::find(line.begin(), line.end(), '?');
 			if (it_interrog + 1 != line.end())
 				throw(std::runtime_error("? symbol must be at the end of the command"));
-			if (it_equal + 1 == it_interrog || (isspace(*(it_equal + 1)) && it_equal + 2 == it_interrog))
+			if (it_equal + 1 == it_interrog)
 				return (Computation);
 			return (Resolv_Polyn);
 		}
