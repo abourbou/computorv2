@@ -27,12 +27,15 @@ bool test_map_variable(void)
 	map_test.add_var("Y", y);
 	map_test.show_map();
 
-	std::cout << "try add forbidden var" << std::endl;
+	std::cout << "try getting a variable : " << std::endl;
+	const IVariable *y_copy = map_test.get_var("Y");
+	std::cout << "y on map : " << y_copy->to_string() << std::endl;
+
+	std::cout << "try add forbidden vars" << std::endl;
 	try { map_test.add_var("EXIt", y);}
 	catch(const std::exception& e) { std::cerr << e.what() << std::endl;}
 	try { map_test.add_var("history", y);}
 	catch(const std::exception& e) { std::cerr << e.what() << std::endl;}
-
 
 	delete y;
 	delete var1;
