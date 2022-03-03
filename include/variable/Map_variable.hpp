@@ -4,6 +4,7 @@
 
 #include <string>
 #include <map>
+#include <algorithm>
 #include "IValue.hpp"
 #include "IVariable.hpp"
 #include "Rational.hpp"
@@ -19,7 +20,8 @@ class	Map_variable
 
 		typedef struct	s_info
 		{
-			IVariable		*var;
+			std::string	name;
+			IVariable	*var;
 			type_secu_lvl	secu_lvl;
 		}				t_info;
 		Map_variable(const Map_variable &rhs);

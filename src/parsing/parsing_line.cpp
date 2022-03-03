@@ -17,7 +17,6 @@ std::string	regulate_string(std::string line)
 		char &c = *it;
 		if (!isalnum(c) && allowed_symboles.find(c) == std::string::npos && !isspace(c))
 			throw(std::runtime_error("Forbidden character"));
-		c = toupper(c);
 		if (isspace(c) && it + 1 != line.end() && isspace(*(it + 1)))
 		{
 			auto start = it + 1;

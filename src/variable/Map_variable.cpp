@@ -4,13 +4,15 @@
 Map_variable::Map_variable(void)
 {
 	t_info info_buffer;
-	info_buffer = {0, Forbidden};
+
 	//forbidden values
+	info_buffer = {"exit", 0, Forbidden};
 	_map_var.insert(std::pair<std::string, t_info>("EXIT", info_buffer));
+	info_buffer = {"history", 0, Forbidden};
 	_map_var.insert(std::pair<std::string, t_info>("HISTORY", info_buffer));
 
 	//const values
-	info_buffer = {new Complex(0, 1), Reserved};
+	info_buffer = {"i", new Complex(0, 1), Reserved};
 	_map_var.insert(std::pair<std::string, t_info>("I", info_buffer));
 }
 
@@ -25,13 +27,13 @@ Map_variable::~Map_variable(void)
 
 void	Map_variable::add_var(std::string name, const IVariable *pvar)
 {
-	t_info	buffer_info = {pvar->clone(), Changeable};
+	t_info	buffer_info = {name, pvar->clone(), Changeable};
+	std::string caps_name = name;
+	to_upper(caps_name);
 
-	to_upper(name);
 	if (!is_alpha(name))
 		throw(std::runtime_error("Variable must be only alphabetic caracters"));
-	to_upper(name);
-	auto it = _map_var.find(name);
+	auto it = _map_var.find(caps_name);
 	if (it != _map_var.end())
 	{
 		if (it->second.secu_lvl == Forbidden)
@@ -42,7 +44,7 @@ void	Map_variable::add_var(std::string name, const IVariable *pvar)
 			it->second = buffer_info;
 	}
 	else
-		_map_var.insert(std::pair<std::string, t_info>(name, buffer_info));
+		_map_var.insert(std::pair<std::string, t_info>(caps_name, buffer_info));
 }
 
 const IVariable *Map_variable::get_var(std::string name) const
@@ -67,8 +69,7 @@ void	Map_variable::show_map(void) const
 	{
 		if (it->second.secu_lvl != Forbidden)
 		{
-			std::cout << it->first << " : " << it->second.var->to_string();
-			//it->second.var->display();
+			std::cout << it->second.name << " : " << it->second.var->to_string();
 			std::cout << std::endl;
 		}
 	}

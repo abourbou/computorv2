@@ -73,7 +73,7 @@ $(PATH_OBJ)/%.o		: 	%.cpp    $(INC)
 # 				$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 # 				@echo "$(_INFO) Compilation of $*"
 clean			:
-				@rm -rf $(PATH_OBJ)/**/**/*.o
+				@ find $(PATH_OBJ) -name '*.o' -delete
 				@ echo "$(_INFO) Delete temporary files"
 
 fclean			:	clean
