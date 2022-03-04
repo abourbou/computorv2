@@ -39,7 +39,7 @@ include test/Include.mk
 PATH_INC_VAR		=	include/variable
 
 INC_FILES		=	parsing.hpp math_utility.hpp string_function.hpp \
-				binary_tree.hpp
+				binary_tree.hpp computation.hpp
 
 INC_VAR			=	Polyn_equation.hpp IValue.hpp IVariable.hpp \
 				Rational.hpp  Function.hpp Complex.hpp Matrix.hpp \

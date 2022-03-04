@@ -32,9 +32,9 @@ bool test_map_variable(void)
 	std::cout << "y on map : " << y_copy->to_string() << std::endl;
 
 	std::cout << "try add forbidden vars" << std::endl;
-	try { map_test.add_var("EXIt", y);}
+	try { map_test.add_var("EXIt", y); return false;}
 	catch(const std::exception& e) { std::cerr << e.what() << std::endl;}
-	try { map_test.add_var("history", y);}
+	try { map_test.add_var("history", y); return false;}
 	catch(const std::exception& e) { std::cerr << e.what() << std::endl;}
 
 	delete y;

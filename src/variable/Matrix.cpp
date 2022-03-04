@@ -4,7 +4,7 @@
 /**
  * @brief Construct a new Matrix object
  *
- * @param str format accepted : [[a,b];[c,d]]
+ * @param str format accepted : [[a,b];[c,d]...]
  * @param is_const
  */
 Matrix::Matrix(std::string str) : IValue()

@@ -39,8 +39,8 @@ int	main(void)
 	signal(SIGQUIT, signal_handler);
 
 	//TEST
-	test_map_variable();
-
+	//test_map_variable();
+	test_computation();
 	//TEST
 
 	std::cout << "Welcome to computorv2!" << std::endl << std::endl;
