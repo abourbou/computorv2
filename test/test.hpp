@@ -3,6 +3,7 @@
 # define TEST_HPP
 
 bool	test_map_variable(void);
-bool	test_computation(void);
+void	test_computation(void);
+void	test_input(void);
 
 #endif
