@@ -4,6 +4,6 @@
 
 bool	test_map_variable(void);
 void	test_computation(void);
-void	test_input(void);
+void	test_syntax(void);
 
 #endif

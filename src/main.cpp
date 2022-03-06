@@ -61,13 +61,12 @@ int	main(int argc, char **argv)
 	//TEST
 	//test_map_variable();
 	//test_computation();
-	test_input();
+	//test_syntax();
 	//TEST
 
 	if (argc == 2)
 	{
-		line = argv[1];
-		exec_line(line, exit);
+		exec_line(argv[1], exit);
 		return (0);
 	}
 	else if (argc > 2)
@@ -76,7 +75,7 @@ int	main(int argc, char **argv)
 		{
 			std::cout << "----------------------------" << std::endl;
 			std::cout << "command n " << i << std::endl;
-			exec_line(line, exit);
+			exec_line(argv[i], exit);
 			if (exit == true)
 				return (0);
 		}
