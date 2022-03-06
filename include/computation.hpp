@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 
-enum class block_type
+enum class token_type
 {
 	math_operator,
 	litteral_value,
@@ -14,9 +14,10 @@ enum class block_type
 	math_function,
 	parenthesis,
 };
-typedef std::pair<block_type, std::string> block;
 
-std::list<block>	cmd_into_list(std::string cmd);
+using token = std::pair<token_type, std::string>;
+
+std::list<token>	lexer(std::string cmd);
 
 
 #endif

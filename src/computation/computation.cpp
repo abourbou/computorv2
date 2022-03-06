@@ -30,45 +30,67 @@ size_t		find_first_separator(std::string cmd, size_t start)
 }
 
 //identify the type of data the str contain
-block_type	identify_type_value(std::string str)
+token_type	identify_type_value(std::string str)
 {
 	if (str[0] == '(')
-		return block_type::parenthesis;
+		return token_type::parenthesis;
 	else
-		return block_type::litteral_value;
+		return token_type::litteral_value;
 }
 
-///parse the computation command into a list of operator, value or parenthesis
-std::list<block>	cmd_into_list(std::string cmd)
+//parse the first value
+//return the string containing the value and cmd become the rest
+std::string lexer_first_value(std::string &cmd)
 {
-	size_t		i = 0;
-	size_t		end;
-	std::string	block_str;
-	block		block_buffer;
-	std::list<block> my_list;
+	size_t end;
+	std::string token_str;
 
-	//particular case of first caracter is + or -
-	if (cmd[0] == '+' || cmd[0] == '-')
+	end = find_first_separator(cmd, 0);
+	token_str = cmd.substr(0, end);
+	if (end < cmd.length())
+		cmd = cmd.substr(end);
+	else
+		cmd = "";
+	return (token_str);
+}
+
+
+//parse the first operator
+//return the string containing the operator and cmd become the rest
+std::string lexer_first_operator(std::string &cmd)
+{
+	size_t end;
+	std::string token_str;
+
+	end = find_first_separator(cmd, 0);
+	if (end)
+		return (std::string());
+	if (cmd[end] == '*' && cmd.length() > 1 && cmd[end + 1] == '*')
 	{
-		end = find_first_separator(cmd, 1);
-		block_str = cmd.substr(0, end);
-		std::cout << "block_str : " + block_str << std::endl;
-		block_buffer = block(identify_type_value(block_str), block_str);
-		my_list.push_back(block_buffer);
-		i = end + 1;
+		cmd = cmd.substr(2);
+		return("**");
 	}
-	while (1)
-	{
-		end = find_first_separator(cmd, i);
-		//std::cout << "separator at : " << end << std::endl;
+	token_str = cmd.substr(0, 1);
+	cmd = cmd.substr(1);
+	return(token_str);
+}
 
-		if (end == i)
-			throw(std::runtime_error("two operators in a row"));
-		else
-			std::cout << "str : " << cmd.substr(i, end - i) << std::endl;
-		if (end >= cmd.length())
-			break;
-		i = end + 1;
+///transform the computation command into a list of token
+/// tokens are operator, value or parenthesis
+std::list<token>	lexer(std::string cmd)
+{
+	std::string			token_str;
+	token				token_buffer;
+	std::list<token>	my_list;
+
+	while (!cmd.empty())
+	{
+		token_str = lexer_first_value(cmd);
+		if (!token_str.empty())
+			std::cout << "value : " << token_str << std::endl;
+		token_str = lexer_first_operator(cmd);
+		if (!token_str.empty())
+			std::cout << "separator : " << token_str << std::endl;
 	}
 	return(my_list);
 }
