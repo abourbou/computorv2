@@ -1,5 +1,5 @@
 
-SRC_COMPUTATION = computation.cpp
+SRC_COMPUTATION = 
 
-SRC		:=	$(SRC) \
-			$(addprefix src/computation/, $(SRC_COMPUTATION))
+# SRC		:=	$(SRC) \
+# 			$(addprefix src/computation/, $(SRC_COMPUTATION))

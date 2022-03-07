@@ -17,7 +17,7 @@ enum Task {
 };
 
 std::string	regulate_string(std::string line);
-int			find_task(std::string line);
+Task		find_task(std::string line);
 void		exec_command(std::string line, bool &exit);
 void		exec_assign_value(std::string line);
 

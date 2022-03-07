@@ -62,7 +62,7 @@ $(NAME)			:	$(OBJ) $(INC)
 change_flag		:
 				$(eval FLAGS := $(FLAGS) -g3 -fsanitize=address)
 
-debug			:	change_flag all
+debug			: change_flag all
 				@echo "$(_SUCCESS) program with debug mode"
 
 $(PATH_OBJ)/%.o		: 	%.cpp    $(INC)

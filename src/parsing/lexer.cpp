@@ -100,16 +100,10 @@ std::list<token>	lexer(std::string cmd)
 	{
 		token_str = lexer_first_value(cmd);
 		if (!token_str.empty())
-		{
-			//std::cout << "value : " << token_str << std::endl;
 			my_list.push_back(tokenize_value(token_str));
-		}
 		token_str = lexer_first_operator(cmd);
 		if (!token_str.empty())
-		{
 			my_list.push_back(token(token_type::math_operator, token_str));
-			//std::cout << "separator : " << token_str << std::endl;
-		}
 	}
 	return(my_list);
 }

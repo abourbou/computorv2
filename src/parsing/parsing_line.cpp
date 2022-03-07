@@ -10,7 +10,7 @@
 
 std::string	regulate_string(std::string line)
 {
-	std::string	allowed_symboles("+-*/%^()[],;=?");
+	std::string	allowed_symboles("+-*/%^()[],;=?.");
 
 	auto it = line.begin();
 	while (it < line.end())
@@ -39,7 +39,7 @@ std::string	regulate_string(std::string line)
  * @param line
  * @return int
  */
-int		find_task(std::string line)
+Task		find_task(std::string line)
 {
 	auto nb_equal = std::count(line.begin(), line.end(), '=');
 	if (nb_equal == 0)
