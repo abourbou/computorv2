@@ -3,7 +3,7 @@
 
 #include "parsing.hpp"
 
-void	exec_line(std::string line, bool &exit);
-void	exec_task(Task task, bool &exit, std::string line);
+void	exec_line(std::string line);
+void	exec_task(Task task, std::string line);
 
 #endif

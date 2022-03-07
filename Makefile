@@ -3,7 +3,7 @@
 NAME			=	computorv2
 CC				=	clang++
 FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11
-HEADER			=	-I$(PATH_INC) -I$(PATH_INC_VAR) -I$(PATH_TEST)
+HEADER			=	-I$(PATH_INC) -I$(PATH_INC_VAR) -I$(PATH_INC_TOKEN) -I$(PATH_TEST)
 
 # Color Code and template code
 _YELLOW			=	\033[38;5;184m
@@ -23,7 +23,7 @@ PATH_TEST		=	test
 
 SRC_TEST		=	$(wildcard $(PATH_TEST)/*.cpp)
 
-SRC			=	$(addprefix $(PATH_SRC)/, main.cpp)
+SRC			=	$(addprefix $(PATH_SRC)/, main.cpp singleton.cpp)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.cpp=.o))
 
@@ -32,18 +32,23 @@ include src/computation/Include.mk
 include src/execution/Include.mk
 include src/external_function/Include.mk
 include src/parsing/Include.mk
+include src/token/Include.mk
 include src/variable/Include.mk
 include test/Include.mk
 
 # Headers
 PATH_INC_VAR		=	include/variable
 
+PATH_INC_TOKEN		=	include/token
+
 INC_FILES		=	parsing.hpp math_utility.hpp string_function.hpp \
-				binary_tree.hpp computation.hpp execution.hpp
+				binary_tree.hpp  execution.hpp singleton.hpp
 
 INC_VAR			=	Polyn_equation.hpp IValue.hpp IVariable.hpp \
 				Rational.hpp  Function.hpp Complex.hpp Matrix.hpp \
 				Map_variable.hpp
+
+INC_TOKEN		=	IToken.hpp
 
 INC_TEST		=	test.hpp
 
@@ -70,9 +75,6 @@ $(PATH_OBJ)/%.o		: 	%.cpp    $(INC)
 				@echo "$(_INFO) Compilation of $*"
 				@$(CC) $(FLAGS) $(HEADER) -c -o $@ $<
 
-# $(PATH_OBJ)/%.o		:	$(PATH_TEST)/%.cpp $(INC)
-# 				$(CC) $(FLAGS) $(HEADER) -c $< -o $@
-# 				@echo "$(_INFO) Compilation of $*"
 clean			:
 				@ find $(PATH_OBJ) -name '*.o' -delete
 				@ echo "$(_INFO) Delete temporary files"

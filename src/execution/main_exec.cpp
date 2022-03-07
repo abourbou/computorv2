@@ -2,7 +2,7 @@
 #include <string>
 #include "execution.hpp"
 
-void	exec_line(std::string line, bool &exit)
+void	exec_line(std::string line)
 {
 	static std::string	list_task[] = {"command","variable assignation",
 										"function assignation", "computation", "polynom resolution"};
@@ -16,7 +16,7 @@ void	exec_line(std::string line, bool &exit)
 		n_task = find_task(line);
 		current_task = list_task[n_task];
 		std::cout << "task : " << current_task << std::endl;
-		exec_task(n_task, exit, line);
+		exec_task(n_task, line);
 	}
 	catch(const std::exception& e)
 	{
@@ -25,12 +25,12 @@ void	exec_line(std::string line, bool &exit)
 	}
 }
 
-void	exec_task(Task task, bool &exit, std::string line)
+void	exec_task(Task task, std::string line)
 {
 	//static list_variable list;
 
 	if (task == Command)
-		exec_command(line, exit);
+		exec_command(line);
 	else if (task == Assign_var)
 		exec_assign_value(line);
 	else

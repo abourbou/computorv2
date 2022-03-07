@@ -6,6 +6,7 @@
 #include "Map_variable.hpp"
 #include "test.hpp"
 #include "execution.hpp"
+#include "singleton.hpp"
 
 void signal_handler(int signal_num)
 {
@@ -15,8 +16,7 @@ void signal_handler(int signal_num)
 
 int	main(int argc, char **argv)
 {
-	Map_variable	my_map;
-	bool		exit = false;
+	Singleton	*glob_var = Singleton::GetInstance();
 	std::string	line;
 
 	signal(SIGINT, signal_handler);
@@ -26,11 +26,12 @@ int	main(int argc, char **argv)
 	//test_map_variable();
 	//test_computation();
 	//test_syntax();
+	test_token();
 	//TEST
 
 	if (argc == 2)
 	{
-		exec_line(argv[1], exit);
+		exec_line(argv[1]);
 		return (0);
 	}
 	else if (argc > 2)
@@ -39,20 +40,20 @@ int	main(int argc, char **argv)
 		{
 			std::cout << "----------------------------" << std::endl;
 			std::cout << "command n " << i << std::endl;
-			exec_line(argv[i], exit);
-			if (exit == true)
+			exec_line(argv[i]);
+			if (glob_var->get_exit() == true)
 				return (0);
 		}
 		return(0);
 	}
 
 	std::cout << "Welcome to computorv2!" << std::endl << std::endl;
-	while(!exit)
+	while(!glob_var->get_exit())
 	{
 		std::cout << "> ";
 		if (!std::getline(std::cin, line))
 			break;
-		exec_line(line, exit);
+		exec_line(line);
 	}
 	std::cout << std::endl << "End of the program" << std::endl;
 	return (0);

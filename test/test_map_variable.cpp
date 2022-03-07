@@ -1,9 +1,10 @@
 
 #include "Map_variable.hpp"
+#include "singleton.hpp"
 
 bool test_map_variable(void)
 {
-	Map_variable map_test;
+	Map_variable &map_test = Singleton::GetInstance()->get_map_variable();
 	std::cout << "test map_variable" << std::endl;
 	map_test.show_map();
 

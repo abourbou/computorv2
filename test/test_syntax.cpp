@@ -4,25 +4,23 @@
 
 void	test_syntax(void)
 {
-	bool exit;
-
 	std::cout << "into test imput" << std::endl;
-	exec_line("var = 5", exit);
+	exec_line("var = 5");
 	std::cout << std::endl;
-	exec_line("x = 23edd23-+-+", exit);
+	exec_line("x = 23edd23-+-+");
 	std::cout << std::endl;
-	exec_line("a ==?", exit);
+	exec_line("a ==?");
 	std::cout << std::endl;
-	exec_line("a42 = 5", exit);
+	exec_line("a42 = 5");
 	std::cout << std::endl;
-	exec_line("x == 2", exit);
+	exec_line("x == 2");
 	std::cout << std::endl;
-	exec_line("a = b = c", exit);
+	exec_line("a = b = c");
 	std::cout << std::endl;
-	exec_line("42 + 5! =?", exit);
+	exec_line("42 + 5! =?");
 	std::cout << std::endl;
-	exec_line("4 = 5 =?", exit);
+	exec_line("4 = 5 =?");
 	std::cout << std::endl;
-	exec_line("4 = 5 ?", exit);
+	exec_line("4 = 5 ?");
 	std::cout << std::endl;
 }

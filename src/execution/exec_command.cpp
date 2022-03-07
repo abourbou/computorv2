@@ -1,12 +1,15 @@
 
 #include <parsing.hpp>
 #include "string_function.hpp"
+#include "singleton.hpp"
 
-void	exec_command(std::string line, bool &exit)
+void	exec_command(std::string line)
 {
+	Singleton *glob_var = Singleton::GetInstance();
+
 	to_upper(line);
 	if (line == "EXIT")
-		exit = true;
+		glob_var->set_exit(true);
 	else if (line == "HISTORY" || line == "CHANGLE-ANGLE-MOD"
 				|| line == "LIST-VARIABLE")
 	{
