@@ -22,6 +22,7 @@ class	IToken {
 
 		//methods
 		virtual std::string get_lit() const = 0;
+		token_type			get_type(void) const;
 };
 
 #endif
