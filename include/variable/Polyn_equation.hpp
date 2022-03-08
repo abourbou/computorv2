@@ -1,6 +1,4 @@
 #pragma once
-#ifndef POLYN_EQUATION_HPP
-# define POLYN_EQUATION_HPP
 
 #include <string>
 #include <map>
@@ -109,5 +107,3 @@ class Polyn_Equation{
 };
 
 std::ostream	&operator<<(std::ostream &o, Polyn_Equation const &rhs);
-
-#endif

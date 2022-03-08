@@ -1,6 +1,4 @@
 #pragma once
-#ifndef COMPLEX_HPP
-# define COMPLEX_HPP
 
 #include "IValue.hpp"
 #include "Rational.hpp"
@@ -40,6 +38,3 @@ class Complex : public IValue
 };
 
 std::ostream	&operator<<(std::ostream &o, const Complex &rhs);
-
-
-#endif

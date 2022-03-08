@@ -1,5 +1,4 @@
-#ifndef TOKEN_VARIABLE
-# define TOKEN_VARIABLE
+#pragma once
 
 #include "IToken.hpp"
 #include "IValue.hpp"
@@ -20,5 +19,3 @@ class Token_variable : public IToken
 		std::string		to_string(void) const;
 
 };
-
-#endif

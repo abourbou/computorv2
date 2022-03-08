@@ -1,6 +1,4 @@
 #pragma once
-#ifndef FUNCTION_HPP
-#define FUNCTION_HPP
 
 #include "IVariable.hpp"
 #include "IValue.hpp"
@@ -36,5 +34,3 @@ class Computable_function: public IVariable
 		IValue			*computation(const IValue *value) const;
 		virtual void		display(std::string var = "") const;
 };
-
-#endif

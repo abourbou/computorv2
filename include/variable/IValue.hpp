@@ -1,6 +1,4 @@
 #pragma once
-#ifndef IVALUE_HPP
-# define IVALUE_HPP
 
 #include <string>
 #include <stdexcept>
@@ -26,5 +24,3 @@ class	IValue : public IVariable
 };
 
 std::ostream	&operator<<(std::ostream &o, const IValue &rhs);
-
-#endif

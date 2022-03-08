@@ -1,5 +1,4 @@
-#ifndef TOKEN_FUNCTION
-# define TOKEN_FUNCTION
+#pragma once
 
 #include "IToken.hpp"
 #include "IValue.hpp"
@@ -28,5 +27,3 @@ class Token_function : public IToken
 		std::string	to_string(void) const;
 
 };
-
-#endif

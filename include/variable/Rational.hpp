@@ -1,6 +1,4 @@
 #pragma once
-#ifndef RATIONAL_HPP
-# define RATIONAL_HPP
 
 #include <string>
 #include <cmath>
@@ -49,5 +47,3 @@ class Rational : public IValue
 };
 
 std::ostream	&operator<<(std::ostream &o, const Rational &rhs);
-
-#endif

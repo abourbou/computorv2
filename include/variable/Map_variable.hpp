@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MAP_VARIABLE_HPP
-# define MAP_VARIABLE_HPP
 
 #include <string>
 #include <map>
@@ -44,5 +42,3 @@ class	Map_variable
 		bool		is_var(std::string name) const;
 		void		show_map(void) const;
 };
-
-#endif

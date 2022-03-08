@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MATH_UTILITY_HPP
-#define MATH_UTILITY_HPP
 
 #include <iostream>
 
@@ -17,5 +15,3 @@ bool		is_zero(double number);
 bool		is_greater(double number, double comparison);
 bool		is_less(double number, double comparison);
 bool		is_same(double number, double comparison);
-
-#endif

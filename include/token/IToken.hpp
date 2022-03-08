@@ -1,6 +1,4 @@
-#ifndef ITOKEN_HPP
-# define ITOKEN_HPP
-
+#pragma once
 
 #include <string>
 #include "parsing.hpp"
@@ -24,5 +22,3 @@ class	IToken {
 		virtual std::string to_string() const = 0;
 		token_type			get_type(void) const;
 };
-
-#endif

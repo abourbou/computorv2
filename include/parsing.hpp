@@ -1,6 +1,4 @@
 #pragma once
-#ifndef PARSING_HPP
-# define PARSING_HPP
 
 #include <cctype>
 #include <string>
@@ -38,5 +36,3 @@ Task		find_task(std::string line);
 void		exec_command(std::string line);
 void		exec_assign_value(std::string line);
 std::list<pre_token>	lexer(std::string cmd);
-
-#endif

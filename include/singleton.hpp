@@ -1,6 +1,4 @@
 #pragma once
-#ifndef SINGLETON_HPP
-# define SINGLETON_HPP
 
 #include "Map_variable.hpp"
 #include <mutex>
@@ -35,5 +33,3 @@ class Singleton
 		void		set_exit(bool val) {exit = val;}
 		Map_variable &get_map_variable() {return my_map;}
 };
-
-#endif

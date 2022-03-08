@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MATRIX_HPP
-# define MATRIX_HPP
 
 #include <vector>
 #include <string>
@@ -43,5 +41,3 @@ class Matrix	: public IValue
 };
 
 std::ostream	&operator<<(std::ostream &o, const Matrix &rhs);
-
-#endif

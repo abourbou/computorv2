@@ -1,6 +1,4 @@
 #pragma once
-#ifndef BINARY_TREE_HPP
-# define BINARY_TREE_HPP
 
 class BinaryTree
 {
@@ -10,5 +8,3 @@ class BinaryTree
 	public:
 		void tell(void) { root = NULL;};
 };
-
-#endif

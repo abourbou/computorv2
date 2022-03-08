@@ -1,5 +1,4 @@
-#ifndef TOKEN_OPERATOR
-# define TOKEN_OPERATOR
+#pragma once
 
 #include "IToken.hpp"
 #include "IValue.hpp"
@@ -20,5 +19,3 @@ class Token_operator : public IToken
 		std::string to_string() const;
 
 };
-
-#endif
