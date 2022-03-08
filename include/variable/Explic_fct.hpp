@@ -1,9 +1,11 @@
 #pragma once
 
+#include<iostream>
 #include "IVariable.hpp"
 #include "IValue.hpp"
 #include "IToken.hpp"
 #include "IFunction.hpp"
+
 /**
  * @brief define a mathematical function describe by a programming function
  */

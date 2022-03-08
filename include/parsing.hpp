@@ -8,6 +8,7 @@
 #include <utility>
 #include <list>
 #include "string_function.hpp"
+#include "IToken.hpp"
 
 enum Task {
 	Command,
@@ -15,17 +16,6 @@ enum Task {
 	Assign_func,
 	Computation,
 	Resolv_Polyn
-};
-
-enum class token_type
-{
-	math_operator,
-	variable,
-	math_function,
-	parenthesis,
-	rational_value,
-	complex_value,
-	matrix_value,
 };
 
 using pre_token = std::pair<token_type, std::string>;

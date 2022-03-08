@@ -42,12 +42,8 @@ pre_token	tokenize_value(std::string pre_token_str)
 		type = token_type::variable;
 	else if (pre_token_str.find('(') != std::string::npos || pre_token_str.find(')') != std::string::npos)
 		type = token_type::math_function;
-	else if (pre_token_str.find('[') != std::string::npos || pre_token_str.find(']') != std::string::npos)
-		type = token_type::matrix_value;
-	else if (pre_token_str.back() == 'i')
-		type = token_type::complex_value;
 	else
-		type = token_type::rational_value;
+		type = token_type::value;
 	return(pre_token(type, pre_token_str));
 }
 

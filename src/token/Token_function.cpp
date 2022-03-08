@@ -66,16 +66,14 @@ Token_function::~Token_function()
  */
 IValue *Token_function::compute(void) const
 {
-	//TODO Tester le dynamic_cast
 	Map_variable &map_var = Singleton::GetInstance()->get_map_variable();
 	const IVariable *buffer_var;
 	const IFunction *f;
 
 	buffer_var = map_var.get_var(_fct);
-	if (buffer_var->get_type() != variable_type::function || buffer_var->get_type() != variable_type::function)
+	if (buffer_var->get_type() != variable_type::function)
 		throw(std::runtime_error("the function isn't a function"));
-	if (buffer_var->get_type() == variable_type::function)
-		f = dynamic_cast<const IFunction *>(buffer_var);
+	f = static_cast<const IFunction *>(buffer_var);
 	const IValue *value = _value;
 	if (!value)
 	{

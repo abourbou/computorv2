@@ -1,19 +1,25 @@
 #pragma once
 
 #include <string>
-#include "parsing.hpp"
+
+enum class token_type
+{
+	math_operator,
+	variable,
+	math_function,
+	parenthesis,
+	value,
+};
 
 class	IToken {
-
-	private:
-		IToken(void);
-		IToken &operator=(const IToken &rhs);
 
 	protected:
 		std::string _lit;
 		token_type	_type;
 
 	public:
+		IToken(void) = delete;
+		IToken &operator=(const IToken &rhs) = delete;
 		IToken(std::string str, token_type type);
 		IToken(const IToken &rhs);
 		virtual ~IToken();
