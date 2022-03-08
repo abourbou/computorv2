@@ -7,12 +7,12 @@
 #include "IToken.hpp"
 
 /**
- * @brief function class
- * define a mathematical function with at choice :
+ * @brief function_computable class
+ * @description define a mathematical function with at choice :
  * - an list of token who can be computed
  * - a function who take a value and return a value
  */
-class Function: public IVariable
+class Computable_function: public IVariable
 {
 	typedef IValue *(*function)(IValue *arg);
 
@@ -23,17 +23,17 @@ class Function: public IVariable
 
 	public:
 		//coplien
-		Function(void) = delete;
-		Function(std::string var, std::string expr);
-		Function(std::string expr, function f);
-		Function(const Function &rhs);
-		Function &operator=(const Function &rhs);
-		virtual ~Function();
+		Computable_function(void) = delete;
+		Computable_function(std::string var, std::string expr);
+		Computable_function(std::string expr, function f);
+		Computable_function(const Computable_function &rhs);
+		Computable_function &operator=(const Computable_function &rhs);
+		virtual ~Computable_function();
 
 		//members
 		std::string			to_string(void) const;
 		virtual IVariable	*clone(void) const;
-		IValue				*computation(IValue *value) const;
+		IValue			*computation(const IValue *value) const;
 		virtual void		display(std::string var = "") const;
 };
 

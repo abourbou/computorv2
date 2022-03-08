@@ -1,6 +1,7 @@
 #include "IToken.hpp"
 #include "Token_operator.hpp"
 #include "Token_variable.hpp"
+#include "Token_function.hpp"
 #include "Rational.hpp"
 #include "singleton.hpp"
 #include "Map_variable.hpp"
@@ -65,8 +66,18 @@ void test_variable()
 	delete var1;
 }
 
+void	test_function()
+{
+	Token_function T1("F(4)");
+	std::cout << "F(x) | " << T1.to_string() << std::endl;
+	Token_function T2("F(4.0)");
+	std::cout << "F(x) | " << T2.to_string() << std::endl;
+	//TODO check if it works with a real function
+}
+
 void	test_token(void)
 {
 	//test_operator();
-	test_variable();
+	//test_variable();
+	test_function();
 }

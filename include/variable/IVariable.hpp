@@ -5,24 +5,31 @@
 #include <string>
 #include <stdexcept>
 
+enum class variable_type
+{
+	rational,
+	complex,
+	matrix,
+	function,
+};
+
 class IVariable
 {
 	private:
 		IVariable(void);
-		IVariable &operator=(const IVariable &rhs);
+		variable_type _type;
 
-	protected:
-		//type : function or value
-		const std::string _type;
+//	protected:
 
 	public:
 		//coplien
-		IVariable(std::string type);
+		IVariable(variable_type type);
 		IVariable(const IVariable &rhs);
+		IVariable &operator=(const IVariable &rhs);
 		virtual ~IVariable();
 
 		//members
-		std::string		get_type() const;
+		variable_type		get_type() const;
 		virtual IVariable	*clone(void) const =0;
 		virtual std::string	to_string(void) const =0;
 		virtual void		display(std::string var= "") const =0;

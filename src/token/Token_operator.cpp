@@ -39,7 +39,7 @@ IValue *Token_operator::operation(const IValue *val1, const IValue *val2) const
 	return (val1->*Operator_ptr)(val2);
 }
 
-std::string	Token_operator::get_lit(void) const
+std::string	Token_operator::to_string(void) const
 {
 	return (_lit);
 }

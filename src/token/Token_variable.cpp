@@ -21,17 +21,16 @@ Token_variable::~Token_variable() {}
 
 const IValue *Token_variable::get_var(void) const
 {
-	static Singleton *glob_var = Singleton::GetInstance();
-	Map_variable &ref_map = glob_var->get_map_variable();
-	const IValue	*value;
+	Map_variable	&ref_map = Singleton::GetInstance()->get_map_variable();
+	const IVariable	*buffer_variable;
 
-	value = dynamic_cast<const IValue*>(ref_map.get_var(_lit));
-	if (!value)
+	buffer_variable = ref_map.get_var(_lit);
+	if (buffer_variable->get_type() == variable_type::function)
 		throw(std::runtime_error("error : var doesn't contain a value"));
-	return(value);
+	return(static_cast<const IValue *>(buffer_variable));
 }
 
-std::string	Token_variable::get_lit(void) const
+std::string	Token_variable::to_string(void) const
 {
 	return(_lit);
 }

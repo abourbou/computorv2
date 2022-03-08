@@ -17,7 +17,7 @@ class Token_operator : public IToken
 		Token_operator &operator=(const Token_operator &rhs);
 		virtual ~Token_operator(void);
 		IValue *operation(const IValue *val1, const IValue *val2) const;
-		std::string get_lit() const;
+		std::string to_string() const;
 
 };
 

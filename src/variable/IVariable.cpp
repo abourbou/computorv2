@@ -7,21 +7,24 @@
  * @param is_const is the variable const
  */
 
-IVariable::IVariable(std::string type) : _type(type)
+IVariable::IVariable(variable_type type) : _type(type)
 {
-	if (this->_type.compare("function") && this->_type.compare("value"))
-		throw(std::runtime_error("variable : invalid type"));
 }
 
 IVariable::IVariable(const IVariable &rhs): _type(rhs._type)
 {
-	if (this->_type.compare("function") && _type.compare("value"))
-		throw(std::runtime_error("variable : invalid type"));
+}
+
+IVariable	&IVariable::operator=(const IVariable &rhs)
+{
+	_type = rhs._type;
+
+	return(*this);
 }
 
 IVariable::~IVariable(void) {}
 
-std::string	IVariable::get_type(void) const
+variable_type	IVariable::get_type(void) const
 {
 	return(_type);
 }

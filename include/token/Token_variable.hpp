@@ -17,7 +17,7 @@ class Token_variable : public IToken
 		Token_variable &operator=(const Token_variable &rhs);
 		virtual ~Token_variable(void);
 		const IValue	*get_var(void) const;
-		std::string		get_lit(void) const;
+		std::string		to_string(void) const;
 
 };
 

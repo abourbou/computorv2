@@ -1,13 +1,12 @@
 #include "IValue.hpp"
 
 //basic
-IValue::IValue(void): IVariable("value") {}
+IValue::IValue(variable_type type): IVariable(type) {}
 IValue::IValue(const IValue &rhs): IVariable(rhs) {}
 IValue::~IValue(void){}
 IValue &IValue::operator=(const IValue &rhs)
 {
-	(void)rhs;
-	throw(std::runtime_error("= is invalid operation"));
+	this->IVariable::operator=(rhs);
 	return(*this);
 }
 

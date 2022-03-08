@@ -7,7 +7,7 @@
  * @param str format accepted : [[a,b];[c,d]...]
  * @param is_const
  */
-Matrix::Matrix(std::string str) : IValue()
+Matrix::Matrix(std::string str) : IValue(variable_type::matrix)
 {
 	size_t	i = 0, buffer, nbr_lign = 0, length_lign = 0;
 	std::vector<double>	vect_buffer;
@@ -50,7 +50,7 @@ Matrix::Matrix(std::string str) : IValue()
 	_size[0] = nbr_lign;
 }
 
-Matrix::Matrix(size_t size[2], double value): IValue()
+Matrix::Matrix(size_t size[2], double value): IValue(variable_type::matrix)
 {
 	std::vector<double> buffer;
 
@@ -106,8 +106,9 @@ IValue	*Matrix::operator+(const IValue *rhs) const
 	const Matrix *m_var;
 	Matrix *new_Matrix;
 
-	if ((m_var = dynamic_cast<const Matrix *>(rhs)))
+	if (rhs->get_type() == variable_type::matrix)
 	{
+		m_var = static_cast<const Matrix *>(rhs);
 		if (m_var->_size[0] != _size[0] || m_var->_size[1] != _size[1])
 			throw(std::runtime_error("different size matrices, can't add"));
 		new_Matrix = new Matrix(*this);
@@ -127,8 +128,9 @@ IValue	*Matrix::operator-(const IValue *rhs) const
 	const Matrix *m_var;
 	Matrix *new_Matrix;
 
-	if ((m_var = dynamic_cast<const Matrix *>(rhs)))
+	if (rhs->get_type() == variable_type::matrix)
 	{
+		m_var = static_cast<const Matrix *>(rhs);
 		if (m_var->_size[0] != _size[0] || m_var->_size[1] != _size[1])
 			throw(std::runtime_error("different size matrices, can't sub"));
 		new_Matrix = new Matrix(*this);
@@ -149,8 +151,9 @@ IValue	*Matrix::operator*(const IValue *rhs) const
 	const Rational *r_var;
 	Matrix *new_Matrix;
 
-	if ((m_var = dynamic_cast<const Matrix *>(rhs)))
+	if (rhs->get_type() == variable_type::matrix)
 	{
+		m_var = static_cast<const Matrix *>(rhs);
 		if (m_var->_size[0] != _size[0] || m_var->_size[1] != _size[1])
 			throw(std::runtime_error("matrices of different size, can't mult"));
 		new_Matrix = new Matrix(*this);
@@ -161,8 +164,9 @@ IValue	*Matrix::operator*(const IValue *rhs) const
 		}
 		return(new_Matrix);
 	}
-	else if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	else if (rhs->get_type() == variable_type::rational)
 	{
+		r_var = static_cast<const Rational*>(rhs);
 		new_Matrix = new Matrix(*this);
 		for (size_t i = 0; i < _size[0]; ++i)
 		{
@@ -180,8 +184,9 @@ IValue *Matrix::Matrix_mult(const IValue *rhs) const
 	const Matrix *m_var;
 	Matrix *new_Matrix;
 
-	if ((m_var = dynamic_cast<const Matrix *>(rhs)))
+	if (rhs->get_type() == variable_type::matrix)
 	{
+		m_var = static_cast<const Matrix *>(rhs);
 		if (_size[1] != m_var->_size[0])
 			throw(std::runtime_error("matrice with invalid size for matricial multiplication"));
 		size_t	new_size[2] = {_size[0], m_var->_size[1]};

@@ -8,14 +8,12 @@
 
 class	IValue : public IVariable
 {
-	private:
-	//coplien
-
 	public:
-		IValue(void);
+		IValue(void) = delete;
+		IValue(variable_type type);
 		IValue(const IValue &rhs);
-		virtual ~IValue(void);
 		IValue &operator=(const IValue &rhs);
+		virtual ~IValue(void);
 
 	//operator
 		virtual IValue *operator+(const IValue *rhs) const;

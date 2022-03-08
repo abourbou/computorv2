@@ -7,7 +7,7 @@
  * @param str format accepted : [white space][+-][number][white space]
  * @param is_const is the variable const
  */
-Rational::Rational(std::string str) : IValue()
+Rational::Rational(std::string str) : IValue(variable_type::rational)
 {
 	size_t		idx;
 	int		sign = 1;
@@ -31,7 +31,7 @@ Rational::Rational(std::string str) : IValue()
 		throw(std::runtime_error("invalid caracter at the end"));
 }
 
-Rational::Rational(double value) : IValue(), _value(value)
+Rational::Rational(double value) : IValue(variable_type::rational), _value(value)
 {}
 
 Rational::Rational(const Rational &rhs) : IValue(rhs), _value(rhs._value)
@@ -60,10 +60,16 @@ IValue	*Rational::operator+(const IValue *rhs) const
 	const Rational	*r_var;
 	const Complex	*c_var;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	if (rhs->get_type() == variable_type::rational)
+	{
+		r_var = static_cast<const Rational*>(rhs);
 		return(new Rational(this->_value + r_var->_value));
-	else if ((c_var = dynamic_cast<const Complex*>(rhs)))
+	}
+	else if (rhs->get_type() == variable_type::complex)
+	{
+		c_var = static_cast<const Complex *>(rhs);
 		return(*c_var + this);
+	}
 	else
 		throw(std::runtime_error("invalid type for addition"));
 }
@@ -73,10 +79,16 @@ IValue	*Rational::operator-(const IValue *rhs) const
 	const Rational	*r_var;
 	const Complex	*c_var;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	if (rhs->get_type() == variable_type::rational)
+	{
+		r_var = static_cast<const Rational*>(rhs);
 		return(new Rational(this->_value - r_var->_value));
-	else if ((c_var = dynamic_cast<const Complex *>(rhs)))
-		return(new Complex(this->_value - c_var->get_realpart(), c_var->get_imagpart()));
+	}
+	else if (rhs->get_type() == variable_type::complex)
+	{
+		c_var = static_cast<const Complex *>(rhs);
+		return(*c_var - this);
+	}
 	else
 		throw(std::runtime_error("invalid type for substraction"));
 }
@@ -87,16 +99,21 @@ IValue	*Rational::operator*(const IValue *rhs) const
 	const Complex	*c_var;
 	const Matrix	*m_var;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
-		return(new Rational(this->_value * r_var->_value));
-	else if((c_var = dynamic_cast<const Complex*>(rhs)))
+	if (rhs->get_type() == variable_type::rational)
 	{
-		if (this->getvalue() == 0)
-			return(new Rational(0));
-		return(new Complex(this->_value * c_var->get_realpart(), this->_value * c_var->get_imagpart()));
+		r_var = static_cast<const Rational*>(rhs);
+		return(new Rational(this->_value * r_var->_value));
 	}
-	else if ((m_var = dynamic_cast<const Matrix*>(rhs)))
+	else if (rhs->get_type() == variable_type::complex)
+	{
+		c_var = static_cast<const Complex *>(rhs);
+		return(*c_var * this);
+	}
+	else if (rhs->get_type() == variable_type::matrix)
+	{
+		m_var = static_cast<const Matrix*>(rhs);
 		return (*m_var * this);
+	}
 	else
 		throw(std::runtime_error("invalid type for multiplication"));
 }
@@ -109,14 +126,16 @@ IValue	*Rational::operator/(const IValue *rhs) const
 	double		c;
 	double		d;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	if (rhs->get_type() == variable_type::rational)
 	{
+		r_var = static_cast<const Rational*>(rhs);
 		if (r_var->_value == 0)
 			throw(std::runtime_error("cannot divide by zero"));
 		return(new Rational(this->_value / r_var->_value));
 	}
-	else if ((c_var = dynamic_cast<const Complex*>(rhs)))
+	else if (rhs->get_type() == variable_type::complex)
 	{
+		c_var = static_cast<const Complex*>(rhs);
 		a = this->_value;
 		c = c_var->get_realpart();
 		d = c_var->get_imagpart();
@@ -134,9 +153,10 @@ IValue	*Rational::operator%(const IValue *rhs) const
 	int				a;
 	int				b;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	if (rhs->get_type() == variable_type::rational)
 	{
-	if (!is_an_int(this->_value) || !is_an_int(r_var->_value))
+		r_var = static_cast<const Rational*>(rhs);
+		if (!is_an_int(this->_value) || !is_an_int(r_var->_value))
 			throw("modulo can be applied only with 2 integers");
 		a = this->_value;
 		b = r_var->_value;
@@ -153,8 +173,9 @@ IValue	*Rational::operator^(const IValue *rhs) const
 	const Rational *r_var;
 	float result = 1;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	if (rhs->get_type() == variable_type::rational)
 	{
+		r_var = static_cast<const Rational*>(rhs);
 		if (!is_an_int(r_var->_value))
 			throw(std::runtime_error("^ operation with float is not implemented yet"));
 		else if (r_var->getvalue() < 0)

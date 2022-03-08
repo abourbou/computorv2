@@ -21,7 +21,7 @@ class	IToken {
 		virtual ~IToken();
 
 		//methods
-		virtual std::string get_lit() const = 0;
+		virtual std::string to_string() const = 0;
 		token_type			get_type(void) const;
 };
 

@@ -9,7 +9,7 @@
  * @param str format accepted : ([white space][+-][number])[white space])[i]([white space])
  * @param is_const
  */
-Complex::Complex(std::string str) : IValue()
+Complex::Complex(std::string str) : IValue(variable_type::complex)
 {
 	size_t	pos;
 	int	sign = 1;
@@ -31,7 +31,7 @@ Complex::Complex(std::string str) : IValue()
 		throw(std::runtime_error("trying to create Complex number with real value"));
 }
 
-Complex::Complex(double real_part, double imag_part) : IValue(), _real_part(real_part), _imag_part(imag_part)
+Complex::Complex(double real_part, double imag_part) : IValue(variable_type::complex), _real_part(real_part), _imag_part(imag_part)
 {
 	if(_imag_part == 0)
 		throw(std::runtime_error("trying to create Complex number with real value"));
@@ -60,13 +60,15 @@ IValue *Complex::operator+(const IValue *rhs) const
 	double			real_part;
 	double			imag_part;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	if (rhs->get_type() == variable_type::rational)
 	{
+		r_var = static_cast<const Rational*>(rhs);
 		real_part = this->_real_part + r_var->getvalue();
 		imag_part = this->_imag_part;
 	}
-	else if ((c_var = dynamic_cast<const Complex *>(rhs)))
+	else if (rhs->get_type() == variable_type::complex)
 	{
+		c_var = static_cast<const Complex *>(rhs);
 		real_part = this->_real_part + c_var->_real_part;
 		imag_part = this->_imag_part + c_var->_imag_part;
 	}
@@ -84,13 +86,15 @@ IValue *Complex::operator-(const IValue *rhs) const
 	double			real_part;
 	double			imag_part;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	if (rhs->get_type() == variable_type::rational)
 	{
+		r_var = static_cast<const Rational*>(rhs);
 		real_part = this->_real_part - r_var->getvalue();
 		imag_part = this->_imag_part;
 	}
-	else if ((c_var = dynamic_cast<const Complex *>(rhs)))
+	else if (rhs->get_type() == variable_type::complex)
 	{
+		c_var = static_cast<const Complex *>(rhs);
 		real_part = this->_real_part - c_var->_real_part;
 		imag_part = this->_imag_part - c_var->_imag_part;
 	}
@@ -107,13 +111,15 @@ IValue *Complex::operator*(const IValue *rhs) const
 	double			real_part;
 	double			imag_part;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	if (rhs->get_type() == variable_type::rational)
 	{
+		r_var = static_cast<const Rational*>(rhs);
 		real_part = this->_real_part * r_var->getvalue();
 		imag_part = this->_imag_part * r_var->getvalue();
 	}
-	else if ((c_var = dynamic_cast<const Complex *>(rhs)))
+	else if (rhs->get_type() == variable_type::complex)
 	{
+		c_var = static_cast<const Complex *>(rhs);
 		real_part = this->_real_part * c_var->_real_part - this->_imag_part * c_var->_imag_part;
 		imag_part = this->_imag_part * c_var->_real_part + this->_real_part * c_var->_imag_part;
 	}
@@ -131,15 +137,17 @@ IValue *Complex::operator/(const IValue *rhs) const
 	double			real_part;
 	double			imag_part;
 
-	if ((r_var = dynamic_cast<const Rational*>(rhs)))
+	if (rhs->get_type() == variable_type::complex)
 	{
+		r_var = static_cast<const Rational*>(rhs);
 		if (r_var->getvalue() == 0)
 			throw("cannot divide by zero");
 		real_part = this->_real_part / r_var->getvalue();
 		imag_part = this->_imag_part / r_var->getvalue();
 	}
-	else if ((c_var = dynamic_cast<const Complex *>(rhs)))
+	else if (rhs->get_type() == variable_type::rational)
 	{
+		c_var = static_cast<const Complex *>(rhs);
 		a = this->_real_part;
 		b = this->_imag_part;
 		c = c_var->_real_part;

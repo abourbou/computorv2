@@ -10,9 +10,12 @@
 #include "Rational.hpp"
 #include "Complex.hpp"
 #include "Matrix.hpp"
-#include "Function.hpp"
+#include "Computable_function.hpp"
 #include "string_function.hpp"
 
+/**
+ * @brief tool to stock, change, show and return IVariable
+ */
 class	Map_variable
 {
 	private:
@@ -38,6 +41,7 @@ class	Map_variable
 		//members
 		void		add_var(std::string name, const IVariable *pvar);
 		const IVariable	*get_var(std::string name) const;
+		bool		is_var(std::string name) const;
 		void		show_map(void) const;
 };
 

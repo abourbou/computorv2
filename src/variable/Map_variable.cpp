@@ -63,6 +63,27 @@ const IVariable *Map_variable::get_var(std::string name) const
 		throw(std::runtime_error("Unknow variable"));
 }
 
+/**
+ * @brief check if a variable exist on the map
+ *
+ * @param name
+ * @return boolean
+ */
+bool		Map_variable::is_var(std::string name) const
+{
+	if (!is_alpha(name))
+		throw(std::runtime_error("Variable must be only alphabetic caracters"));
+	to_upper(name);
+	auto it = _map_var.find(name);
+	if (it != _map_var.end())
+	{
+		if (it->second.secu_lvl == Forbidden)
+			return(false);
+		return(true);
+	}
+	return (false);
+}
+
 void	Map_variable::show_map(void) const
 {
 	for (auto it = _map_var.begin(); it != _map_var.end(); ++it)
