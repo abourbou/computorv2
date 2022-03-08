@@ -25,7 +25,7 @@ class Token_function : public IToken
 		Token_function &operator=(const Token_function &rhs);
 		virtual ~Token_function(void);
 
-		const IValue	*compute(void) const;
+		IValue	*compute(void) const;
 		std::string	to_string(void) const;
 
 };

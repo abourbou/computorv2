@@ -5,6 +5,7 @@
 #include "Rational.hpp"
 #include "singleton.hpp"
 #include "Map_variable.hpp"
+#include "Explic_fct.hpp"
 
 void	test_operation(std::string math_operator, IValue *v1, IValue *v2)
 {
@@ -66,13 +67,35 @@ void test_variable()
 	delete var1;
 }
 
+IValue	*mult2(const IValue *var)
+{
+	Rational	two(2);
+
+	return(two * var);
+}
+
 void	test_function()
 {
+	//TODO check if it works with a real function
+	Map_variable &map = Singleton::GetInstance()->get_map_variable();
+	Rational	r(2);
+	Explic_fct	f("double", &mult2);
+	IVariable *var;
+
 	Token_function T1("F(4)");
 	std::cout << "F(x) | " << T1.to_string() << std::endl;
 	Token_function T2("F(4.0)");
 	std::cout << "F(x) | " << T2.to_string() << std::endl;
-	//TODO check if it works with a real function
+	map.add_var("double", &f);
+
+	Token_function tok("double(2)");
+	var = tok.compute();
+	std::cout << var->to_string() << std::endl;
+	delete var;
+	Token_function tok2("double(x)");
+	try{var = tok2.compute();}catch(std::exception& e){std::cout << e.what() << std::endl;}
+	Token_function tok3("unknown(3)");
+	try{var = tok3.compute();}catch(std::exception& e){std::cout << e.what() << std::endl;}
 }
 
 void	test_token(void)

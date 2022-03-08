@@ -64,7 +64,7 @@ Token_function::~Token_function()
  *
  * @return const IValue*
  */
-const IValue *Token_function::compute(void) const
+IValue *Token_function::compute(void) const
 {
 	//TODO Tester le dynamic_cast
 	Map_variable &map_var = Singleton::GetInstance()->get_map_variable();
