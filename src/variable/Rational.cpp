@@ -194,8 +194,9 @@ IVariable		*Rational::clone(void) const
 }
 
 //convert the variable into a string
-std::string	Rational::to_string(void) const
+std::string	Rational::to_string(std::string str) const
 {
+	(void)str;
 	return(double_to_string(this->_value));
 }
 

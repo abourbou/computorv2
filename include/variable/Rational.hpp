@@ -42,7 +42,7 @@ class Rational : public IValue
 
 		//methods to visualize the value
 		IVariable			*clone(void) const;
-		virtual std::string	to_string(void) const;
+		virtual std::string	to_string(std::string str = "") const;
 		virtual void		display(std::string var = "") const;
 };
 

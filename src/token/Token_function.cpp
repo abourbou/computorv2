@@ -67,7 +67,7 @@ const IValue *Token_function::compute(void) const
 	buffer_var = map_var.get_var(_fct);
 	if (buffer_var->get_type() != variable_type::function)
 		throw(std::runtime_error("the function isn't a function"));
-	const Computable_function *f = static_cast<const Computable_function *>(buffer_var);
+	const Comput_fct *f = static_cast<const Comput_fct *>(buffer_var);
 	const IValue *value = _value;
 	if (!value)
 	{
