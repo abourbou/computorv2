@@ -15,7 +15,7 @@ class IVariable
 {
 	private:
 		IVariable(void);
-		variable_type _type;
+		const variable_type _type;
 
 //	protected:
 

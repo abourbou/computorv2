@@ -17,7 +17,7 @@ IVariable::IVariable(const IVariable &rhs): _type(rhs._type)
 
 IVariable	&IVariable::operator=(const IVariable &rhs)
 {
-	_type = rhs._type;
+	(void)rhs;
 
 	return(*this);
 }

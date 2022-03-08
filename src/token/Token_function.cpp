@@ -59,20 +59,28 @@ Token_function::~Token_function()
 		delete _value;
 }
 
+/**
+ * @brief call the function and the value from the map_var to do the computation
+ *
+ * @return const IValue*
+ */
 const IValue *Token_function::compute(void) const
 {
+	//TODO Tester le dynamic_cast
 	Map_variable &map_var = Singleton::GetInstance()->get_map_variable();
 	const IVariable *buffer_var;
+	const IFunction *f;
 
 	buffer_var = map_var.get_var(_fct);
-	if (buffer_var->get_type() != variable_type::function)
+	if (buffer_var->get_type() != variable_type::function || buffer_var->get_type() != variable_type::function)
 		throw(std::runtime_error("the function isn't a function"));
-	const Comput_fct *f = static_cast<const Comput_fct *>(buffer_var);
+	if (buffer_var->get_type() == variable_type::function)
+		f = dynamic_cast<const IFunction *>(buffer_var);
 	const IValue *value = _value;
 	if (!value)
 	{
 		buffer_var = map_var.get_var(_expr);
-		if (buffer_var->get_type() == variable_type::function)
+		if (buffer_var->get_type() == variable_type::function || buffer_var->get_type() == variable_type::function)
 			throw(std::runtime_error("expression in the function must not be a function"));
 		value = static_cast<const IValue*>(map_var.get_var(_expr));
 	}

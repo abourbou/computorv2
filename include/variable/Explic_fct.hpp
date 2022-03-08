@@ -3,11 +3,11 @@
 #include "IVariable.hpp"
 #include "IValue.hpp"
 #include "IToken.hpp"
-
+#include "IFunction.hpp"
 /**
  * @brief define a mathematical function describe by a programming function
  */
-class Explic_fct: public IVariable
+class Explic_fct: public IFunction
 {
 	typedef IValue *(*function)(const IValue *arg);
 

@@ -45,8 +45,8 @@ INC_FILES		=	parsing.hpp math_utility.hpp string_function.hpp \
 				binary_tree.hpp  execution.hpp singleton.hpp
 
 INC_VAR			=	Polyn_equation.hpp IValue.hpp IVariable.hpp \
-				Rational.hpp  Computable_function.hpp Explicit_function.hpp \
-				Complex.hpp Matrix.hpp Map_variable.hpp
+				Rational.hpp  Comput_fct.hpp Explic_fct.hpp \
+				IFunction.hpp Complex.hpp Matrix.hpp Map_variable.hpp
 
 INC_TOKEN		=	IToken.hpp
 

@@ -8,7 +8,7 @@
 #include "Rational.hpp"
 #include "Complex.hpp"
 #include "Matrix.hpp"
-#include "Computable_function.hpp"
+#include "Comput_fct.hpp"
 #include "string_function.hpp"
 
 /**

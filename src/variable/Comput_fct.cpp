@@ -1,5 +1,5 @@
 
-#include "Computable_function.hpp"
+#include "Comput_fct.hpp"
 
 //coplien
 
@@ -10,7 +10,7 @@
  * @param expr			string representing the function, will be interpreted by the computor ex: 4X^2 / (5 X)
  * @param is_const		can the function change expression
  */
-Comput_fct::Comput_fct(std::string var, std::string expr) : IVariable(variable_type::function)
+Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 {
 	//TODO
 	(void)expr;
@@ -18,7 +18,7 @@ Comput_fct::Comput_fct(std::string var, std::string expr) : IVariable(variable_t
 	//_computation_expr = lexer(expr);
 }
 
-Comput_fct::Comput_fct(const Comput_fct &rhs): IVariable(rhs), _var(rhs._var),
+Comput_fct::Comput_fct(const Comput_fct &rhs): IFunction(), _var(rhs._var),
 					_computation_expr(rhs._computation_expr)
 {}
 

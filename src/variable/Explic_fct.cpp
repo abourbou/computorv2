@@ -1,11 +1,11 @@
 
-#include "Explicit_function.hpp"
+#include "Explic_fct.hpp"
 
-Explic_fct::Explic_fct(std::string expr, function f): IVariable(variable_type::function),
+Explic_fct::Explic_fct(std::string expr, function f): IFunction(),
 								_expr(expr), _f(f)
 {}
 
-Explic_fct::Explic_fct(const Explic_fct &rhs): IVariable(rhs), _expr(rhs._expr), _f(rhs._f)
+Explic_fct::Explic_fct(const Explic_fct &rhs): IFunction(), _expr(rhs._expr), _f(rhs._f)
 {}
 
 Explic_fct	&Explic_fct::operator=(const Explic_fct &rhs)

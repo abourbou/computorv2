@@ -8,6 +8,8 @@
 #include "Rational.hpp"
 #include "Complex.hpp"
 #include "Matrix.hpp"
+#include "Explic_fct.hpp"
+#include "Comput_fct.hpp"
 
 class Token_function : public IToken
 {

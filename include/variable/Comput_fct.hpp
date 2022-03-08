@@ -3,11 +3,12 @@
 #include "IVariable.hpp"
 #include "IValue.hpp"
 #include "IToken.hpp"
+#include "IFunction.hpp"
 
 /**
  * @brief define a mathematical function with an list of token who can be computed
  */
-class Comput_fct: public IVariable
+class Comput_fct: public IFunction
 {
 	protected:
 		std::string	_var;
