@@ -75,14 +75,14 @@ funB(y) = 43 * y / (4 % 2 * y)	=> must send 43 * y / (4 % 2 * y)
 funA(x) = varA + varB * 4 - 1 / 2 + x	=> must send 238.5 + x
 f(x) = 3x - 1
 g(x) = f(0) + 5x						=> must send -1 + 5x
-w = 5 AND f(w) = 4w	AND f(w) =?			=> must be 20
+w = 5 AND f(w) = 4w	AND f(42) =?			=> must be always 20
 f(x) = 2*(x + 3*(x - 4)) AND p = 2
-f(3) - f(p) + 2= ?
+f(3) - f(p) + 2 =?
 f(x) = 2 *x * i
 f(2) = ?
 
 * test none static var in function *
 varA = 2 AND f(x) = varA AND varA= 5
-f(x)=?										=> must send 2, none static in function
+f(x)=?										=> must send 5
 
 

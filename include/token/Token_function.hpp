@@ -5,12 +5,14 @@
 #include "IValue.hpp"
 #include "parsing.hpp"
 #include "singleton.hpp"
+#include "string_function.hpp"
 
 class Token_function : public IToken
 {
 	private:
 		std::string _fct;
 		std::string _expr;
+		IValue	*_value;
 
 	public:
 		Token_function(void) = delete;
@@ -20,7 +22,7 @@ class Token_function : public IToken
 		virtual ~Token_function(void);
 
 		const IValue	*get_fct(void) const;
-		std::string	get_lit(void) const;
+		std::string		get_lit(void) const;
 
 };
 
