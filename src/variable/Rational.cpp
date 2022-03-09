@@ -203,7 +203,7 @@ std::string	Rational::to_string(std::string str) const
 void		Rational::display(std::string var) const
 {
 	(void)var;
-	std::cout << this->to_string();
+	std::cout << this->to_string() << std::endl;
 }
 
 std::ostream	&operator<<(std::ostream &o, const Rational &rhs)

@@ -204,7 +204,7 @@ std::string	Complex::to_string(std::string str) const
 void		Complex::display(std::string str) const
 {
 	(void)str;
-	std::cout << this->to_string();
+	std::cout << this->to_string() << std::endl;
 }
 
 

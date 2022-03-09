@@ -2,6 +2,7 @@
 #include "Token_operator.hpp"
 #include "Token_variable.hpp"
 #include "Token_function.hpp"
+#include "Token_value.hpp"
 #include "Rational.hpp"
 #include "singleton.hpp"
 #include "Map_variable.hpp"
@@ -27,6 +28,7 @@ void	test_operator(void)
 	test_operation("-", val1, val2);
 	test_operation("*", val1, val2);
 	test_operation("/", val1, val2);
+	std::cout << "test invalid operation : ";
 	try { test_operation("**", val1, val2);}
 	catch (const std::exception& e)
 	{ std::cout << e.what() << std::endl;}
@@ -53,9 +55,12 @@ void test_variable()
 	map.add_var("compl", var1);
 
 	Token_variable	tok1("compl");
+	std::cout << "must be (2 + 3i) : ";
 	tok1.get_var()->display();
+	std::cout << std::endl;
 
 	try {
+		std::cout << "test unknow variable on map : ";
 		Token_variable	tok2("unknown");
 		tok2.get_var()->display();
 	}
@@ -98,9 +103,34 @@ void	test_function()
 	try{var = tok3.compute();}catch(std::exception& e){std::cout << e.what() << std::endl;}
 }
 
+void	test_a_value(std::string str)
+{
+	std::cout << "test value [" + str + "]" << std::endl;
+	try{
+		Token_value tk(str);
+		tk.get_value()->display();
+	}
+	catch(const std::exception& e)
+	{std::cout << "Unvalid value : " << e.what() << std::endl;}
+	std::cout << "-------------" << std::endl;
+
+}
+
+void	test_value(void)
+{
+	std::cout << "-------------" << std::endl;
+	test_a_value("4i");
+	test_a_value("4.0x");
+	test_a_value("-5.85987");
+	test_a_value("[[5,8]]");
+	test_a_value("[[-5.5877,+8994.]]");
+	test_a_value("[[-5.5877,+8994.];[4.55, 0.0000000001]]");
+}
+
 void	test_token(void)
 {
-	//test_operator();
-	//test_variable();
-	test_function();
+	test_operator();
+	test_variable();
+	//test_function();
+	test_value();
 }
