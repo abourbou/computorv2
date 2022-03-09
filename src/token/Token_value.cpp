@@ -38,3 +38,8 @@ const IValue *Token_value::get_value(void) const
 {
 	return(_value);
 }
+
+IToken	*Token_value::clone(void) const
+{
+	return(new Token_value(*this));
+}

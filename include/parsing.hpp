@@ -23,9 +23,6 @@ enum Task {
 	Resolv_Polyn
 };
 
-using pre_token = std::pair<token_type, std::string>;
-
-
 std::string	regulate_string(std::string line);
 Task		find_task(std::string line);
 void		exec_command(std::string line);

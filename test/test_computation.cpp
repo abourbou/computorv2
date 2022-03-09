@@ -29,8 +29,6 @@ void	test_token(std::string str)
 
 void	test_computation(void)
 {
-	std::list<pre_token>	my_list;
-
 	//basic test
 	test_token("5 + 3 * 2 % 6");
 	test_token("2 * (5 + 2)");

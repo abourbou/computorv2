@@ -28,12 +28,12 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.cpp singleton.cpp)
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.cpp=.o))
 
 #include
+include src/variable/Include.mk
 include src/computation/Include.mk
 include src/execution/Include.mk
 include src/external_function/Include.mk
 include src/parsing/Include.mk
 include src/token/Include.mk
-include src/variable/Include.mk
 include test/Include.mk
 
 # Headers

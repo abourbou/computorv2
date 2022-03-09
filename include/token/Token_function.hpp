@@ -26,5 +26,6 @@ class Token_function : public IToken
 
 		IValue	*compute(void) const;
 		std::string	to_string(void) const;
+		IToken	*clone(void) const;
 
 };

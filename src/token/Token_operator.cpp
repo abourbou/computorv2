@@ -43,3 +43,8 @@ std::string	Token_operator::to_string(void) const
 {
 	return (_lit);
 }
+
+IToken	*Token_operator::clone(void) const
+{
+	return(new Token_operator(*this));
+}

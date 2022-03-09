@@ -14,17 +14,18 @@ enum class token_type
 class	IToken {
 
 	protected:
-		std::string _lit;
+		std::string	_lit;
 		token_type	_type;
 
 	public:
 		IToken(void) = delete;
-		IToken &operator=(const IToken &rhs) = delete;
 		IToken(std::string str, token_type type);
 		IToken(const IToken &rhs);
+		IToken &operator=(const IToken &rhs);
 		virtual ~IToken();
 
 		//methods
-		virtual std::string to_string() const = 0;
-		token_type			get_type(void) const;
+		virtual std::string	to_string(void) const = 0;
+		virtual IToken		*clone(void) const = 0;
+		token_type		get_type(void) const;
 };

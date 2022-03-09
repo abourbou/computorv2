@@ -22,4 +22,5 @@ class Token_value : public IToken
 		//methods
 		std::string to_string(void) const;
 		const IValue *get_value(void) const;
+		IToken	*clone(void) const;
 };

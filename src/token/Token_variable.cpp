@@ -34,3 +34,8 @@ std::string	Token_variable::to_string(void) const
 {
 	return(_lit);
 }
+
+IToken	*Token_variable::clone(void) const
+{
+	return(new Token_variable(*this));
+}

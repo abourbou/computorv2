@@ -50,6 +50,7 @@ Token_function &Token_function::operator=(const Token_function &rhs)
 	if (_value)
 		delete _value;
 	_value = (rhs._value) ? static_cast<IValue*>(rhs._value->clone()) : 0;
+
 	return(*this);
 }
 
@@ -90,4 +91,9 @@ std::string Token_function::to_string(void) const
 	std::string expr = (_value) ? _value->to_string() : _expr;
 
 	return(_fct + "(" + expr + ")");
+}
+
+IToken	*Token_function::clone(void) const
+{
+	return(new Token_function(*this));
 }

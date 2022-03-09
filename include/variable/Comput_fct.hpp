@@ -5,6 +5,7 @@
 #include "IValue.hpp"
 #include "IToken.hpp"
 #include "IFunction.hpp"
+#include "parsing.hpp"
 
 /**
  * @brief define a mathematical function with an list of token who can be computed
@@ -13,7 +14,7 @@ class Comput_fct: public IFunction
 {
 	protected:
 		std::string	_var;
-		std::list<IToken *>	_computation_expr;
+		std::list<IToken *>	_expr;
 
 	public:
 		//coplien
