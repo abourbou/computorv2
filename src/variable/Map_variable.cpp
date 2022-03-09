@@ -37,14 +37,34 @@ void	Map_variable::add_var(std::string name, const IVariable *pvar)
 	if (it != _map_var.end())
 	{
 		if (it->second.secu_lvl == Forbidden)
+		{
+			delete buffer_info.var;
 			throw(std::runtime_error("Forbidden name for variable"));
+		}
 		else if (it->second.secu_lvl == Reserved)
+		{
+			delete buffer_info.var;
 			throw(std::runtime_error("Reserved name for variable"));
+		}
 		else
+		{
+			delete it->second.var;
 			it->second = buffer_info;
+		}
 	}
 	else
 		_map_var.insert(std::pair<std::string, t_info>(caps_name, buffer_info));
+}
+
+void	Map_variable::remove_var(std::string name)
+{
+	to_upper(name);
+	auto it = _map_var.find(name);
+	if (it == _map_var.end())
+		throw(std::runtime_error("impossible to remove variable"));
+	else if (it->second.secu_lvl != Changeable)
+		throw(std::runtime_error("impossible to remove variable"));
+	_map_var.erase(it);
 }
 
 const IVariable *Map_variable::get_var(std::string name) const

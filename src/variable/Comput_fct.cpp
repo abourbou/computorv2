@@ -86,8 +86,7 @@ std::string	Comput_fct::to_string(std::string str) const
 
 void	Comput_fct::display(std::string var) const
 {
-	//TODO
-	(void)var;
+	std::cout << this->to_string(var) << std::endl;
 }
 
 IValue	*Comput_fct::computation(const IValue *value) const

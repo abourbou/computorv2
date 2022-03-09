@@ -23,10 +23,10 @@ int	main(int argc, char **argv)
 	signal(SIGQUIT, signal_handler);
 
 	//TEST
-	//test_map_variable();
-	test_computation();
-	//test_syntax();
-	//test_token();
+	test_map_variable();
+	//test_computation();
+	test_syntax();
+	test_token();
 	//TEST
 
 	if (argc == 2)

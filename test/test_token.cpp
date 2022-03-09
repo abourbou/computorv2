@@ -81,7 +81,6 @@ IValue	*mult2(const IValue *var)
 
 void	test_function()
 {
-	//TODO check if it works with a real function
 	Map_variable &map = Singleton::GetInstance()->get_map_variable();
 	Rational	r(2);
 	Explic_fct	f("double", &mult2);
@@ -105,7 +104,7 @@ void	test_function()
 
 void	test_a_value(std::string str)
 {
-	std::cout << "test value [" + str + "]" << std::endl;
+	std::cout << "test value " + str + "" << std::endl;
 	try{
 		Token_value tk(str);
 		tk.get_value()->display();
@@ -129,6 +128,7 @@ void	test_value(void)
 
 void	test_token(void)
 {
+	std::cout << std::endl << "***********TEST TOKEN*********" << std::endl;
 	test_operator();
 	test_variable();
 	//test_function();

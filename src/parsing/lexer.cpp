@@ -41,7 +41,7 @@ IToken	*tokenize_value(std::string token_str)
 	else if (token_str.find('(') != std::string::npos || token_str.find(')') != std::string::npos)
 		return (new Token_function(token_str));
 	else
-		return (new Token_variable(token_str));
+		return (new Token_value(token_str));
 }
 
 //parse the first value
@@ -60,6 +60,11 @@ std::string lexer_first_value(std::string &cmd)
 	return (pre_token_str);
 }
 
+void	clean_lexer(std::list<IToken*> list_tok)
+{
+	for (auto it = list_tok.begin(); it != list_tok.end(); ++it)
+		delete (*it);
+}
 
 //parse the first operator
 //return the string containing the operator and cmd become the rest
@@ -92,7 +97,16 @@ std::list<IToken*>	lexer(std::string cmd)
 	{
 		token_str = lexer_first_value(cmd);
 		if (!token_str.empty())
-			my_list.push_back(tokenize_value(token_str));
+		{
+			try {my_list.push_back(tokenize_value(token_str));}
+			catch (const std::exception& e)
+			{
+				clean_lexer(my_list);
+				throw(std::runtime_error(e.what()));
+			}
+			//my_list.push_back(tokenize_value(token_str));
+
+		}
 		token_str = lexer_first_operator(cmd);
 		if (!token_str.empty())
 			my_list.push_back(new Token_operator(token_str));

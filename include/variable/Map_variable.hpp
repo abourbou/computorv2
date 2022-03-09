@@ -37,6 +37,7 @@ class	Map_variable
 
 		//members
 		void		add_var(std::string name, const IVariable *pvar);
+		void		remove_var(std::string name);
 		const IVariable	*get_var(std::string name) const;
 		bool		is_var(std::string name) const;
 		void		show_map(void) const;

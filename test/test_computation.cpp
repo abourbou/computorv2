@@ -24,7 +24,10 @@ void	test_token(std::string str)
 		std::cout << std::endl;
 	}
 	catch(const std::exception& e)
-	{ std::cout << "error: " << e.what() << std::endl;}
+	{ std::cout << "error: " << e.what() << std::endl << std::endl; }
+	for (auto it = my_list.begin(); it != my_list.end(); ++it)
+		delete (*it);
+	//std::cout << std::endl;
 }
 
 void	test_computation(void)
@@ -44,4 +47,5 @@ void	test_computation(void)
 	test_token("f(0) + 5 * x");
 	test_token("2*(x + 3*(x - 4))");
 	test_token("(2*(x + 3*(x - 4)))");
+	test_token("0i * 5");
 }

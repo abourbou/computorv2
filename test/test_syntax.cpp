@@ -4,7 +4,7 @@
 
 void	test_syntax(void)
 {
-	std::cout << "into test imput" << std::endl;
+	std::cout << std::endl << "*********INTO TEST SYNTAX**********" << std::endl;
 	exec_line("var = 5");
 	std::cout << std::endl;
 	exec_line("x = 23edd23-+-+");
