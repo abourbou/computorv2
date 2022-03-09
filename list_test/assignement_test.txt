@@ -53,7 +53,7 @@ f(a) = x then f = 3				=> don't allow it, it is too confusing to have var and fu
 
 
 
-// assignment function // 
+// assignment function //
 * simple *
 f(x) = 5 x
 f(W) = 5 w - 2
@@ -74,7 +74,7 @@ f(x) = 2*x^5 + 4x^2 - 5*x + 4	=> must send 2 * x^5 + 4 * x^2 - 5*x + 4
 funB(y) = 43 * y / (4 % 2 * y)	=> must send 43 * y / (4 % 2 * y)
 funA(x) = varA + varB * 4 - 1 / 2 + x	=> must send 238.5 + x
 f(x) = 3x - 1
-g(x) = f(0) + 5x						=> must send -1 + 5x
+g(x) = f(0) + 5 * x						=> must send -1 + 5x
 w = 5 AND f(w) = 4w	AND f(42) =?			=> must be always 20
 f(x) = 2*(x + 3*(x - 4)) AND p = 2
 f(3) - f(p) + 2 =?

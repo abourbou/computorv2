@@ -30,21 +30,18 @@ size_t		find_first_separator(std::string cmd, size_t start)
 }
 
 //identify the type of value the str contain and transform it in pre_token
-pre_token	tokenize_value(std::string pre_token_str)
+IToken	*tokenize_value(std::string token_str)
 {
-	token_type	type;
-
-	if (pre_token_str.empty())
-		throw(std::runtime_error("empty pre_token is not recognizable"));
-	if (pre_token_str[0] == '(')
-		type = token_type::parenthesis;
-	else if (is_alpha(pre_token_str))
-		type = token_type::variable;
-	else if (pre_token_str.find('(') != std::string::npos || pre_token_str.find(')') != std::string::npos)
-		type = token_type::math_function;
+	if (token_str.empty())
+		throw(std::runtime_error("empty Token is not recognizable"));
+	if (token_str[0] == '(')
+		return (new Token_parenth(token_str));
+	else if (is_alpha(token_str))
+		return (new Token_variable(token_str));
+	else if (token_str.find('(') != std::string::npos || token_str.find(')') != std::string::npos)
+		return (new Token_function(token_str));
 	else
-		type = token_type::value;
-	return(pre_token(type, pre_token_str));
+		return (new Token_variable(token_str));
 }
 
 //parse the first value
@@ -86,22 +83,19 @@ std::string lexer_first_operator(std::string &cmd)
 
 ///transform the computation command into a list of pre_token
 /// pre_tokens are operator, value or parenthesis
-std::list<pre_token>	lexer(std::string cmd)
+std::list<IToken*>	lexer(std::string cmd)
 {
-	std::list<pre_token>	my_list;
-	std::string			pre_token_str;
-	pre_token				token_buffer;
+	std::list<IToken *>	my_list;
+	std::string		token_str;
 
 	while (!cmd.empty())
 	{
-		pre_token_str = lexer_first_value(cmd);
-		if (!pre_token_str.empty())
-			my_list.push_back(tokenize_value(pre_token_str));
-		pre_token_str = lexer_first_operator(cmd);
-		if (!pre_token_str.empty())
-			my_list.push_back(pre_token(token_type::math_operator, pre_token_str));
+		token_str = lexer_first_value(cmd);
+		if (!token_str.empty())
+			my_list.push_back(tokenize_value(token_str));
+		token_str = lexer_first_operator(cmd);
+		if (!token_str.empty())
+			my_list.push_back(new Token_operator(token_str));
 	}
 	return(my_list);
 }
-
-//std::list<

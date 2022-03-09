@@ -49,12 +49,13 @@ INC_VAR			=	Polyn_equation.hpp IValue.hpp IVariable.hpp \
 				IFunction.hpp Complex.hpp Matrix.hpp Map_variable.hpp
 
 INC_TOKEN		=	IToken.hpp Token_function.hpp Token_operator.hpp \
-					Token_parenth.hpp Token_variable.hpp Token_value.hpp
+				Token_parenth.hpp Token_variable.hpp Token_value.hpp
 
 INC_TEST		=	test.hpp
 
 INC			=	$(addprefix $(PATH_INC)/, $(INC_FILES)) \
 				$(addprefix $(PATH_INC_VAR)/, $(INC_VAR)) \
+				$(addprefix $(PATH_INC_TOKEN)/, $(INC_TOKEN)) \
 				$(addprefix $(PATH_TEST)/, $(INC_TEST))
 
 # Rules
