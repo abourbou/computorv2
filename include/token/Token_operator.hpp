@@ -18,6 +18,6 @@ class Token_operator : public IToken
 
 		//methods
 		IValue *operation(const IValue *val1, const IValue *val2) const;
-		std::string to_string() const;
+		std::string to_string(void) const;
 		IToken	*clone(void) const;
 };

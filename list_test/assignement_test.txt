@@ -56,7 +56,7 @@ f(a) = x then f = 3				=> don't allow it, it is too confusing to have var and fu
 // assignment function //
 * simple *
 f(x) = 5 x
-f(W) = 5 w - 2
+f(W) = 5 * w - 2
 f(x) = 4
 g(x) = varA - x					=> error, varA is not defined
 i(x) = 4x						=>error
@@ -81,8 +81,23 @@ f(3) - f(p) + 2 =?
 f(x) = 2 *x * i
 f(2) = ?
 
+* problematic * => static function resolve it
+f(x) = x * 2
+g(y) = f(y) + 5
+g(z) =?
+
+f(y) = f(y) * 2
+
+f(x) = g(x)
+g(x) = h(x)
+h(x) = f(x)
+f(2) =?
+
 * test none static var in function *
 varA = 2 AND f(x) = varA AND varA= 5
 f(x)=?										=> must send 5
 
-
+f(x) = x
+varA = f(2)
+f(x) = x + varA
+* no problem because var is already calculate

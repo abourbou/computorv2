@@ -1,0 +1,26 @@
+* Syntax rules *
+
+-Functions cannot be used in other fct if they are not defined
+ex: f(x) = g(2) //ERROR
+ex: f(x) = y + 4 //OK
+
+-A var can be use as you want, error will be treated in computation
+ex:	f(x) = x + y * 4
+	f(3)	//ERROR
+	y = -3
+	f(3)	//OK
+
+-A function must be resolve in other function definition
+ex: f(x) = x	//OK
+	g(x) = f(0)	//OK
+	var = 5
+	g(x) = f(var) //OK
+	h(y) = f(y)	//ERROR
+
+* J'AIME PAS CE SYSTEME => VOIR POUR CHANGER EN STATIC ?
+-Once a function is defined, it can be changed to change other functions 
+ex: f(x) = x
+	g(x) = f(2) * x
+	g(3) =? => 6
+	f(x) = x * x
+	g(3) =? => 12

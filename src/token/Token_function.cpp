@@ -26,16 +26,24 @@ IValue	*expr_to_value(std::string expr)
 Token_function::Token_function(std::string str): IToken(str, token_type::math_function)
 {
 	size_t start, end;
+	Map_variable &map = Singleton::GetInstance()->get_map_variable();
 
+	//find function
 	start = str.find("(");
 	if (start == std::string::npos || start == 0)
 		throw std::runtime_error("unvalid function syntax");
 	_fct = str.substr(0, start);
+	if (!map.is_var(_fct))
+		throw std::runtime_error("unknown function in function token");
+
+	//find expr
 	end = str.find(")");
 	if (end == std::string::npos || end <= start + 1 || end != str.size() - 1)
 		throw std::runtime_error("unvalid function syntax");
 	_expr = str.substr(start + 1, end - start - 1);
 	_value = expr_to_value(_expr);
+	if (_value == 0 && !map.is_var(_expr))
+		throw std::runtime_error("unknow var in function token");
 }
 
 Token_function::Token_function(const Token_function &rhs): IToken(rhs), _fct(rhs._fct), _expr(rhs._expr)
@@ -71,15 +79,18 @@ IValue *Token_function::compute(void) const
 	const IVariable *buffer_var;
 	const IFunction *f;
 
+	//get the fct from the map
 	buffer_var = map_var.get_var(_fct);
 	if (buffer_var->get_type() != variable_type::function)
 		throw(std::runtime_error("the function isn't a function"));
 	f = static_cast<const IFunction *>(buffer_var);
+
+	//get the value of the fct if it is a variable, call its value from the map
 	const IValue *value = _value;
 	if (!value)
 	{
 		buffer_var = map_var.get_var(_expr);
-		if (buffer_var->get_type() == variable_type::function || buffer_var->get_type() == variable_type::function)
+		if (buffer_var->get_type() == variable_type::function)
 			throw(std::runtime_error("expression in the function must not be a function"));
 		value = static_cast<const IValue*>(map_var.get_var(_expr));
 	}
@@ -88,9 +99,11 @@ IValue *Token_function::compute(void) const
 
 std::string Token_function::to_string(void) const
 {
-	std::string expr = (_value) ? _value->to_string() : _expr;
+	IValue *val_result = this->compute();
+	std::string result = val_result->to_string();
+	delete val_result;
 
-	return(_fct + "(" + expr + ")");
+	return(result);
 }
 
 IToken	*Token_function::clone(void) const

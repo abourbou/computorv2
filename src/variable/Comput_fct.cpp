@@ -45,42 +45,41 @@ IVariable *Comput_fct::clone(void) const
 
 /**
  * @brief transform the function expression to string
- * if the var of the function is already a variable, take it as a variable
- * else print it with the name
  * @param str
  * @return std::string
  */
-std::string	Comput_fct::to_string(std::string str) const
+std::string	Comput_fct::to_string(std::string fct_var) const
 {
-	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 	std::string	ret = "";
+	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 
 	for (auto it = _expr.begin(); it != _expr.end(); ++it)
 	{
+		std::cout << "test in comput_fct : " << ret << std::endl;
 		if (it != _expr.begin())
 			ret += " ";
 		if ((*it)->get_type() == token_type::variable)
 		{
-			std::string var = (*it)->to_string();
-			ret += (map.is_var(var))
-				? (*it)->to_string()
-				: (str.empty()) ? _var
-				: str;
-			/*if (map.is_var(var))
-				ret += (*it)->to_string();
+			std::string token_var = static_cast<Token_variable*>(*it)->get_name();
+			if ( token_var == _var && !map.is_var(token_var))
+				ret += !fct_var.empty() ? fct_var : _var;
 			else
-			{
-				if (str.empty())
-					ret += _var;
-				else
-					ret += str;
-			}*/
+				ret += (*it)->to_string();
+		}
+		else if ((*it)->get_type() == token_type::parenthesis)
+		{
+			std::string str_content = (*it)->to_string();
+			str_content = str_content.substr(1, str_content.length() - 2);
+			erase_white_space(str_content);
+			std::cout << "line parenth without parenth : " << str_content << std::endl;
+			Comput_fct parenth_fct(_var, str_content);
+			ret += parenth_fct.to_string(fct_var);
 		}
 		else
 			ret += (*it)->to_string();
 	}
 
-	return(_var);
+	return(ret);
 }
 
 

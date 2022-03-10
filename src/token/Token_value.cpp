@@ -29,7 +29,7 @@ Token_value::~Token_value(void)
 	delete _value;
 }
 
-std::string Token_value::to_string() const
+std::string Token_value::to_string(void) const
 {
 	return(_value->to_string());
 }

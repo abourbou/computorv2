@@ -10,6 +10,10 @@
 #include "Explic_fct.hpp"
 #include "Comput_fct.hpp"
 
+/**
+ * @brief Token_function token with [fct(var / expr)]
+ * var must be know
+ */
 class Token_function : public IToken
 {
 	private:
