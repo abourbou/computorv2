@@ -84,7 +84,6 @@ void	test_function()
 	Map_variable &map = Singleton::GetInstance()->get_map_variable();
 	Rational	r(2);
 	Explic_fct	f("double", &mult2);
-	IVariable *var;
 
 	std::cout << "*******TEST TOKEN_FUNCTION********" << std::endl;
 
@@ -100,7 +99,7 @@ void	test_function()
 	std::cout << "test error var not defined : ";
 	try{
 		Token_function tok2("double(unknown)");
-		var = tok2.compute();
+		std::cout << tok2.to_string() << std::endl;
 	}
 	catch(std::exception& e){std::cout << e.what() << std::endl;}
 	std::cout << "test error function not defined : ";

@@ -18,7 +18,6 @@ class Token_variable : public IToken
 
 		//methods
 		const IValue	*get_val(void) const;
-		std::string		get_name(void) const;
 		std::string		to_string(void) const;
 		IToken		*clone(void) const;
 };

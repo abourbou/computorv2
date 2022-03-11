@@ -48,44 +48,23 @@ IVariable *Comput_fct::clone(void) const
  * @param str
  * @return std::string
  */
-std::string	Comput_fct::to_string(std::string fct_var) const
+std::string	Comput_fct::to_string(void) const
 {
 	std::string	ret = "";
-	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
+	//Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 
 	for (auto it = _expr.begin(); it != _expr.end(); ++it)
 	{
-		std::cout << "test in comput_fct : " << ret << std::endl;
 		if (it != _expr.begin())
 			ret += " ";
-		if ((*it)->get_type() == token_type::variable)
-		{
-			std::string token_var = static_cast<Token_variable*>(*it)->get_name();
-			if ( token_var == _var && !map.is_var(token_var))
-				ret += !fct_var.empty() ? fct_var : _var;
-			else
-				ret += (*it)->to_string();
-		}
-		else if ((*it)->get_type() == token_type::parenthesis)
-		{
-			std::string str_content = (*it)->to_string();
-			str_content = str_content.substr(1, str_content.length() - 2);
-			erase_white_space(str_content);
-			std::cout << "line parenth without parenth : " << str_content << std::endl;
-			Comput_fct parenth_fct(_var, str_content);
-			ret += parenth_fct.to_string(fct_var);
-		}
-		else
-			ret += (*it)->to_string();
+		ret += (*it)->to_string();
 	}
-
 	return(ret);
 }
 
-
-void	Comput_fct::display(std::string var) const
+void	Comput_fct::display(void) const
 {
-	std::cout << this->to_string(var) << std::endl;
+	std::cout << this->to_string() << std::endl;
 }
 
 IValue	*Comput_fct::computation(const IValue *value) const

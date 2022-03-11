@@ -13,9 +13,11 @@ enum class token_type
 
 class	IToken {
 
+	private:
+		token_type	_type;
+
 	protected:
 		std::string	_lit;
-		token_type	_type;
 
 	public:
 		IToken(void) = delete;

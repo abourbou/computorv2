@@ -17,9 +17,10 @@
 class Token_function : public IToken
 {
 	private:
-		std::string	_fct;
-		std::string	_expr;
-		IValue		*_value;
+		// std::string	_fct;
+		// std::string	_expr;
+		//IValue		*_value;
+		IValue		*_result;
 
 	public:
 		Token_function(void) = delete;
@@ -28,7 +29,6 @@ class Token_function : public IToken
 		Token_function &operator=(const Token_function &rhs);
 		virtual ~Token_function(void);
 
-		IValue	*compute(void) const;
 		std::string	to_string(void) const;
 		IToken	*clone(void) const;
 

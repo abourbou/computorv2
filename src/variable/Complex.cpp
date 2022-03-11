@@ -179,8 +179,10 @@ IVariable *Complex::clone(void) const
 	return (new Complex(*this));
 }
 
-std::string	Complex::to_string(std::string str) const
+std::string	Complex::to_string(void) const
 {
+	std::string str;
+
 	if (this->_real_part)
 	{
 		str += '(';
@@ -201,9 +203,8 @@ std::string	Complex::to_string(std::string str) const
 	return(str);
 }
 
-void		Complex::display(std::string str) const
+void		Complex::display(void) const
 {
-	(void)str;
 	std::cout << this->to_string() << std::endl;
 }
 

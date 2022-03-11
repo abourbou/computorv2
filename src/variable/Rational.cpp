@@ -194,15 +194,13 @@ IVariable		*Rational::clone(void) const
 }
 
 //convert the variable into a string
-std::string	Rational::to_string(std::string str) const
+std::string	Rational::to_string(void) const
 {
-	(void)str;
 	return(double_to_string(this->_value));
 }
 
-void		Rational::display(std::string var) const
+void		Rational::display(void) const
 {
-	(void)var;
 	std::cout << this->to_string() << std::endl;
 }
 

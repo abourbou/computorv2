@@ -29,7 +29,6 @@ Token_operator::~Token_operator(void) {}
 Token_operator &Token_operator::operator=(const Token_operator &rhs)
 {
 	_lit = rhs._lit;
-	_type = rhs._type;
 	Operator_ptr = rhs.Operator_ptr;
 	return(*this);
 }

@@ -12,7 +12,6 @@ Token_variable::Token_variable(const Token_variable &rhs): IToken(rhs) {}
 
 Token_variable &Token_variable::operator=(const Token_variable &rhs)
 {
-	_type = rhs._type;
 	_lit = rhs._lit;
 	return(*this);
 }
@@ -26,24 +25,13 @@ const IValue *Token_variable::get_val(void) const
 
 	buffer_variable = ref_map.get_var(_lit);
 	if (buffer_variable->get_type() == variable_type::function)
-		throw(std::runtime_error("error : var doesn't contain a value"));
+		throw(std::runtime_error("error : variable must be a value not a function"));
 	return(static_cast<const IValue *>(buffer_variable));
-}
-
-std::string		Token_variable::get_name(void) const
-{
-	return(_lit);
 }
 
 std::string	Token_variable::to_string(void) const
 {
-	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
-	const IVariable *var;
-
-	var = map.get_var(_lit);
-	if (var->get_type() == variable_type::function)
-		throw std::runtime_error("variable must be a value not a function");
-	return(var->to_string());
+	return(_lit);
 }
 
 IToken	*Token_variable::clone(void) const

@@ -32,12 +32,18 @@ size_t		find_first_separator(std::string cmd, size_t start)
 //identify the type of value the str contain and transform it in pre_token
 IToken	*tokenize_value(std::string token_str)
 {
+	Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
+
 	if (token_str.empty())
 		throw(std::runtime_error("empty Token is not recognizable"));
 	if (token_str[0] == '(')
 		return (new Token_parenth(token_str));
 	else if (is_alpha(token_str))
-		return (new Token_variable(token_str));
+	{
+		if (!map_var.is_var(token_str))
+			return (new Token_variable(token_str));
+		return(new Token_value(token_str));
+	}
 	else if (token_str.find('(') != std::string::npos || token_str.find(')') != std::string::npos)
 		return (new Token_function(token_str));
 	else
@@ -105,7 +111,6 @@ std::list<IToken*>	lexer(std::string cmd)
 				throw(std::runtime_error(e.what()));
 			}
 			//my_list.push_back(tokenize_value(token_str));
-
 		}
 		token_str = lexer_first_operator(cmd);
 		if (!token_str.empty())

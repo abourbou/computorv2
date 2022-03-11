@@ -25,8 +25,8 @@ class Comput_fct: public IFunction
 		virtual ~Comput_fct();
 
 		//members
-		std::string		to_string(std::string var = "") const;
+		std::string			to_string(void) const;
 		virtual IVariable	*clone(void) const;
-		IValue			*computation(const IValue *value) const;
-		virtual void		display(std::string var = "") const;
+		IValue				*computation(const IValue *value) const;
+		virtual void		display(void) const;
 };

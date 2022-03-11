@@ -29,6 +29,6 @@ class IVariable
 		//members
 		variable_type		get_type() const;
 		virtual IVariable	*clone(void) const =0;
-		virtual std::string	to_string(std::string str = "") const =0;
-		virtual void		display(std::string var= "") const =0;
+		virtual std::string	to_string(void) const =0;
+		virtual void		display(void) const =0;
 };

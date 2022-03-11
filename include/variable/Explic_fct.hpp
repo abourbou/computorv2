@@ -26,8 +26,8 @@ class Explic_fct: public IFunction
 		virtual ~Explic_fct();
 
 		//members
-		std::string		to_string(std::string var = "x") const;
+		std::string		to_string(void) const;
 		virtual IVariable	*clone(void) const;
 		IValue			*computation(const IValue *value) const;
-		virtual void		display(std::string var = "x") const;
+		virtual void		display(void) const;
 };

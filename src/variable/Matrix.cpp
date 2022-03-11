@@ -207,9 +207,9 @@ IVariable	*Matrix::clone(void) const
 	return (new Matrix(*this));
 }
 
-std::string	Matrix::to_string(std::string str) const
+std::string	Matrix::to_string(void) const
 {
-	str = "[";
+	std::string str = "[";
 
 	for (size_t i =0; i < _size[0]; ++i)
 	{
@@ -231,9 +231,8 @@ std::string	Matrix::to_string(std::string str) const
 	return(str);
 }
 
-void	Matrix::display(std::string str) const
+void	Matrix::display(void) const
 {
-	(void)str;
 	for (size_t i =0; i < _size[0]; ++i)
 	{
 		std::cout << '[';

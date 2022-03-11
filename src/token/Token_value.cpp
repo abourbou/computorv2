@@ -3,7 +3,11 @@
 
 Token_value::Token_value(std::string str): IToken(str, token_type::value)
 {
-	if (str.find('[') != std::string::npos || str.find(']') != std::string::npos)
+	Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
+
+	if (is_alpha(str))
+		_value = static_cast<IValue*>(map_var.get_var(str)->clone());
+	else if (str.find('[') != std::string::npos || str.find(']') != std::string::npos)
 		_value = new Matrix(str);
 	else if (str.back() == 'i')
 		_value = new Complex(str);

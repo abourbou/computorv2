@@ -17,10 +17,9 @@ ex: f(x) = x	//OK
 	g(x) = f(var) //OK
 	h(y) = f(y)	//ERROR
 
-* J'AIME PAS CE SYSTEME => VOIR POUR CHANGER EN STATIC ?
--Once a function is defined, it can be changed to change other functions 
+-Var and function in function definition are STATIC 
 ex: f(x) = x
 	g(x) = f(2) * x
 	g(3) =? => 6
 	f(x) = x * x
-	g(3) =? => 12
+	g(3) =? => 6 //g is unchanged
