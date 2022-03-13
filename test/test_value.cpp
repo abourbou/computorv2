@@ -2,10 +2,17 @@
 
 void	unit_test_comput_fct(std::string var, std::string expr)
 {
+	std::cout << "test of : " << "f(" << var << ") : " << std::endl;
 	erase_white_space(var);
 	erase_white_space(expr);
-	Comput_fct c(var, expr);
-	std::cout << "test f() : " << c.to_string() << std::endl;
+	try {
+		Comput_fct c(var, expr);
+		std::cout << c.to_string() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "error : " << e.what() << std::endl;
+	}
 	std::cout << std::endl;
 }
 

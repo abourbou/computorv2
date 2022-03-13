@@ -56,13 +56,13 @@ void test_variable()
 
 	Token_variable	tok1("compl");
 	std::cout << "must be (2 + 3i) : ";
-	tok1.get_val()->display();
+	tok1.get_value()->display();
 	std::cout << std::endl;
 
 	try {
 		std::cout << "test unknow variable on map : ";
 		Token_variable	tok2("unknown");
-		tok2.get_val()->display();
+		tok2.get_value()->display();
 	}
 	catch(const std::exception& e)
 	{

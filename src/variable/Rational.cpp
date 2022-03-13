@@ -19,7 +19,7 @@ Rational::Rational(std::string str) : IValue(variable_type::rational)
 		throw(std::runtime_error("empty string"));
 	idx = str.find_first_not_of(" \f\n\r\t\v");
 	if (!isdigit(str[idx]) && str[idx] != '+' && str[idx] != '-')
-		throw(std::runtime_error("invalid caracter at the beginning"));
+		throw(std::runtime_error("invalid rational"));
 	if(str[idx] == '+' || str[idx] == '-')
 	{
 		if (str[idx] == '-')
@@ -28,7 +28,7 @@ Rational::Rational(std::string str) : IValue(variable_type::rational)
 	}
 	this->_value = std::stod(str, &idx);
 	if (idx != length)
-		throw(std::runtime_error("invalid caracter at the end"));
+		throw(std::runtime_error("invalid rational"));
 }
 
 Rational::Rational(double value) : IValue(variable_type::rational), _value(value)

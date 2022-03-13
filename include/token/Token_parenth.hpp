@@ -20,4 +20,5 @@ class Token_parenth : public IToken
 		std::string	to_string(void) const;
 		const std::list<IToken*>	&get_content(void) const;
 		IToken	*clone(void) const;
+		const IValue	*get_value(void) const;
 };

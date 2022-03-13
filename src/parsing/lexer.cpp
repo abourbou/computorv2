@@ -92,29 +92,69 @@ std::string lexer_first_operator(std::string &cmd)
 	return(pre_token_str);
 }
 
-///transform the computation command into a list of pre_token
-/// pre_tokens are operator, value or parenthesis
+//check if their is 2 values or 2 operators in row
+void	check_order_operator(const std::list<IToken*> &my_list)
+{
+	bool	last_is_op;
+	bool	current_is_op;
+
+	if (my_list.empty())
+		throw(std::runtime_error("empty command"));
+	for (auto it = my_list.begin(); it != my_list.end(); ++it)
+	{
+		current_is_op = (*it)->get_type() == token_type::math_operator;
+		if (it != my_list.begin() && current_is_op == last_is_op)
+			throw(std::runtime_error("unvalid syntax in lexer"));
+		last_is_op = current_is_op;
+	}
+}
+
+//check the case of the front token is an operator
+//ex : -4 + 5 VALID -x + 8 UNVALID
+//TODO handle -4 + 5 case
+void	check_front_operator(std::list<IToken *> &my_list)
+{
+	auto it_first = my_list.begin();
+	if ((*it_first)->get_type() == token_type::math_operator)
+	{
+		std::string str_operator = (*it_first)->to_string();
+		auto it_second = ++my_list.begin();
+		if (str_operator != "+" || str_operator != "-" || it_second == my_list.end())
+			throw(std::runtime_error("unvalid syntax in lexer"));
+		else if ((*it_second)->get_type() != token_type::value)
+			throw(std::runtime_error("unvalid syntax in lexer"));
+		//TODO check second token and change value
+		// if (str_operator == '-')
+		// {
+		// 	it_second->
+		// }
+	}
+}
+
+///transform the computation command into a list of token
+/// tokens are operator, value, variable, function or parenthesis
 std::list<IToken*>	lexer(std::string cmd)
 {
 	std::list<IToken *>	my_list;
 	std::string		token_str;
 
-	while (!cmd.empty())
-	{
-		token_str = lexer_first_value(cmd);
-		if (!token_str.empty())
+	try {
+		while (!cmd.empty())
 		{
-			try {my_list.push_back(tokenize_value(token_str));}
-			catch (const std::exception& e)
-			{
-				clean_lexer(my_list);
-				throw(std::runtime_error(e.what()));
-			}
-			//my_list.push_back(tokenize_value(token_str));
+			token_str = lexer_first_value(cmd);
+			if (!token_str.empty())
+				my_list.push_back(tokenize_value(token_str));
+			token_str = lexer_first_operator(cmd);
+			if (!token_str.empty())
+				my_list.push_back(new Token_operator(token_str));
 		}
-		token_str = lexer_first_operator(cmd);
-		if (!token_str.empty())
-			my_list.push_back(new Token_operator(token_str));
+		check_order_operator(my_list);
+		check_front_operator(my_list);
+	}
+	catch (const std::exception& e)
+	{
+		clean_lexer(my_list);
+		throw(std::runtime_error(e.what()));
 	}
 	return(my_list);
 }

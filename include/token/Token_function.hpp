@@ -8,7 +8,7 @@
 #include "Complex.hpp"
 #include "Matrix.hpp"
 #include "Explic_fct.hpp"
-#include "Comput_fct.hpp"
+#include "IFunction.hpp"
 
 /**
  * @brief Token_function token with [fct(var / expr)]
@@ -17,9 +17,6 @@
 class Token_function : public IToken
 {
 	private:
-		// std::string	_fct;
-		// std::string	_expr;
-		//IValue		*_value;
 		IValue		*_result;
 
 	public:
@@ -31,5 +28,5 @@ class Token_function : public IToken
 
 		std::string	to_string(void) const;
 		IToken	*clone(void) const;
-
+		const IValue	*get_value(void) const;
 };

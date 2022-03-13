@@ -18,17 +18,6 @@ Token_variable &Token_variable::operator=(const Token_variable &rhs)
 
 Token_variable::~Token_variable() {}
 
-const IValue *Token_variable::get_val(void) const
-{
-	Map_variable	&ref_map = Singleton::GetInstance()->get_map_variable();
-	const IVariable	*buffer_variable;
-
-	buffer_variable = ref_map.get_var(_lit);
-	if (buffer_variable->get_type() == variable_type::function)
-		throw(std::runtime_error("error : variable must be a value not a function"));
-	return(static_cast<const IValue *>(buffer_variable));
-}
-
 std::string	Token_variable::to_string(void) const
 {
 	return(_lit);
@@ -37,4 +26,15 @@ std::string	Token_variable::to_string(void) const
 IToken	*Token_variable::clone(void) const
 {
 	return(new Token_variable(*this));
+}
+
+const IValue *Token_variable::get_value(void) const
+{
+	Map_variable	&ref_map = Singleton::GetInstance()->get_map_variable();
+	const IVariable	*buffer_variable;
+
+	buffer_variable = ref_map.get_var(_lit);
+	if (buffer_variable->get_type() == variable_type::function)
+		throw(std::runtime_error("error : variable must be a value not a function"));
+	return(static_cast<const IValue *>(buffer_variable));
 }
