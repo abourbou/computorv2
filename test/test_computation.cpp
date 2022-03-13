@@ -34,10 +34,12 @@ void	test_computation(void)
 {
 	//basic test
 	test_token("5 + 3 * 2 % 6");
-	test_token("2 * (5 + 2)");
+	test_token("-2 * (5 + 2)");
 	test_token("x + 2 * 3");
 	test_token("var * )5 * (2 + 5) + 2) * 3");
-	test_token("-4 + 3");
+	test_token("-4i + 3");
+	test_token("[[2]] * 3");
+	test_token("-[[2]; [5]]");
 	test_token("var * f(5.) - (2.5 + 5) + [[1.0]] * 3i^i");
 	test_token("++--***/%");
 	test_token("4dsfadf");

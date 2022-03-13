@@ -1,5 +1,6 @@
 
 #include "parsing.hpp"
+#include "Rational.hpp"
 
 ///find first separator of the string at or after the position start
 //return the pos of the separator or npos if not found
@@ -117,17 +118,26 @@ void	check_front_operator(std::list<IToken *> &my_list)
 	auto it_first = my_list.begin();
 	if ((*it_first)->get_type() == token_type::math_operator)
 	{
+		//check form ±value
 		std::string str_operator = (*it_first)->to_string();
 		auto it_second = ++my_list.begin();
-		if (str_operator != "+" || str_operator != "-" || it_second == my_list.end())
+		if ((str_operator != "+" && str_operator != "-") || it_second == my_list.end())
 			throw(std::runtime_error("unvalid syntax in lexer"));
 		else if ((*it_second)->get_type() != token_type::value)
 			throw(std::runtime_error("unvalid syntax in lexer"));
-		//TODO check second token and change value
-		// if (str_operator == '-')
-		// {
-		// 	it_second->
-		// }
+
+		//if negatif, inverse the values
+		if (str_operator == "-")
+		{
+			IValue *opposite = Rational(-1) * (*it_second)->get_value();
+			std::string str_opposite = opposite->to_string();
+			delete opposite;
+			delete *it_second;
+			*it_second = new Token_value(str_opposite);
+		}
+		//eliminate first operator
+		delete *it_first;
+		my_list.pop_front();
 	}
 }
 
