@@ -84,9 +84,6 @@ Token_function::Token_function(std::string str): IToken(str, token_type::math_fu
 	if (end == std::string::npos || end <= start + 1 || end != str.size() - 1)
 		throw std::runtime_error("unvalid function syntax");
 	_expr = str.substr(start + 1, end - start - 1);
-	//_value = expr_to_value(_expr);
-	// if (_value == 0 && !map.is_var(_expr))
-	// 	throw std::runtime_error("unknow var in function token");
 
 	//compute result
 	_result = compute(_fct, _expr);

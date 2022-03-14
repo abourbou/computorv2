@@ -24,14 +24,12 @@ int	main(int argc, char **argv)
 
 	//TEST
 	// test_map_variable();
-	test_computation();
+	// test_computation();
 	// test_syntax();
 	//test_token();
 	//test_value();
 	//TEST
 
-	//TODO erase exit
-	exit(0);
 	if (argc == 2)
 	{
 		exec_line(argv[1]);

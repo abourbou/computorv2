@@ -64,6 +64,8 @@ void	Map_variable::remove_var(std::string name)
 		throw(std::runtime_error("impossible to remove variable"));
 	else if (it->second.secu_lvl != Changeable)
 		throw(std::runtime_error("impossible to remove variable"));
+	if (it->second.var->get_type() != variable_type::function)
+		delete it->second.var;
 	_map_var.erase(it);
 }
 

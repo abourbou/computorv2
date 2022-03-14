@@ -29,7 +29,6 @@ OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.cpp=.o))
 
 #include
 include src/variable/Include.mk
-include src/computation/Include.mk
 include src/execution/Include.mk
 include src/external_function/Include.mk
 include src/parsing/Include.mk
@@ -42,7 +41,7 @@ PATH_INC_VAR		=	include/variable
 PATH_INC_TOKEN		=	include/token
 
 INC_FILES		=	parsing.hpp math_utility.hpp string_function.hpp \
-				binary_tree.hpp  execution.hpp singleton.hpp
+				execution.hpp singleton.hpp
 
 INC_VAR			=	Polyn_equation.hpp IValue.hpp IVariable.hpp \
 				Rational.hpp  Comput_fct.hpp Explic_fct.hpp \

@@ -27,12 +27,12 @@ void	exec_line(std::string line)
 
 void	exec_task(Task task, std::string line)
 {
-	//static list_variable list;
-
 	if (task == Command)
 		exec_command(line);
 	else if (task == Assign_var)
-		exec_assign_value(line);
+		exec_assign_var(line);
+	else if (task == Assign_func)
+		exec_assign_fct(line);
 	else
 	{
 		std::cout << "Cannot executate task n" << task << " for now" << std::endl;

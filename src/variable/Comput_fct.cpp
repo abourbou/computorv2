@@ -8,12 +8,20 @@
  *
  * @param var			variable in the expression
  * @param expr			string representing the function, will be interpreted by the computor ex: 4X^2 / (5 X)
- * @param is_const		can the function change expression
  */
 Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 {
 	_var = var;
 	_expr = lexer(expr);
+
+	for (auto it = _expr.begin(); it != _expr.end(); ++it)
+	{
+		if ((*it)->get_type() == token_type::variable && (*it)->to_string() != _var)
+		{
+			clean_lexer(_expr);
+			throw std::runtime_error("unknown variable in computable function");
+		}
+	}
 }
 
 Comput_fct::Comput_fct(const Comput_fct &rhs): IFunction(), _var(rhs._var)
