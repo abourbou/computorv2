@@ -67,9 +67,17 @@ void	Comput_fct::display(void) const
 	std::cout << this->to_string() << std::endl;
 }
 
-IValue	*Comput_fct::computation(const IValue *value) const
+const IValue	*Comput_fct::fct_computation(const IValue *value) const
 {
-	//TODO
-	(void)value;
-	return(0);
+	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
+
+	if (!map.is_var(_var))
+	{
+		map.add_var(_var, value);
+		const IValue	*result = computation(_expr);
+		map.remove_var(_var);
+		return (result);
+	}
+	else
+		return(computation(_expr));
 }

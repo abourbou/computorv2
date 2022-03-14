@@ -67,6 +67,7 @@ std::string lexer_first_value(std::string &cmd)
 	return (pre_token_str);
 }
 
+//TODO change name to clean_list_token
 void	clean_lexer(std::list<IToken*> list_tok)
 {
 	for (auto it = list_tok.begin(); it != list_tok.end(); ++it)
@@ -108,11 +109,12 @@ void	check_order_operator(const std::list<IToken*> &my_list)
 			throw(std::runtime_error("unvalid syntax in lexer"));
 		last_is_op = current_is_op;
 	}
+	if (last_is_op)
+		throw(std::runtime_error("unvalid syntax in lexer"));
 }
 
 //check the case of the front token is an operator
-//ex : -4 + 5 VALID -x + 8 UNVALID
-//TODO handle -4 + 5 case
+//ex : -4 + 5 VALID && -x + 8 UNVALID
 void	check_front_operator(std::list<IToken *> &my_list)
 {
 	auto it_first = my_list.begin();
@@ -130,10 +132,8 @@ void	check_front_operator(std::list<IToken *> &my_list)
 		if (str_operator == "-")
 		{
 			IValue *opposite = Rational(-1) * (*it_second)->get_value();
-			std::string str_opposite = opposite->to_string();
-			delete opposite;
 			delete *it_second;
-			*it_second = new Token_value(str_opposite);
+			*it_second = new Token_value(opposite);
 		}
 		//eliminate first operator
 		delete *it_first;

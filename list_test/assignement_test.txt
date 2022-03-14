@@ -83,8 +83,9 @@ f(2) = ?
 
 * problematic * => static function resolve it
 f(x) = x * 2
-g(y) = f(y) + 5
-g(z) =?
+g(y) = f(y) + 5 //error
+y = 2
+g(y) = f(y) + 5 //valid
 
 f(y) = f(y) * 2
 

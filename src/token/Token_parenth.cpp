@@ -60,6 +60,5 @@ IToken	*Token_parenth::clone(void) const
 
 const IValue	*Token_parenth::get_value(void) const
 {
-	//TODO computation
-	return (0);
+	return (computation(_content));
 }

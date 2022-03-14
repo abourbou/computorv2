@@ -31,7 +31,7 @@ IValue	*expr_to_value(std::string expr)
  *
  * @return const IValue*
  */
-IValue *compute(std::string _fct, std::string _expr)
+const IValue *compute(std::string _fct, std::string _expr)
 {
 	Map_variable &map_var = Singleton::GetInstance()->get_map_variable();
 	const IVariable	*buffer_var;
@@ -46,9 +46,9 @@ IValue *compute(std::string _fct, std::string _expr)
 	//get the value of the fct if it is a variable, call its value from the map
 	const IValue *value = expr_to_value(_expr);
 
-	IValue *result;
+	const IValue *result;
 	try {
-		result = f->computation(value);
+		result = f->fct_computation(value);
 	}
 	catch(std::exception &e)
 	{

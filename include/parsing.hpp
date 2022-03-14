@@ -28,3 +28,5 @@ Task		find_task(std::string line);
 void		exec_command(std::string line);
 void		exec_assign_value(std::string line);
 std::list<IToken *>	lexer(std::string cmd);
+void				clean_lexer(std::list<IToken*> list_tok);
+const IValue *computation(const std::list<IToken*> list_token);

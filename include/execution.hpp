@@ -4,5 +4,3 @@
 
 void	exec_line(std::string line);
 void	exec_task(Task task, std::string line);
-
-//IValue *computation(std::list<IToken*> list_token);

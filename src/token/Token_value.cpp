@@ -13,7 +13,11 @@ Token_value::Token_value(std::string str): IToken(str, token_type::value)
 		_value = new Complex(str);
 	else
 		_value = new Rational(str);
+	_lit = _value->to_string();
 }
+
+Token_value::Token_value(IValue *value): IToken(value->to_string(), token_type::value), _value(value)
+{}
 
 Token_value::Token_value(const Token_value &rhs): IToken(rhs)
 {
@@ -24,6 +28,7 @@ Token_value &Token_value::operator=(const Token_value &rhs)
 {
 	delete _value;
 	_value = static_cast<IValue*>(rhs._value->clone());
+	_lit = _value->to_string();
 
 	return(*this);
 }
@@ -35,7 +40,7 @@ Token_value::~Token_value(void)
 
 std::string Token_value::to_string(void) const
 {
-	return(_value->to_string());
+	return(_lit);
 }
 
 const IValue *Token_value::get_value(void) const

@@ -16,6 +16,7 @@ class Token_value : public IToken
 	public:
 		Token_value(void) = delete;
 		Token_value(std::string str);
+		Token_value(IValue *value);
 		Token_value(const Token_value &rhs);
 		Token_value &operator=(const Token_value &rhs_);
 		virtual ~Token_value(void);

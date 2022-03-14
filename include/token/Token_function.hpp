@@ -17,7 +17,7 @@
 class Token_function : public IToken
 {
 	private:
-		IValue		*_result;
+		const IValue		*_result;
 
 	public:
 		Token_function(void) = delete;

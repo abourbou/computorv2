@@ -3,6 +3,9 @@
 #include <list>
 #include "IToken.hpp"
 #include "parsing.hpp"
+//#include "execution.hpp"
+
+std::list<IToken *>	lexer(std::string cmd);
 
 class Token_parenth : public IToken
 {

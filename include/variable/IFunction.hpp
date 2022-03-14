@@ -11,5 +11,5 @@ class	IFunction: public IVariable
 		IFunction& operator=(const IFunction& rhs);
 		~IFunction();
 
-		virtual IValue	*computation(const IValue *value) const = 0;
+		virtual const IValue	*fct_computation(const IValue *value) const = 0;
 };

@@ -28,7 +28,7 @@ IVariable	*Explic_fct::clone(void) const
 	return (new Explic_fct(*this));
 }
 
-IValue	*Explic_fct::computation(const IValue *value) const
+const IValue	*Explic_fct::fct_computation(const IValue *value) const
 {
 	return(_f(value));
 }
