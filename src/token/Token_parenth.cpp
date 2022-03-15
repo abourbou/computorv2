@@ -11,16 +11,20 @@ Token_parenth::Token_parenth(std::string str): IToken(str, token_type::parenthes
 
 Token_parenth::Token_parenth(const Token_parenth &rhs): IToken(rhs._lit, token_type::parenthesis)
 {
-	for (auto it = rhs._content.begin(); it != rhs._content.end(); ++it)
-		_content.push_back(token_ptr((*it)->clone()));
+	// for (auto it = rhs._content.begin(); it != rhs._content.end(); ++it)
+	// 	_content.push_back(token_ptr((*it)->clone()));
+	for (const auto &token : rhs._content)
+		_content.push_back(token_ptr(token->clone()));
 }
 
 Token_parenth	&Token_parenth::operator=(const Token_parenth &rhs)
 {
-	// for (auto it = _content.begin(); it != _content.end(); ++it)
-	// 	delete *it;
-	for (auto it = rhs._content.begin(); it != rhs._content.end(); ++it)
-		_content.push_back(token_ptr((*it)->clone()));
+
+	// for (auto it = rhs._content.begin(); it != rhs._content.end(); ++it)
+	// 	_content.push_back(token_ptr((*it)->clone()));
+	_content.clear();
+	for (const auto &token : rhs._content)
+		_content.push_back(token_ptr(token->clone()));
 	_lit = rhs._lit;
 
 	return(*this);

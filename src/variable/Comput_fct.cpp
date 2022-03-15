@@ -14,9 +14,10 @@ Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 	_var = var;
 	lexer(expr, _expr);
 
-	for (auto it = _expr.begin(); it != _expr.end(); ++it)
+	//for (auto it = _expr.begin(); it != _expr.end(); ++it)
+	for (const auto &token : _expr)
 	{
-		if ((*it)->get_type() == token_type::variable && (*it)->to_string() != _var)
+		if (token->get_type() == token_type::variable && token->to_string() != _var)
 		{
 			throw std::runtime_error("unknown variable in computable function");
 		}
@@ -25,15 +26,16 @@ Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 
 Comput_fct::Comput_fct(const Comput_fct &rhs): IFunction(), _var(rhs._var)
 {
-	for (auto it = rhs._expr.begin(); it != rhs._expr.end(); ++it)
-		_expr.push_back(token_ptr((*it)->clone()));
+	for (const auto &token : rhs._expr)
+		_expr.push_back(token_ptr(token->clone()));
 }
 
 Comput_fct	&Comput_fct::operator=(const Comput_fct &rhs)
 {
 	this->_var = rhs._var;
-	for (auto it = rhs._expr.begin(); it != rhs._expr.end(); ++it)
-		_expr.push_back(token_ptr((*it)->clone()));
+	_expr.clear();
+	for (const auto &token : rhs._expr)
+		_expr.push_back(token_ptr(token->clone()));
 
 	return(*this);
 }

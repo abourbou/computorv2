@@ -44,15 +44,15 @@ std::string	double_to_string(double number, int precision)
 
 void	to_upper(std::string &str)
 {
-	for(auto it = str.begin(); it != str.end(); ++it)
-		*it = toupper(*it);
+	for (char &c : str)
+		c = toupper(c);
 }
 
 bool	is_alpha(std::string str)
 {
-	for (auto it = str.begin(); it != str.end(); ++it)
+	for (char &c : str)
 	{
-		if (!isalpha(*it))
+		if (!isalpha(c))
 			return(false);
 	}
 	return (true);

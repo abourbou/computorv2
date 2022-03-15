@@ -69,7 +69,6 @@ IValue *do_operation(std::list<token_ptr>::iterator priority_it)
 }
 
 //do computation on the list
-//carefull it will modify the list
 IValue *computation(const std::list<token_ptr>& list_token)
 {
 	std::list<token_ptr>	copy_list;
