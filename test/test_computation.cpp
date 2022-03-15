@@ -3,7 +3,7 @@
 #include "execution.hpp"
 #include "string_function.hpp"
 
-void	print_list_token(std::list<token_ptr> my_list)
+void	print_list_token(std::list<token_ptr> &my_list)
 {
 	std::cout << "computation : {";
 	for (auto it = my_list.begin(); it != my_list.end(); ++it)
@@ -22,7 +22,7 @@ void	test_token(std::string str)
 	erase_white_space(str);
 	std::cout << "test: {" + str + "}" << std::endl;
 	try {
-		my_list = lexer(str);
+		lexer(str, my_list);
 		print_list_token(my_list);
 		const IValue *buffer_value = computation(my_list);
 		std::cout << "result : " << buffer_value->to_string() << std::endl;

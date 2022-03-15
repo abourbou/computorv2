@@ -14,7 +14,6 @@ size_t		find_first_separator(std::string cmd, size_t start)
 	{
 		size_t nbr_parenth = 1;
 		size_t i = end + 1;
-		//std::cout << "str before : " << cmd.substr(i) << std::endl;
 		while (nbr_parenth && i < cmd.length())
 		{
 			if (cmd[i] == '(')
@@ -23,7 +22,6 @@ size_t		find_first_separator(std::string cmd, size_t start)
 				--nbr_parenth;
 			++i;
 		}
-		//std::cout << "str after : " << cmd.substr(i) << std::endl;
 		if (i >= cmd.length())
 			return i;
 		return (find_first_separator(cmd, i));
@@ -140,24 +138,19 @@ void	check_front_operator(std::list<token_ptr> &my_list)
 
 ///transform the computation command into a list of token
 /// tokens are operator, value, variable, function or parenthesis
-std::list<token_ptr>	lexer(std::string cmd)
+void	lexer(std::string cmd, std::list<token_ptr> &token_list)
 {
-	std::list<token_ptr>	my_list;
-	std::list<token_ptr>	ptr_list;
 	std::string		token_str;
 
 	while (!cmd.empty())
 	{
 		token_str = lexer_first_value(cmd);
 		if (!token_str.empty())
-			ptr_list.push_back(tokenize_value(token_str));
-			//my_list.push_back(tokenize_value(token_str));
+			token_list.push_back(tokenize_value(token_str));
 		token_str = lexer_first_operator(cmd);
 		if (!token_str.empty())
-			ptr_list.push_back(std::make_unique<Token_operator>(Token_operator(token_str)));
-			//my_list.push_back(new Token_operator(token_str));
+			token_list.push_back(std::make_unique<Token_operator>(Token_operator(token_str)));
 	}
-	check_order_operator(ptr_list);
-	check_front_operator(ptr_list);
-	return(ptr_list);
+	check_order_operator(token_list);
+	check_front_operator(token_list);
 }

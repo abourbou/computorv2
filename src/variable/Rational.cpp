@@ -165,7 +165,7 @@ IValue	*Rational::operator%(const IValue *rhs) const
 		return(new Rational(a % b));
 	}
 	else
-		throw(std::runtime_error("invalid type for addition"));
+		throw(std::runtime_error("invalid type for modulus"));
 }
 
 IValue	*Rational::operator^(const IValue *rhs) const

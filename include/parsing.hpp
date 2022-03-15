@@ -25,6 +25,6 @@ enum Task {
 
 std::string	regulate_string(std::string line);
 Task		find_task(std::string line);
-std::list<token_ptr>	lexer(std::string cmd);
+void		lexer(std::string cmd, std::list<token_ptr> &list_token);
 void		clean_list_token(std::list<IToken*> list_tok);
-IValue *computation(const std::list<token_ptr> list_token);
+IValue *computation(const std::list<token_ptr> &list_token);

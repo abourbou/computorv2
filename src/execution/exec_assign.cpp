@@ -22,7 +22,8 @@ void	exec_assign_var(std::string line)
 	else if (!is_alpha(expr1))
 		throw(std::runtime_error("variable must only contain alphabetic characters"));
 
-	std::list<token_ptr> list_token = lexer(expr2);
+	std::list<token_ptr> list_token;
+	lexer(expr2, list_token);
 	std::shared_ptr<IValue>	result(computation(list_token));
 	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 	map.add_var(expr1, result.get());
@@ -69,7 +70,9 @@ void	exec_assign_fct(std::string line)
 void	exec_computation(std::string line)
 {
 	line = line.substr(0, line.size() - 2);
-	std::list<token_ptr> list_tok = lexer(line);
+	//std::list<token_ptr> list_tok = lexer(line);
+	std::list<token_ptr>	list_tok;
+	lexer(line, list_tok);
 	std::unique_ptr<IValue> result(computation(list_tok));
 	result->display();
 }

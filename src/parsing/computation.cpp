@@ -46,9 +46,8 @@ IValue *do_operation(std::list<token_ptr>::iterator priority_it)
 	const IValue *right_value = 0;
 	IValue *result_operation = 0;
 
-	auto operator_it = std::static_pointer_cast<Token_operator>(*priority_it);
+	std::unique_ptr<Token_operator> operator_it(static_cast<Token_operator *>((*priority_it)->clone()));
 	try{
-
 		left_value = (*std::prev(priority_it))->get_value();
 		right_value = (*std::next(priority_it))->get_value();
 		result_operation = operator_it->operation(left_value, right_value);
@@ -71,12 +70,12 @@ IValue *do_operation(std::list<token_ptr>::iterator priority_it)
 
 //do computation on the list
 //carefull it will modify the list
-IValue *computation(const std::list<token_ptr> list_token)
+IValue *computation(const std::list<token_ptr>& list_token)
 {
 	std::list<token_ptr>	copy_list;
 
 	for (const auto& elem: list_token)
-		copy_list.push_back(std::shared_ptr<IToken>(elem->clone()));
+		copy_list.push_back(std::unique_ptr<IToken>(elem->clone()));
 
 	while (1)
 	{

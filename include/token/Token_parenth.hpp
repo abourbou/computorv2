@@ -4,7 +4,7 @@
 #include "IToken.hpp"
 #include "parsing.hpp"
 
-std::list<token_ptr>	lexer(std::string cmd);
+void	lexer(std::string cmd, std::list<token_ptr> &list_token);
 
 class Token_parenth : public IToken
 {
