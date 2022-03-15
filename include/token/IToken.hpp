@@ -14,7 +14,7 @@ enum class token_type
 };
 
 class IToken;
-typedef std::unique_ptr<IToken> token_ptr;
+typedef std::shared_ptr<IToken> token_ptr;
 
 class	IToken {
 

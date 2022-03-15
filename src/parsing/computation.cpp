@@ -18,7 +18,7 @@ size_t		priority(std::string str_operator)
 		return (0);
 }
 
-std::list<IToken *>::iterator	find_priority_operator(std::list<IToken *> &list_token)
+std::list<token_ptr>::iterator	find_priority_operator(std::list<token_ptr> &list_token)
 {
 	size_t	max_priority = 0;
 	auto	it = std::next(list_token.begin());
@@ -40,13 +40,13 @@ std::list<IToken *>::iterator	find_priority_operator(std::list<IToken *> &list_t
 	return (priority_it);
 }
 
-IValue *do_operation(std::list<IToken *>::iterator priority_it)
+IValue *do_operation(std::list<token_ptr>::iterator priority_it)
 {
 	const IValue *left_value = 0;
 	const IValue *right_value = 0;
 	IValue *result_operation = 0;
 
-	auto operator_it = static_cast<Token_operator*>(*priority_it);
+	auto operator_it = std::static_pointer_cast<Token_operator>(*priority_it);
 	try{
 
 		left_value = (*std::prev(priority_it))->get_value();
@@ -69,65 +69,34 @@ IValue *do_operation(std::list<IToken *>::iterator priority_it)
 	return (result_operation);
 }
 
-//TODO erase this test function
-void	comp_print_list_token(std::list<IToken *> my_list)
-{
-	std::cout << "computation : {";
-	for (auto it = my_list.begin(); it != my_list.end(); ++it)
-	{
-		if (it != my_list.begin())
-			std::cout << " ";
-		std::cout << (*it)->to_string();
-	}
-	std::cout << "}" << std::endl;
-}
-
 //do computation on the list
 //carefull it will modify the list
-const IValue *computation(const std::list<IToken *> list_token)
+IValue *computation(const std::list<token_ptr> list_token)
 {
-	std::list<IToken *>	copy_list;
+	std::list<token_ptr>	copy_list;
 
-	for (auto it = list_token.begin(); it != list_token.end(); ++it)
-		copy_list.push_back((*it)->clone());
+	for (const auto& elem: list_token)
+		copy_list.push_back(std::shared_ptr<IToken>(elem->clone()));
 
-	try{
-		while (1)
+	while (1)
+	{
+		//find priority operator
+		std::list<token_ptr>::iterator	priority_it = find_priority_operator(copy_list);
+		if (priority_it == copy_list.end())
 		{
-			//find priority operator
-			std::list<IToken *>::iterator	priority_it = find_priority_operator(copy_list);
-			if (priority_it == copy_list.end())
-			{
-				//std::cout << "no more operator" << std::endl;
-				IValue *result = static_cast<IValue*>(copy_list.front()->get_value()->clone());
-				clean_list_token(copy_list);
-				return (result);
-			}
-			else
-			{
-				//do operation and change list
-				//std::cout << "priority operator : " << (*priority_it)->to_string() << std::endl;
+			//std::cout << "no more operator" << std::endl;
+			IValue *result = static_cast<IValue*>(copy_list.front()->get_value()->clone());
+			//clean_list_token(copy_list);
+			return (result);
+		}
+		else
+		{
+			IValue *result_operation = do_operation(priority_it);
+			*priority_it = std::make_unique<Token_value>(Token_value(result_operation));
 
-				IValue *result_operation = do_operation(priority_it);
-				//std::cout << "result computation : " << result_operation->to_string() << std::endl;
-				
-
-				delete *priority_it;
-				*priority_it = new Token_value(result_operation);
-
-				delete *std::next(priority_it);
-				delete *std::prev(priority_it);
-				copy_list.erase(std::next(priority_it));
-				copy_list.erase(std::prev(priority_it));
-				//comp_print_list_token(copy_list);
-			}
+			copy_list.erase(std::next(priority_it));
+			copy_list.erase(std::prev(priority_it));
 		}
 	}
-	catch(const std::exception& e)
-	{
-		clean_list_token(copy_list);
-		throw std::runtime_error(e.what());
-	}
-	clean_list_token(copy_list);
 	return (0);
 }

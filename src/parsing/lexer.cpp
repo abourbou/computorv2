@@ -31,24 +31,24 @@ size_t		find_first_separator(std::string cmd, size_t start)
 }
 
 //identify the type of value the str contain and transform it in pre_token
-IToken	*tokenize_value(std::string token_str)
+token_ptr	tokenize_value(std::string token_str)
 {
 	Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
 
 	if (token_str.empty())
 		throw(std::runtime_error("empty Token is not recognizable"));
 	if (token_str[0] == '(')
-		return (new Token_parenth(token_str));
+		return (std::make_unique<Token_parenth>(Token_parenth(token_str)));
 	else if (is_alpha(token_str))
 	{
 		if (!map_var.is_var(token_str))
-			return (new Token_variable(token_str));
-		return(new Token_value(token_str));
+			return (std::make_unique<Token_variable>(Token_variable(token_str)));
+		return(std::make_unique<Token_value>(Token_value(token_str)));
 	}
 	else if (token_str.find('(') != std::string::npos || token_str.find(')') != std::string::npos)
-		return (new Token_function(token_str));
+		return (std::make_unique<Token_function>(Token_function(token_str)));
 	else
-		return (new Token_value(token_str));
+		return (std::make_unique<Token_value>(Token_value(token_str)));
 }
 
 //parse the first value
@@ -78,7 +78,7 @@ void	clean_list_token(std::list<IToken*> list_tok)
 std::string lexer_first_operator(std::string &cmd)
 {
 	size_t end;
-	std::string pre_token_str;
+	std::string token_str;
 
 	end = find_first_separator(cmd, 0);
 	if (end)
@@ -88,13 +88,13 @@ std::string lexer_first_operator(std::string &cmd)
 		cmd = cmd.substr(2);
 		return("**");
 	}
-	pre_token_str = cmd.substr(0, 1);
+	token_str = cmd.substr(0, 1);
 	cmd = cmd.substr(1);
-	return(pre_token_str);
+	return(token_str);
 }
 
 //check if their is 2 values or 2 operators in row
-void	check_order_operator(const std::list<IToken*> &my_list)
+void	check_order_operator(const std::list<token_ptr> &my_list)
 {
 	bool	last_is_op;
 	bool	current_is_op;
@@ -114,7 +114,7 @@ void	check_order_operator(const std::list<IToken*> &my_list)
 
 //check the case of the front token is an operator
 //ex : -4 + 5 VALID && -x + 8 UNVALID
-void	check_front_operator(std::list<IToken *> &my_list)
+void	check_front_operator(std::list<token_ptr> &my_list)
 {
 	auto it_first = my_list.begin();
 	if ((*it_first)->get_type() == token_type::math_operator)
@@ -131,39 +131,33 @@ void	check_front_operator(std::list<IToken *> &my_list)
 		if (str_operator == "-")
 		{
 			IValue *opposite = Rational(-1) * (*it_second)->get_value();
-			delete *it_second;
-			*it_second = new Token_value(opposite);
+			*it_second = std::make_unique<Token_value>(Token_value(opposite)); //new Token_value(opposite);
 		}
 		//eliminate first operator
-		delete *it_first;
 		my_list.pop_front();
 	}
 }
 
 ///transform the computation command into a list of token
 /// tokens are operator, value, variable, function or parenthesis
-std::list<IToken*>	lexer(std::string cmd)
+std::list<token_ptr>	lexer(std::string cmd)
 {
-	std::list<IToken *>	my_list;
+	std::list<token_ptr>	my_list;
+	std::list<token_ptr>	ptr_list;
 	std::string		token_str;
 
-	try {
-		while (!cmd.empty())
-		{
-			token_str = lexer_first_value(cmd);
-			if (!token_str.empty())
-				my_list.push_back(tokenize_value(token_str));
-			token_str = lexer_first_operator(cmd);
-			if (!token_str.empty())
-				my_list.push_back(new Token_operator(token_str));
-		}
-		check_order_operator(my_list);
-		check_front_operator(my_list);
-	}
-	catch (const std::exception& e)
+	while (!cmd.empty())
 	{
-		clean_list_token(my_list);
-		throw(std::runtime_error(e.what()));
+		token_str = lexer_first_value(cmd);
+		if (!token_str.empty())
+			ptr_list.push_back(tokenize_value(token_str));
+			//my_list.push_back(tokenize_value(token_str));
+		token_str = lexer_first_operator(cmd);
+		if (!token_str.empty())
+			ptr_list.push_back(std::make_unique<Token_operator>(Token_operator(token_str)));
+			//my_list.push_back(new Token_operator(token_str));
 	}
-	return(my_list);
+	check_order_operator(ptr_list);
+	check_front_operator(ptr_list);
+	return(ptr_list);
 }

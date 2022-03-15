@@ -3,14 +3,13 @@
 #include <list>
 #include "IToken.hpp"
 #include "parsing.hpp"
-//#include "execution.hpp"
 
-std::list<IToken *>	lexer(std::string cmd);
+std::list<token_ptr>	lexer(std::string cmd);
 
 class Token_parenth : public IToken
 {
 	private:
-		std::list<IToken*>	_content;
+		std::list<token_ptr>	_content;
 
 	public:
 		Token_parenth(void) = delete;
@@ -21,7 +20,7 @@ class Token_parenth : public IToken
 
 		//methods
 		std::string	to_string(void) const;
-		const std::list<IToken*>	&get_content(void) const;
+		const std::list<token_ptr>	&get_content(void) const;
 		IToken	*clone(void) const;
 		const IValue	*get_value(void) const;
 };

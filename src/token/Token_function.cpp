@@ -44,18 +44,8 @@ const IValue *compute(std::string _fct, std::string _expr)
 	f = static_cast<const IFunction *>(buffer_var);
 
 	//get the value of the fct if it is a variable, call its value from the map
-	const IValue *value = expr_to_value(_expr);
-
-	const IValue *result;
-	try {
-		result = f->fct_computation(value);
-	}
-	catch(std::exception &e)
-	{
-		delete value;
-		throw(std::runtime_error(e.what()));
-	}
-	delete value;
+	std::shared_ptr<IValue> value(expr_to_value(_expr));
+	const IValue *result = f->fct_computation(value.get());
 	return(result);
 }
 

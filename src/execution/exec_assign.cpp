@@ -1,4 +1,5 @@
 
+#include <memory>
 #include "parsing.hpp"
 #include "string_function.hpp"
 #include "Comput_fct.hpp"
@@ -21,23 +22,11 @@ void	exec_assign_var(std::string line)
 	else if (!is_alpha(expr1))
 		throw(std::runtime_error("variable must only contain alphabetic characters"));
 
-	std::list<IToken *> list_token = lexer(expr2);
-	const IValue	*result = 0;
-	try {
-		result = computation(list_token);
-		Map_variable	&map = Singleton::GetInstance()->get_map_variable();
-		map.add_var(expr1, result);
-	}
-	catch (const std::exception& e)
-	{
-		clean_list_token(list_token);
-		if (result)
-			delete result;
-		throw std::runtime_error(e.what());
-	}
-	clean_list_token(list_token);
+	std::list<token_ptr> list_token = lexer(expr2);
+	std::shared_ptr<IValue>	result(computation(list_token));
+	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
+	map.add_var(expr1, result.get());
 	result->display();
-	delete result;
 }
 
 /**
@@ -66,20 +55,10 @@ void	exec_assign_fct(std::string line)
 		throw std::runtime_error("unvalid function syntax");
 	std::cout << "fct : [" << name_fct << "], var : [" << var_name << "], expr : [" << expr2 << "]" << std::endl;
 
-	IVariable *new_fct = 0;
-	try {
-		new_fct = new Comput_fct(var_name, expr2);
-		Map_variable	&map = Singleton::GetInstance()->get_map_variable();
-		map.add_var(name_fct, new_fct);
-		new_fct->display();
-	}
-	catch (const std::exception& e)
-	{
-		if (new_fct)
-			delete new_fct;
-		throw std::runtime_error(e.what());
-	}
-	delete new_fct;
+	std::shared_ptr<IVariable> new_fct(new Comput_fct(var_name, expr2));
+	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
+	map.add_var(name_fct, new_fct.get());
+	new_fct->display();
 }
 
 /**
@@ -90,20 +69,7 @@ void	exec_assign_fct(std::string line)
 void	exec_computation(std::string line)
 {
 	line = line.substr(0, line.size() - 2);
-	//std::cout << "line computation : {" << line << "}" << std::endl;
-	std::list<IToken *> list_tok = lexer(line);
-	const IValue *result = 0;
-	try {
-		result = computation(list_tok);
-		result->display();
-	}
-	catch (const std::exception& e)
-	{
-		if (result)
-			delete result;
-		clean_list_token(list_tok);
-		throw std::runtime_error(e.what());
-	}
-	delete result;
-	clean_list_token(list_tok);
+	std::list<token_ptr> list_tok = lexer(line);
+	std::unique_ptr<IValue> result(computation(list_tok));
+	result->display();
 }

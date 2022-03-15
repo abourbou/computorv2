@@ -12,15 +12,15 @@ Token_parenth::Token_parenth(std::string str): IToken(str, token_type::parenthes
 Token_parenth::Token_parenth(const Token_parenth &rhs): IToken(rhs._lit, token_type::parenthesis)
 {
 	for (auto it = rhs._content.begin(); it != rhs._content.end(); ++it)
-		_content.push_back((*it)->clone());
+		_content.push_back(token_ptr((*it)->clone()));
 }
 
 Token_parenth	&Token_parenth::operator=(const Token_parenth &rhs)
 {
-	for (auto it = _content.begin(); it != _content.end(); ++it)
-		delete *it;
+	// for (auto it = _content.begin(); it != _content.end(); ++it)
+	// 	delete *it;
 	for (auto it = rhs._content.begin(); it != rhs._content.end(); ++it)
-		_content.push_back((*it)->clone());
+		_content.push_back(token_ptr((*it)->clone()));
 	_lit = rhs._lit;
 
 	return(*this);
@@ -28,8 +28,8 @@ Token_parenth	&Token_parenth::operator=(const Token_parenth &rhs)
 
 Token_parenth::~Token_parenth()
 {
-	for (auto it = _content.begin(); it != _content.end(); ++it)
-		delete *it;
+	// for (auto it = _content.begin(); it != _content.end(); ++it)
+	// 	delete *it;
 }
 
 //methods
@@ -48,7 +48,7 @@ std::string	Token_parenth::to_string(void) const
 	return (ret);
 }
 
-const std::list<IToken *> &Token_parenth::get_content() const
+const std::list<token_ptr> &Token_parenth::get_content() const
 {
 	return (_content);
 }

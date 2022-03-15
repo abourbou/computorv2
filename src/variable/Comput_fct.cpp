@@ -18,7 +18,6 @@ Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 	{
 		if ((*it)->get_type() == token_type::variable && (*it)->to_string() != _var)
 		{
-			clean_list_token(_expr);
 			throw std::runtime_error("unknown variable in computable function");
 		}
 	}
@@ -27,23 +26,19 @@ Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 Comput_fct::Comput_fct(const Comput_fct &rhs): IFunction(), _var(rhs._var)
 {
 	for (auto it = rhs._expr.begin(); it != rhs._expr.end(); ++it)
-		_expr.push_back((*it)->clone());
+		_expr.push_back(token_ptr((*it)->clone()));
 }
 
 Comput_fct	&Comput_fct::operator=(const Comput_fct &rhs)
 {
 	this->_var = rhs._var;
-	for (auto it = _expr.begin(); it != _expr.end(); ++it)
-		delete *it;
 	for (auto it = rhs._expr.begin(); it != rhs._expr.end(); ++it)
-		_expr.push_back((*it)->clone());
+		_expr.push_back(token_ptr((*it)->clone()));
 
 	return(*this);
 }
 
 Comput_fct::~Comput_fct(void){
-	for (auto it = _expr.begin(); it != _expr.end(); ++it)
-		delete *it;
 }
 
 IVariable *Comput_fct::clone(void) const
@@ -59,7 +54,6 @@ IVariable *Comput_fct::clone(void) const
 std::string	Comput_fct::to_string(void) const
 {
 	std::string	ret = "";
-	//Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 
 	for (auto it = _expr.begin(); it != _expr.end(); ++it)
 	{
