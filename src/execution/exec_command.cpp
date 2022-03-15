@@ -2,6 +2,7 @@
 #include <parsing.hpp>
 #include "string_function.hpp"
 #include "singleton.hpp"
+#include "Map_variable.hpp"
 
 void	exec_command(std::string line)
 {
@@ -10,8 +11,12 @@ void	exec_command(std::string line)
 	to_upper(line);
 	if (line == "EXIT")
 		glob_var->set_exit(true);
-	else if (line == "HISTORY" || line == "CHANGLE-ANGLE-MOD"
-				|| line == "LIST-VARIABLE")
+	else if (line == "LIST-VARIABLE")
+	{
+		Map_variable &map = Singleton::GetInstance()->get_map_variable();
+		map.show_map();
+	}
+	else if (line == "HISTORY" || line == "CHANGLE-ANGLE-MOD")
 	{
 		std::cout << "This feature is not implemented yet" << std::endl;
 	}

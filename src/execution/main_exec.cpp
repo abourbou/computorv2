@@ -33,6 +33,8 @@ void	exec_task(Task task, std::string line)
 		exec_assign_var(line);
 	else if (task == Assign_func)
 		exec_assign_fct(line);
+	else if (task == Computation)
+		exec_computation(line);
 	else
 	{
 		std::cout << "Cannot executate task n" << task << " for now" << std::endl;

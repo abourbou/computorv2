@@ -1,8 +1,6 @@
 
 #include <list>
 #include <string>
-//TODO delete iostream
-#include <iostream>
 #include "IToken.hpp"
 #include "Token_operator.hpp"
 #include "IValue.hpp"
@@ -102,7 +100,7 @@ const IValue *computation(const std::list<IToken *> list_token)
 			{
 				//std::cout << "no more operator" << std::endl;
 				IValue *result = static_cast<IValue*>(copy_list.front()->get_value()->clone());
-				clean_lexer(copy_list);
+				clean_list_token(copy_list);
 				return (result);
 			}
 			else
@@ -127,9 +125,9 @@ const IValue *computation(const std::list<IToken *> list_token)
 	}
 	catch(const std::exception& e)
 	{
-		clean_lexer(copy_list);
+		clean_list_token(copy_list);
 		throw std::runtime_error(e.what());
 	}
-	clean_lexer(copy_list);
+	clean_list_token(copy_list);
 	return (0);
 }

@@ -2,7 +2,7 @@
 # Compilation
 NAME			=	computorv2
 CC				=	clang++
-FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++11
+FLAGS			=	-Wall -Werror -Wextra -Wshadow -std=c++17
 HEADER			=	-I$(PATH_INC) -I$(PATH_INC_VAR) -I$(PATH_INC_TOKEN) -I$(PATH_TEST)
 
 # Color Code and template code

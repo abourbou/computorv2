@@ -2,15 +2,19 @@
 #include "parsing.hpp"
 #include "string_function.hpp"
 #include "Comput_fct.hpp"
+#include "execution.hpp"
 
+/**
+ * @brief execute the assignation of a variable
+ *
+ * @param line
+ */
 void	exec_assign_var(std::string line)
 {
 	auto it_equal = find(line.begin(), line.end(), '=');
 
 	std::string expr1(line.begin(), it_equal);
 	std::string expr2(++it_equal, line.end());
-
-	//std::cout << "expr1 : [" << expr1 << "], expr2 : [" << expr2 << "]" << std::endl;
 
 	if (expr1.empty() || expr2.empty())
 		throw(std::runtime_error("empty expression"));
@@ -26,16 +30,21 @@ void	exec_assign_var(std::string line)
 	}
 	catch (const std::exception& e)
 	{
-		clean_lexer(list_token);
+		clean_list_token(list_token);
 		if (result)
 			delete result;
 		throw std::runtime_error(e.what());
 	}
-	clean_lexer(list_token);
+	clean_list_token(list_token);
 	result->display();
 	delete result;
 }
 
+/**
+ * @brief execute the assignation of a function
+ *
+ * @param line
+ */
 void	exec_assign_fct(std::string line)
 {
 	auto it_equal = find(line.begin(), line.end(), '=');
@@ -48,7 +57,7 @@ void	exec_assign_fct(std::string line)
 	if (start == std::string::npos || start == 0)
 		throw std::runtime_error("unvalid function syntax");
 	name_fct = expr1.substr(0, start);
-	
+
 	size_t end = expr1.find(")");
 	if (end == std::string::npos || end <= start + 1 || end != expr1.size() - 1)
 		throw std::runtime_error("unvalid function syntax");
@@ -71,4 +80,30 @@ void	exec_assign_fct(std::string line)
 		throw std::runtime_error(e.what());
 	}
 	delete new_fct;
+}
+
+/**
+ * @brief execute a computation
+ *
+ * @param line
+ */
+void	exec_computation(std::string line)
+{
+	line = line.substr(0, line.size() - 2);
+	//std::cout << "line computation : {" << line << "}" << std::endl;
+	std::list<IToken *> list_tok = lexer(line);
+	const IValue *result = 0;
+	try {
+		result = computation(list_tok);
+		result->display();
+	}
+	catch (const std::exception& e)
+	{
+		if (result)
+			delete result;
+		clean_list_token(list_tok);
+		throw std::runtime_error(e.what());
+	}
+	delete result;
+	clean_list_token(list_tok);
 }

@@ -67,8 +67,7 @@ std::string lexer_first_value(std::string &cmd)
 	return (pre_token_str);
 }
 
-//TODO change name to clean_list_token
-void	clean_lexer(std::list<IToken*> list_tok)
+void	clean_list_token(std::list<IToken*> list_tok)
 {
 	for (auto it = list_tok.begin(); it != list_tok.end(); ++it)
 		delete (*it);
@@ -163,7 +162,7 @@ std::list<IToken*>	lexer(std::string cmd)
 	}
 	catch (const std::exception& e)
 	{
-		clean_lexer(my_list);
+		clean_list_token(my_list);
 		throw(std::runtime_error(e.what()));
 	}
 	return(my_list);

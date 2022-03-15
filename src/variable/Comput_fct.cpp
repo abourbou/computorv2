@@ -18,7 +18,7 @@ Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 	{
 		if ((*it)->get_type() == token_type::variable && (*it)->to_string() != _var)
 		{
-			clean_lexer(_expr);
+			clean_list_token(_expr);
 			throw std::runtime_error("unknown variable in computable function");
 		}
 	}

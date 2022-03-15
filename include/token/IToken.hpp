@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 #include "IValue.hpp"
 
 enum class token_type
@@ -11,6 +12,9 @@ enum class token_type
 	parenthesis,
 	value,
 };
+
+class IToken;
+typedef std::unique_ptr<IToken> token_ptr;
 
 class	IToken {
 
