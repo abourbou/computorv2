@@ -24,7 +24,7 @@ Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 	}
 }
 
-Comput_fct::Comput_fct(const Comput_fct &rhs): IFunction(), _var(rhs._var)
+Comput_fct::Comput_fct(const Comput_fct &rhs): IFunction(rhs)
 {
 	for (const auto &token : rhs._expr)
 		_expr.push_back(token_ptr(token->clone()));

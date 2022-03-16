@@ -2,7 +2,7 @@
 
 #include "IToken.hpp"
 #include "IValue.hpp"
-#include "singleton.hpp"
+#include "Singleton.hpp"
 #include "string_function.hpp"
 #include "Rational.hpp"
 #include "Complex.hpp"

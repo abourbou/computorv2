@@ -4,7 +4,7 @@
 #include "Token_function.hpp"
 #include "Token_value.hpp"
 #include "Rational.hpp"
-#include "singleton.hpp"
+#include "Singleton.hpp"
 #include "Map_variable.hpp"
 #include "Explic_fct.hpp"
 

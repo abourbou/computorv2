@@ -23,7 +23,7 @@ PATH_TEST		=	test
 
 SRC_TEST		=	$(wildcard $(PATH_TEST)/*.cpp)
 
-SRC			=	$(addprefix $(PATH_SRC)/, main.cpp singleton.cpp)
+SRC			=	$(addprefix $(PATH_SRC)/, main.cpp Singleton.cpp)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.cpp=.o))
 
@@ -41,7 +41,7 @@ PATH_INC_VAR		=	include/variable
 PATH_INC_TOKEN		=	include/token
 
 INC_FILES		=	parsing.hpp math_utility.hpp string_function.hpp \
-				execution.hpp singleton.hpp
+				execution.hpp Singleton.hpp
 
 INC_VAR			=	Polyn_equation.hpp IValue.hpp IVariable.hpp \
 				Rational.hpp  Comput_fct.hpp Explic_fct.hpp \

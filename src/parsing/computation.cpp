@@ -84,7 +84,6 @@ IValue *computation(const std::list<token_ptr>& list_token)
 		{
 			//std::cout << "no more operator" << std::endl;
 			IValue *result = static_cast<IValue*>(copy_list.front()->get_value()->clone());
-			//clean_list_token(copy_list);
 			return (result);
 		}
 		else

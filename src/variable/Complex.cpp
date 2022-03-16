@@ -25,22 +25,16 @@ Complex::Complex(std::string str) : IValue(variable_type::complex)
 		this->_imag_part = std::stod(str, &pos) * sign;
 	pos = str.find_first_not_of(" \f\n\r\t\v", pos);
 	if (pos == std::string::npos || str[pos] != 'i'
-			|| str.find_first_not_of(" \f\n\r\t\v", pos + 1) != std::string::npos)
+		|| str.find_first_not_of(" \f\n\r\t\v", pos + 1) != std::string::npos)
 		throw(std::runtime_error("invalid string for Complex creation"));
-	if(_imag_part == 0)
-		throw(std::runtime_error("trying to create Complex number with real value"));
 }
 
 Complex::Complex(double real_part, double imag_part) : IValue(variable_type::complex), _real_part(real_part), _imag_part(imag_part)
 {
-	if(_imag_part == 0)
-		throw(std::runtime_error("trying to create Complex number with real value"));
 }
 
 Complex::Complex(const Complex &rhs): IValue(rhs), _real_part(rhs._real_part), _imag_part(rhs._imag_part)
 {
-	if(_imag_part == 0)
-		throw(std::runtime_error("trying to create Complex number with real value"));
 }
 
 Complex::~Complex(void){}
@@ -141,7 +135,7 @@ IValue *Complex::operator/(const IValue *rhs) const
 	{
 		r_var = static_cast<const Rational*>(rhs);
 		if (r_var->getvalue() == 0)
-			throw("cannot divide by zero");
+			throw std::runtime_error("cannot divide by zero");
 		real_part = this->_real_part / r_var->getvalue();
 		imag_part = this->_imag_part / r_var->getvalue();
 	}
@@ -183,21 +177,26 @@ std::string	Complex::to_string(void) const
 {
 	std::string str;
 
-	if (this->_real_part)
+	if (this->_real_part && this->_imag_part)
 	{
 		str += '(';
 		str += double_to_string(this->_real_part);
-		if (this->_imag_part > 0)
-			str += " + ";
-		else
-			str += " - ";
-		str += double_to_string(ft_abs(this->_imag_part));
-		str += "i)";
+		if (this->_imag_part)
+		{
+			if (this->_imag_part > 0)
+				str += " + ";
+			else
+				str += " - ";
+			str += double_to_string(ft_abs(this->_imag_part));
+			str += "i)";
+		}
 	}
 	else
 	{
-		str += double_to_string(this->_imag_part);
-		str += "i";
+		if (this->_imag_part != 1)
+			str += double_to_string(this->_imag_part);
+		if (this->_imag_part != 0)
+			str += "i";
 	}
 
 	return(str);

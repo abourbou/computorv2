@@ -3,7 +3,7 @@
 #include "IToken.hpp"
 #include "IValue.hpp"
 #include "parsing.hpp"
-#include "singleton.hpp"
+#include "Singleton.hpp"
 
 class Token_variable : public IToken
 {

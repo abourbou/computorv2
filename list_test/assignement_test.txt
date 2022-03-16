@@ -41,13 +41,12 @@ a = [[4]
 * calcul + value variable * => not really usefull to test complicated calcul, same as calculation
 *		 *    but type must be correctly assign
 a = 2 * 4.5 					=> 	a must be show and use as an integer
-b = 2 * [[4,5]] 				=> must be a Matrix
+b = 2 * [[4.5]] 				=> must be a Matrix
 a = 4 + i
 b = i - a; varC = b * [[1]]		=> must be -4 and be an integer so next computation mustn't be an error
 z = z + 2 						=> error
 i = 2
-f(a) = x then f = 3				=> don't allow it, it is too confusing to have var and function with the same name
-
+f(a) = x then f = 3
 
 
 
@@ -55,8 +54,8 @@ f(a) = x then f = 3				=> don't allow it, it is too confusing to have var and fu
 
 // assignment function //
 * simple *
-f(x) = 5 x
-f(W) = 5 * w - 2
+f(x) = 5 * x
+f(w) = 5 * w - 2
 f(x) = 4
 g(x) = varA - x					=> error, varA is not defined
 i(x) = 4x						=>error
@@ -70,7 +69,7 @@ g(x) = x ^2 - 4 / 3 + 3 % 5
 y = [[4, 2]]
 f(z) = z * y					=> must send z * [[4, 2]]
 f(z) =?
-f(x) = 2*x^5 + 4x^2 - 5*x + 4	=> must send 2 * x^5 + 4 * x^2 - 5*x + 4
+f(x) = 2*x^5 + 4 * x^2 - 5*x + 4	=> must send 2 * x^5 + 4 * x^2 - 5*x + 4
 funB(y) = 43 * y / (4 % 2 * y)	=> must send 43 * y / (4 % 2 * y)
 funA(x) = varA + varB * 4 - 1 / 2 + x	=> must send 238.5 + x
 f(x) = 3x - 1

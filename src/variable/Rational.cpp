@@ -139,9 +139,9 @@ IValue	*Rational::operator/(const IValue *rhs) const
 		a = this->_value;
 		c = c_var->get_realpart();
 		d = c_var->get_imagpart();
-		if (a == 0)
-			return(new Rational(0));
-		return(new Complex((a * c) / (c *c + d * d), ((- a * d) / (c *c + d * d))));
+		if (a == 0 || d == 0)
+			return(new Rational((a * c) / (c * c + d * d)));
+		return(new Complex((a * c) / (c * c + d * d), ((- a * d) / (c *c + d * d))));
 	}
 	else
 		throw(std::runtime_error("invalid type for division"));
@@ -161,7 +161,7 @@ IValue	*Rational::operator%(const IValue *rhs) const
 		a = this->_value;
 		b = r_var->_value;
 		if (b == 0)
-			throw("% 0 is undefined");
+			throw std::runtime_error("% 0 is undefined");
 		return(new Rational(a % b));
 	}
 	else
@@ -180,9 +180,12 @@ IValue	*Rational::operator^(const IValue *rhs) const
 			throw(std::runtime_error("^ operation with float is not implemented yet"));
 		else if (r_var->getvalue() < 0)
 			throw(std::runtime_error("^ operation with negatives number is not implemented yet"));
-		for(int i = r_var->_value; i > 0; --i)
-			result *= this->_value;
-		return(new Rational(result));
+		else
+		{
+			for(int i = r_var->_value; i > 0; --i)
+				result *= this->_value;
+			return(new Rational(result));
+		}
 	}
 	else
 		throw(std::runtime_error("invalid type for pow"));

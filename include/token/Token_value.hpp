@@ -6,7 +6,7 @@
 #include "Rational.hpp"
 #include "Complex.hpp"
 #include "Matrix.hpp"
-#include "singleton.hpp"
+#include "Singleton.hpp"
 
 class Token_value : public IToken
 {

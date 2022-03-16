@@ -6,26 +6,29 @@
 //return the pos of the separator or npos if not found
 size_t		find_first_separator(std::string cmd, size_t start)
 {
-	size_t	end = cmd.find_first_of("+-*/%^(", start);
+	size_t	end = cmd.find_first_of("+-*/%^([", start);
 
-	if (end == std::string::npos || cmd[end] != '(')
-		return(end);
-	else
+	if (cmd[end] == '(' || cmd[end] == '[')
 	{
-		size_t nbr_parenth = 1;
+		char car_begin = cmd[end];
+		char car_end = (car_begin == '(') ? ')' : ']';
+		size_t diff = 1;
 		size_t i = end + 1;
-		while (nbr_parenth && i < cmd.length())
+
+		while (diff && i < cmd.length())
 		{
-			if (cmd[i] == '(')
-				++nbr_parenth;
-			else if (cmd[i] == ')')
-				--nbr_parenth;
+			if (cmd[i] == car_begin)
+				++diff;
+			else if (cmd[i] == car_end)
+				--diff;
 			++i;
 		}
 		if (i >= cmd.length())
 			return i;
 		return (find_first_separator(cmd, i));
 	}
+	else
+		return(end);
 }
 
 //identify the type of value the str contain and transform it in pre_token
@@ -63,12 +66,6 @@ std::string lexer_first_value(std::string &cmd)
 	else
 		cmd = "";
 	return (pre_token_str);
-}
-
-void	clean_list_token(std::list<IToken*> list_tok)
-{
-	for (auto it = list_tok.begin(); it != list_tok.end(); ++it)
-		delete (*it);
 }
 
 //parse the first operator

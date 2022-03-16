@@ -32,8 +32,6 @@ Token_parenth	&Token_parenth::operator=(const Token_parenth &rhs)
 
 Token_parenth::~Token_parenth()
 {
-	// for (auto it = _content.begin(); it != _content.end(); ++it)
-	// 	delete *it;
 }
 
 //methods

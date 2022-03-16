@@ -1,7 +1,7 @@
 
 #include <parsing.hpp>
 #include "string_function.hpp"
-#include "singleton.hpp"
+#include "Singleton.hpp"
 #include "Map_variable.hpp"
 
 void	exec_command(std::string line)

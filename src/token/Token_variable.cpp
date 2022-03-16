@@ -1,7 +1,7 @@
 
 #include "Token_variable.hpp"
 #include "parsing.hpp"
-#include "singleton.hpp"
+#include "Singleton.hpp"
 #include "Map_variable.hpp"
 
 Token_variable::Token_variable(std::string str): IToken(str, token_type::variable)

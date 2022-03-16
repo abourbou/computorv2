@@ -1,7 +1,6 @@
 
 #include <memory>
 #include "parsing.hpp"
-#include "string_function.hpp"
 #include "Comput_fct.hpp"
 #include "execution.hpp"
 
@@ -54,25 +53,9 @@ void	exec_assign_fct(std::string line)
 	var_name = expr1.substr(start + 1, end - start - 1);
 	if (!is_alpha(var_name))
 		throw std::runtime_error("unvalid function syntax");
-	std::cout << "fct : [" << name_fct << "], var : [" << var_name << "], expr : [" << expr2 << "]" << std::endl;
 
 	std::shared_ptr<IVariable> new_fct(new Comput_fct(var_name, expr2));
 	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 	map.add_var(name_fct, new_fct.get());
 	new_fct->display();
-}
-
-/**
- * @brief execute a computation
- *
- * @param line
- */
-void	exec_computation(std::string line)
-{
-	line = line.substr(0, line.size() - 2);
-	//std::list<token_ptr> list_tok = lexer(line);
-	std::list<token_ptr>	list_tok;
-	lexer(line, list_tok);
-	std::unique_ptr<IValue> result(computation(list_tok));
-	result->display();
 }

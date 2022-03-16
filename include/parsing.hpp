@@ -20,11 +20,11 @@ enum Task {
 	Assign_var,
 	Assign_func,
 	Computation,
+	Get_variable,
 	Resolv_Polyn
 };
 
 std::string	regulate_string(std::string line);
 Task		find_task(std::string line);
 void		lexer(std::string cmd, std::list<token_ptr> &list_token);
-void		clean_list_token(std::list<IToken*> list_tok);
-IValue *computation(const std::list<token_ptr> &list_token);
+IValue		*computation(const std::list<token_ptr> &list_token);

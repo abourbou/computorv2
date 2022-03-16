@@ -1,3 +1,6 @@
+
+#include <string>
+#include "execution.hpp"
 #include "parsing.hpp"
 #include "string_function.hpp"
 
@@ -12,23 +15,15 @@ std::string	regulate_string(std::string line)
 {
 	std::string	allowed_symboles("+-*/%^()[],;=?.");
 
+	erase_white_space(line);
 	auto it = line.begin();
 	while (it < line.end())
 	{
 		char &c = *it;
-		if (!isalnum(c) && allowed_symboles.find(c) == std::string::npos && !isspace(c))
+		if (!isalnum(c) && allowed_symboles.find(c) == std::string::npos)
 			throw(std::runtime_error("Forbidden character"));
-		if (isspace(c) && it + 1 != line.end() && isspace(*(it + 1)))
-		{
-			auto start = it + 1;
-			auto end = it + 1;
-			while(end != line.end() && isspace(*end))
-				++end;
-			line.erase(start, end);
-		}
 		++it;
 	}
-	erase_white_space(line);
 	return(line);
 }
 
@@ -50,9 +45,11 @@ Task		find_task(std::string line)
 		auto it_equal = std::find(line.begin(), line.end(), '=');
 		if (nb_interrogation == 0)
 		{
+			//form f(x) = expr(x)
 			if (std::count(line.begin(), it_equal, '(' ) > 0 ||
 				std::count(line.begin(), it_equal, ')') > 0)
 				return(Assign_func);
+			//form a = computation
 			return(Assign_var);
 		}
 		else if (nb_interrogation == 1)
@@ -60,8 +57,20 @@ Task		find_task(std::string line)
 			auto it_interrog = std::find(line.begin(), line.end(), '?');
 			if (it_interrog + 1 != line.end())
 				throw(std::runtime_error("? symbol must be at the end of the command"));
+			//form expr1 =?
 			if (it_equal + 1 == it_interrog)
-				return (Computation);
+			{
+				std::string expr1 = line.substr(0, line.size() - 2);
+				if (is_alpha(expr1))
+					return(Get_variable);
+				for (char c : expr1)
+				{
+					if (!isalpha(c) && c != '(' && c != ')')
+						return (Computation);
+				}
+				return (Get_variable);
+			}
+			//form expr1 = expr2 ?
 			return (Resolv_Polyn);
 		}
 		throw(std::runtime_error("more than one question mark sign"));
@@ -71,4 +80,48 @@ Task		find_task(std::string line)
 		throw(std::runtime_error("More than one equal sign"));
 	}
 	return (Assign_func);
+}
+
+
+
+void	exec_line(std::string line)
+{
+	static std::string	list_task[] = {"command","variable assignation",
+						"function assignation", "computation",
+						"get variable", "polynom resolution"};
+	Task		n_task;
+	std::string current_task = "parsing";
+
+	try
+	{
+		line = regulate_string(line);
+		n_task = find_task(line);
+		current_task = list_task[n_task];
+		exec_task(n_task, line);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "Error in the " + current_task << std::endl;
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void	exec_task(Task task, std::string line)
+{
+	if (task == Command)
+		exec_command(line);
+	else if (task == Assign_var)
+		exec_assign_var(line);
+	else if (task == Assign_func)
+		exec_assign_fct(line);
+	else if (task == Computation)
+		exec_computation(line);
+	else if (task == Get_variable)
+		exec_get_var(line);
+	else if (task == Resolv_Polyn)
+		exec_polyn(line);
+	else
+	{
+		std::cout << "Cannot executate task n" << task << " for now" << std::endl;
+	}
 }

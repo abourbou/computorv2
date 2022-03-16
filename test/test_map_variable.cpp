@@ -1,6 +1,6 @@
 
 #include "Map_variable.hpp"
-#include "singleton.hpp"
+#include "Singleton.hpp"
 
 bool test_map_variable(void)
 {

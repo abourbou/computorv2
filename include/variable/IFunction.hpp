@@ -5,6 +5,9 @@
 
 class	IFunction: public IVariable
 {
+	protected:
+		std::string	_var;
+
 	public:
 		IFunction(void);
 		IFunction(const IFunction& rhs);
@@ -12,4 +15,5 @@ class	IFunction: public IVariable
 		~IFunction();
 
 		virtual const IValue	*fct_computation(const IValue *value) const = 0;
+		std::string		get_var(void) const;
 };

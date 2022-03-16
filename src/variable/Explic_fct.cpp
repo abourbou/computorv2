@@ -20,7 +20,7 @@ Explic_fct::~Explic_fct(void)
 
 std::string	Explic_fct::to_string(void) const
 {
-	return(_expr + '(' + "x" + ')');
+	return(_expr + '(' + _var + ')');
 }
 
 IVariable	*Explic_fct::clone(void) const

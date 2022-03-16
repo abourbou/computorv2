@@ -6,7 +6,7 @@
 #include "Map_variable.hpp"
 #include "test.hpp"
 #include "execution.hpp"
-#include "singleton.hpp"
+#include "Singleton.hpp"
 
 void signal_handler(int signal_num)
 {
