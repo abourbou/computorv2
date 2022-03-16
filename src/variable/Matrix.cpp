@@ -233,13 +233,31 @@ std::string	Matrix::to_string(void) const
 
 void	Matrix::display(void) const
 {
-	for (size_t i =0; i < _size[0]; ++i)
+	std::vector<size_t> max_size(_size[1], 0);
+	std::vector<std::vector<std::string> > vect_str(_size[0]);
+
+	//stock string and put the max_length of each line
+	for (size_t j = 0; j < _size[1]; ++j)
+	{
+		max_size[j] = 0;
+		for (size_t i = 0; i < _size[0]; ++i)
+		{
+			vect_str[i].push_back(double_to_string(_array[i][j]));
+			if (vect_str[i][j].size() > max_size[j])
+				max_size[j] = vect_str[i][j].size();
+		}
+	}
+	//rectify alignement for all
+	for (size_t j = 0; j < _size[1]; ++j)
+		for (size_t i = 0; i < _size[0]; ++i)
+			vect_str[i][j] = std::string(max_size[j] - vect_str[i][j].size(), ' ') + vect_str[i][j];
+	//display the matrix
+	for (size_t i = 0; i < _size[0]; ++i)
 	{
 		std::cout << '[';
 		for(size_t j = 0; j < _size[1]; ++j)
 		{
-			//std::cout << " i : " << i << ", j : " << j << std::endl;
-			std::cout << ' ' + double_to_string(_array[i][j]) + ' ';
+			std::cout << ' ' + vect_str[i][j];
 			if (j < _size[1] - 1)
 				std::cout << ',';
 		}
