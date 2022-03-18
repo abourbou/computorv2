@@ -87,7 +87,7 @@ IValue	*Rational::operator-(const IValue *rhs) const
 	else if (rhs->get_type() == variable_type::complex)
 	{
 		c_var = static_cast<const Complex *>(rhs);
-		return(*c_var - this);
+		return(new Complex(this->_value - c_var->get_realpart(), -1 * c_var->get_imagpart()));
 	}
 	else
 		throw(std::runtime_error("invalid type for substraction"));
@@ -165,7 +165,7 @@ IValue	*Rational::operator%(const IValue *rhs) const
 		return(new Rational(a % b));
 	}
 	else
-		throw(std::runtime_error("invalid type for modulus"));
+		throw(std::runtime_error("invalid type for modulo"));
 }
 
 IValue	*Rational::operator^(const IValue *rhs) const

@@ -6,7 +6,7 @@ Token_parenth::Token_parenth(std::string str): IToken(str, token_type::parenthes
 	if (str.length() < 3 || str.front() != '(' || str.back() != ')')
 		throw std::runtime_error("syntax error parenthesis");
 	std::string sstr = str.substr(1, str.length() - 2);
-	lexer(sstr, _content);
+	lexer_computation(sstr, _content);
 }
 
 Token_parenth::Token_parenth(const Token_parenth &rhs): IToken(rhs._lit, token_type::parenthesis)

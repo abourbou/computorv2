@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "string_function.hpp"
 #include "math_utility.hpp"
+#include "math_function.hpp"
 
 //Color off
 #define Color_Off "\033[0m"       // Text Reset

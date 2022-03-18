@@ -216,7 +216,6 @@ std::string	Matrix::to_string(void) const
 		str += '[';
 		for(size_t j = 0; j < _size[1]; ++j)
 		{
-			//std::cout << " i : " << i << ", j : " << j << std::endl;
 			str += ' ';
 			str += double_to_string(_array[i][j]);
 			str += ' ';

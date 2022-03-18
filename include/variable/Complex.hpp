@@ -2,6 +2,7 @@
 
 #include "IValue.hpp"
 #include "Rational.hpp"
+#include "math_function.hpp"
 #include <string>
 
 class Complex : public IValue

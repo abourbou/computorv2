@@ -22,7 +22,7 @@ void	exec_assign_var(std::string line)
 		throw(std::runtime_error("variable must only contain alphabetic characters"));
 
 	std::list<token_ptr> list_token;
-	lexer(expr2, list_token);
+	lexer_computation(expr2, list_token);
 	std::shared_ptr<IValue>	result(computation(list_token));
 	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 	map.add_var(expr1, result.get());

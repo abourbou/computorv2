@@ -14,6 +14,10 @@ Map_variable::Map_variable(void)
 	//const values
 	info_buffer = {"i", new Complex(0, 1), Reserved};
 	_map_var.insert(std::pair<std::string, t_info>("I", info_buffer));
+
+	//const function
+	info_buffer = {"sqrt", new Explic_fct("sqrt", fct_sqrt), Reserved};
+	_map_var.insert(std::pair<std::string, t_info>("SQRT", info_buffer));
 }
 
 Map_variable::~Map_variable(void)

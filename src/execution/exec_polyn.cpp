@@ -1,9 +1,11 @@
 
 #include <string>
 #include <iostream>
+#include "Polyn_equation.hpp"
 
 void	exec_polyn(std::string line)
 {
-	std::cout << "line in exec_polyn : [" << line << "]" << std::endl;
+	line.pop_back();
 
+	Polyn_Equation polyn(line);
 }

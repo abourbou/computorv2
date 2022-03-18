@@ -14,8 +14,6 @@ void	exec_get_var(std::string line)
 	if (is_alpha(line))
 	{
 		const IVariable *var = map.get_var(line);
-		if (var->get_type() == variable_type::function)
-			throw std::runtime_error(line + " is a function");
 		var->display();
 	}
 	else
@@ -28,11 +26,13 @@ void	exec_get_var(std::string line)
 
 		std::string fct_str = line.substr(0, pos_parenth);
 		std::string var = line.substr(pos_parenth + 1, pos_end - (pos_parenth + 1));
-		const IFunction *fct = dynamic_cast<const IFunction *>(map.get_var(fct_str));
-		if (!fct)
+		
+		const IVariable *value = map.get_var(fct_str);
+		if (value->get_type() != variable_type::function)
 			throw std::runtime_error(fct_str + " is a variable");
+		const IFunction *fct = static_cast<const IFunction *>(map.get_var(fct_str));
 		if (fct->get_var() != var)
-			throw std::runtime_error("unknown variable for the function");
+			throw std::runtime_error("unvalid argument for the function");
 		fct->display();
 	}
 }

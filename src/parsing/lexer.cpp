@@ -100,11 +100,11 @@ void	check_order_operator(const std::list<token_ptr> &my_list)
 	{
 		current_is_op = (*it)->get_type() == token_type::math_operator;
 		if (it != my_list.begin() && current_is_op == last_is_op)
-			throw(std::runtime_error("unvalid syntax in lexer"));
+			throw(std::runtime_error("unvalid syntax in lexer_computation"));
 		last_is_op = current_is_op;
 	}
 	if (last_is_op)
-		throw(std::runtime_error("unvalid syntax in lexer"));
+		throw(std::runtime_error("unvalid syntax in lexer_computation"));
 }
 
 //check the case of the front token is an operator
@@ -118,9 +118,9 @@ void	check_front_operator(std::list<token_ptr> &my_list)
 		std::string str_operator = (*it_first)->to_string();
 		auto it_second = ++my_list.begin();
 		if ((str_operator != "+" && str_operator != "-") || it_second == my_list.end())
-			throw(std::runtime_error("unvalid syntax in lexer"));
+			throw(std::runtime_error("unvalid syntax in lexer_computation"));
 		else if ((*it_second)->get_type() != token_type::value)
-			throw(std::runtime_error("unvalid syntax in lexer"));
+			throw(std::runtime_error("unvalid syntax in lexer_computation"));
 
 		//if negatif, inverse the values
 		if (str_operator == "-")
@@ -135,7 +135,7 @@ void	check_front_operator(std::list<token_ptr> &my_list)
 
 ///transform the computation command into a list of token
 /// tokens are operator, value, variable, function or parenthesis
-void	lexer(std::string cmd, std::list<token_ptr> &token_list)
+void	lexer_computation(std::string cmd, std::list<token_ptr> &token_list)
 {
 	std::string		token_str;
 
@@ -151,3 +151,4 @@ void	lexer(std::string cmd, std::list<token_ptr> &token_list)
 	check_order_operator(token_list);
 	check_front_operator(token_list);
 }
+

@@ -12,7 +12,7 @@
 Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 {
 	_var = var;
-	lexer(expr, _expr);
+	lexer_computation(expr, _expr);
 
 	//for (auto it = _expr.begin(); it != _expr.end(); ++it)
 	for (const auto &token : _expr)

@@ -31,6 +31,7 @@ OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.cpp=.o))
 include src/variable/Include.mk
 include src/execution/Include.mk
 include src/external_function/Include.mk
+include src/math_function/Include.mk
 include src/parsing/Include.mk
 include src/token/Include.mk
 include test/Include.mk

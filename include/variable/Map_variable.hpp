@@ -8,7 +8,9 @@
 #include "Rational.hpp"
 #include "Complex.hpp"
 #include "Matrix.hpp"
+#include "Explic_fct.hpp"
 #include "string_function.hpp"
+#include "math_function.hpp"
 
 /**
  * @brief tool to stock, change, show and return IVariable
