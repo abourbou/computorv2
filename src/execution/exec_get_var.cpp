@@ -8,7 +8,7 @@
 
 void	exec_get_var(std::string line)
 {
-	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
+	static Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 
 	line = line.substr(0, line.size() - 2);
 	if (is_alpha(line))

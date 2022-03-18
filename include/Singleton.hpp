@@ -14,14 +14,14 @@ class Singleton
 		static Singleton *pinstance_;
 		static std::mutex mutex_;
 
-	protected:
+	private:
 		Singleton(void) {}
 		~Singleton() {}
 
 		//var
 		bool exit = false;
 		Map_variable	my_map;
-		IValue		*Ans = 0;
+		bool		_is_radian = false;
 
 	public:
 		Singleton(Singleton &other) = delete;
@@ -31,5 +31,7 @@ class Singleton
 
 		bool	get_exit(void) const {return exit;}
 		void		set_exit(bool val) {exit = val;}
+		void		change_angle_mod(void);
+		bool		is_radian(void) const;
 		Map_variable &get_map_variable() {return my_map;}
 };

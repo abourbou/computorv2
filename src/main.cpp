@@ -16,7 +16,7 @@ void signal_handler(int signal_num)
 
 int	main(int argc, char **argv)
 {
-	Singleton	*glob_var = Singleton::GetInstance();
+	static Singleton	*glob_var = Singleton::GetInstance();
 	std::string	line;
 
 	signal(SIGINT, signal_handler);

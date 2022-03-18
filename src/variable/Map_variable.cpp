@@ -1,27 +1,33 @@
 
 #include "Map_variable.hpp"
 
+void	Map_variable::insert_var(std::string name, IVariable *var, type_secu_lvl lvl)
+{
+	std::string caps_name = name;
+	to_upper(caps_name);
+	t_info info_buffer = {name, var, lvl};
+
+	_map_var.insert(std::pair<std::string, t_info>(caps_name, info_buffer));
+}
+
 Map_variable::Map_variable(void)
 {
 	t_info info_buffer;
 
 	//forbidden values
-	info_buffer = {"exit", 0, Forbidden};
-	_map_var.insert(std::pair<std::string, t_info>("EXIT", info_buffer));
-	info_buffer = {"test", 0, Forbidden};
-	_map_var.insert(std::pair<std::string, t_info>("TEST", info_buffer));
+	insert_var("exit", 0, Forbidden);
+	insert_var("test", 0, Forbidden);
 
 	//const values
-	info_buffer = {"i", new Complex(0, 1), Reserved};
-	_map_var.insert(std::pair<std::string, t_info>("I", info_buffer));
-	info_buffer = {"pi", new Rational(3.14159265359), Reserved};
-	_map_var.insert(std::pair<std::string, t_info>("PI", info_buffer));
+	insert_var("i", new Complex(0, 1), Reserved);
+	insert_var("pi", new Rational(3.141592653), Reserved);
 
 	//const function
-	info_buffer = {"sqrt", new Explic_fct("sqrt", fct_sqrt), Reserved};
-	_map_var.insert(std::pair<std::string, t_info>("SQRT", info_buffer));
-	info_buffer = {"norm", new Explic_fct("norm", fct_norm), Reserved};
-	_map_var.insert(std::pair<std::string, t_info>("NORM", info_buffer));
+	insert_var("sqrt", new Explic_fct("sqrt", fct_sqrt), Reserved);
+	insert_var("norm", new Explic_fct("norm", fct_norm), Reserved);
+	insert_var("sin", new Explic_fct("sin", fct_sin), Reserved);
+	insert_var("cos", new Explic_fct("cos", fct_cos), Reserved);
+	insert_var("tan", new Explic_fct("tan", fct_tan), Reserved);
 }
 
 Map_variable::~Map_variable(void)

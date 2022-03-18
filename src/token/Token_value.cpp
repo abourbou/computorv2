@@ -3,7 +3,7 @@
 
 Token_value::Token_value(std::string str): IToken(str, token_type::value)
 {
-	Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
+	static Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
 
 	if (is_alpha(str))
 	{

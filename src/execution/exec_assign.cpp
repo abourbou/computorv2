@@ -12,6 +12,7 @@
 void	exec_assign_var(std::string line)
 {
 	auto it_equal = find(line.begin(), line.end(), '=');
+	static Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 
 	std::string expr1(line.begin(), it_equal);
 	std::string expr2(++it_equal, line.end());
@@ -24,7 +25,6 @@ void	exec_assign_var(std::string line)
 	std::list<token_ptr> list_token;
 	lexer_computation(expr2, list_token);
 	std::shared_ptr<IValue>	result(computation(list_token));
-	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 	map.add_var(expr1, result.get());
 	result->display();
 }
@@ -36,6 +36,7 @@ void	exec_assign_var(std::string line)
  */
 void	exec_assign_fct(std::string line)
 {
+	static Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 	auto it_equal = find(line.begin(), line.end(), '=');
 	std::string name_fct, var_name;
 	std::string expr1(line.begin(), it_equal);
@@ -55,7 +56,6 @@ void	exec_assign_fct(std::string line)
 		throw std::runtime_error("unvalid function syntax");
 
 	std::shared_ptr<IVariable> new_fct(new Comput_fct(var_name, expr2));
-	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 	map.add_var(name_fct, new_fct.get());
 	new_fct->display();
 }

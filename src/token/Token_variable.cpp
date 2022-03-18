@@ -30,7 +30,7 @@ IToken	*Token_variable::clone(void) const
 
 const IValue *Token_variable::get_value(void)
 {
-	Map_variable	&ref_map = Singleton::GetInstance()->get_map_variable();
+	static Map_variable	&ref_map = Singleton::GetInstance()->get_map_variable();
 	const IVariable	*buffer_variable;
 
 	buffer_variable = ref_map.get_var(_lit);

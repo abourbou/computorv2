@@ -4,7 +4,7 @@
 
 bool test_map_variable(void)
 {
-	Map_variable &map_test = Singleton::GetInstance()->get_map_variable();
+	static Map_variable &map_test = Singleton::GetInstance()->get_map_variable();
 	std::cout << std::endl << "********TEST MAP_VARIABLE********" << std::endl;
 	map_test.show_map();
 	std::cout << std::endl;

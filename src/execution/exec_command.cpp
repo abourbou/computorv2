@@ -6,21 +6,23 @@
 
 void	exec_command(std::string line)
 {
-	Singleton *glob_var = Singleton::GetInstance();
+	static Singleton *glob_var = Singleton::GetInstance();
+	static Map_variable &map = glob_var->get_map_variable();
 
 	to_upper(line);
 	if (line == "EXIT")
 		glob_var->set_exit(true);
 	else if (line == "LIST-VARIABLE")
-	{
-		Map_variable &map = Singleton::GetInstance()->get_map_variable();
 		map.show_map();
-	}
 	else if (line == "TEST")
 		std::cout << "this is a test command" << std::endl;
-	else if (line == "CHANGLE-ANGLE-MOD")
+	else if (line == "CHG-ANGLE-MOD")
 	{
-		std::cout << "This feature is not implemented yet" << std::endl;
+		glob_var->change_angle_mod();
+		if (glob_var->is_radian())
+			std::cout << "Angle is in radians now" << std::endl;
+		else
+			std::cout << "Angle is in degrees now" << std::endl;
 	}
 	else
 	{

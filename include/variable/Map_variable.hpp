@@ -28,6 +28,8 @@ class	Map_variable
 		}				t_info;
 		Map_variable(const Map_variable &rhs);
 		Map_variable &operator=(const Map_variable &rhs);
+		void	insert_var(std::string name, IVariable *var, type_secu_lvl lvl);
+
 
 	protected:
 		std::map<std::string, t_info>	_map_var;

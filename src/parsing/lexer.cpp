@@ -34,7 +34,7 @@ size_t		find_first_separator(std::string cmd, size_t start)
 //identify the type of value the str contain and transform it in pre_token
 token_ptr	tokenize_value(std::string token_str)
 {
-	Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
+	static Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
 
 	if (token_str.empty())
 		throw(std::runtime_error("empty Token is not recognizable"));

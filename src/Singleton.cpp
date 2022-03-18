@@ -18,3 +18,13 @@ Singleton *Singleton::GetInstance(void)
     }
     return pinstance_;
 }
+
+void	Singleton::change_angle_mod(void)
+{
+	_is_radian = !_is_radian;
+}
+
+bool	Singleton::is_radian() const
+{
+	return (_is_radian);
+}

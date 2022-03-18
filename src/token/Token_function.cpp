@@ -9,7 +9,7 @@
  */
 IValue	*expr_to_value(std::string expr)
 {
-	Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
+	static Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
 	const IVariable *buffer_var;
 
 	if (is_alpha(expr))
@@ -33,7 +33,7 @@ IValue	*expr_to_value(std::string expr)
  */
 const IValue *compute(std::string _fct, std::string _expr)
 {
-	Map_variable &map_var = Singleton::GetInstance()->get_map_variable();
+	static Map_variable &map_var = Singleton::GetInstance()->get_map_variable();
 	const IVariable	*buffer_var;
 	const IFunction *f;
 
@@ -57,7 +57,7 @@ const IValue *compute(std::string _fct, std::string _expr)
 Token_function::Token_function(std::string str): IToken(str, token_type::math_function)
 {
 	size_t start, end;
-	Map_variable &map = Singleton::GetInstance()->get_map_variable();
+	static Map_variable &map = Singleton::GetInstance()->get_map_variable();
 	std::string	_fct;
 	std::string	_expr;
 

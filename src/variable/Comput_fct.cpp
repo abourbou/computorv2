@@ -73,7 +73,7 @@ void	Comput_fct::display(void) const
 
 const IValue	*Comput_fct::fct_computation(const IValue *value) const
 {
-	Map_variable	&map = Singleton::GetInstance()->get_map_variable();
+	static Map_variable	&map = Singleton::GetInstance()->get_map_variable();
 
 	if (!map.is_var(_var))
 	{

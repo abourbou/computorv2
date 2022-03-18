@@ -47,8 +47,8 @@ void	test_operator(void)
 
 void test_variable()
 {
-	Singleton *glob_var = Singleton::GetInstance();
-	Map_variable	&map = glob_var->get_map_variable();
+	static Singleton *glob_var = Singleton::GetInstance();
+	static Map_variable	&map = glob_var->get_map_variable();
 
 	Complex *var1 = new Complex(2, 3);
 
@@ -81,7 +81,7 @@ IValue	*mult2(const IValue *var)
 
 void	test_function()
 {
-	Map_variable &map = Singleton::GetInstance()->get_map_variable();
+	static Map_variable &map = Singleton::GetInstance()->get_map_variable();
 	Rational	r(2);
 	Explic_fct	f("double", &mult2);
 

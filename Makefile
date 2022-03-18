@@ -42,7 +42,7 @@ PATH_INC_VAR		=	include/variable
 PATH_INC_TOKEN		=	include/token
 
 INC_FILES		=	parsing.hpp math_utility.hpp string_function.hpp \
-				execution.hpp Singleton.hpp
+				execution.hpp Singleton.hpp math_function.hpp
 
 INC_VAR			=	Polyn_equation.hpp IValue.hpp IVariable.hpp \
 				Rational.hpp  Comput_fct.hpp Explic_fct.hpp \
