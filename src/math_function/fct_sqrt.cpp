@@ -47,8 +47,8 @@ IValue	*fct_sqrt(const IValue *value)
 	if (value->get_type() == variable_type::rational)
 	{
 		const Rational *r = static_cast<const Rational*>(value);
-		return (new Rational(ft_sqrt(r->getvalue())));
+		return (new Rational(ft_sqrt(r->get_value())));
 	}
 	else
-		throw std::runtime_error("sqrt can only be done with rational");
+		throw std::runtime_error("invalid type for sqrt");
 }

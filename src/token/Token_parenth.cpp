@@ -32,6 +32,8 @@ Token_parenth	&Token_parenth::operator=(const Token_parenth &rhs)
 
 Token_parenth::~Token_parenth()
 {
+	if (_buffer_result)
+		delete _buffer_result;
 }
 
 //methods
@@ -60,7 +62,11 @@ IToken	*Token_parenth::clone(void) const
 	return(new Token_parenth(*this));
 }
 
-const IValue	*Token_parenth::get_value(void) const
+const IValue	*Token_parenth::get_value(void)
 {
-	return (computation(_content));
+	if (_buffer_result)
+		delete _buffer_result;
+	_buffer_result = computation(_content);
+
+	return (_buffer_result);
 }

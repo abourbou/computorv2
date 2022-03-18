@@ -10,3 +10,4 @@
 
 double		ft_sqrt(double number);
 IValue		*fct_sqrt(const IValue *value);
+IValue		*fct_norm(const IValue *value);

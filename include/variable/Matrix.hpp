@@ -38,6 +38,7 @@ class Matrix	: public IValue
 		virtual IVariable	*clone(void) const;
 		virtual std::string	to_string(void) const;
 		virtual void		display(void) const;
+		const std::vector<std::vector<double> >	&get_arr(void) const;
 };
 
 std::ostream	&operator<<(std::ostream &o, const Matrix &rhs);

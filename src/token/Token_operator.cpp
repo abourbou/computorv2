@@ -48,7 +48,7 @@ IToken	*Token_operator::clone(void) const
 	return(new Token_operator(*this));
 }
 
-const IValue	*Token_operator::get_value(void) const
+const IValue	*Token_operator::get_value(void)
 {
 	throw(std::runtime_error("operator token doesn't have value"));
 }

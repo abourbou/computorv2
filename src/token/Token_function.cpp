@@ -105,7 +105,7 @@ IToken	*Token_function::clone(void) const
 	return(new Token_function(*this));
 }
 
-const IValue	*Token_function::get_value(void) const
+const IValue	*Token_function::get_value(void)
 {
 	return (_result);
 }

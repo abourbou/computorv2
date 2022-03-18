@@ -27,6 +27,35 @@ std::string	regulate_string(std::string line)
 	return(line);
 }
 
+//determine if f(x) is a computation or getting the variable f
+Task	compt_or_getvar(std::string str)
+{
+	Map_variable &map = Singleton::GetInstance()->get_map_variable();
+	std::string var, fct;
+	size_t	start, end;
+
+	start = str.find("(");
+	if (start == std::string::npos || start == 0)
+		return (Computation);
+	fct = str.substr(0, start);
+	if (!map.is_var(fct))
+		throw std::runtime_error("unknown function");
+
+	//find expr
+	end = str.find(")");
+	if (end == std::string::npos || end <= start + 1 || end != str.size() - 1)
+		throw std::runtime_error("unvalid syntax");
+	var = str.substr(start + 1, end - start - 1);
+
+	const IVariable *Ivar = map.get_var(fct);
+	if (Ivar->get_type() != variable_type::function)
+		throw std::runtime_error("variable isn't a function");
+	const IFunction *Ifct = static_cast<const IFunction *>(Ivar);
+	if (Ifct->get_var() == var)
+		return (Get_variable);
+	return (Computation);
+}
+
 /**
  * @brief Find the task asked :
  * assignation, computation, resolution equation etc...
@@ -68,7 +97,8 @@ Task		find_task(std::string line)
 					if (!isalpha(c) && c != '(' && c != ')')
 						return (Computation);
 				}
-				return (Get_variable);
+				//form f(var) =?
+				return (compt_or_getvar(expr1));
 			}
 			//form expr1 = expr2 ?
 			return (Resolv_Polyn);
@@ -108,6 +138,11 @@ void	exec_line(std::string line)
 
 void	exec_task(Task task, std::string line)
 {
+	//TODO erase it
+	static std::string	list_task[] = {"command","variable assignation",
+						"function assignation", "computation",
+						"get variable", "polynom resolution"};
+	std::cout << "task : " << list_task[task] << std::endl;
 	if (task == Command)
 		exec_command(line);
 	else if (task == Assign_var)

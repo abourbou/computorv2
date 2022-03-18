@@ -16,7 +16,9 @@ void	exec_command(std::string line)
 		Map_variable &map = Singleton::GetInstance()->get_map_variable();
 		map.show_map();
 	}
-	else if (line == "HISTORY" || line == "CHANGLE-ANGLE-MOD")
+	else if (line == "TEST")
+		std::cout << "this is a test command" << std::endl;
+	else if (line == "CHANGLE-ANGLE-MOD")
 	{
 		std::cout << "This feature is not implemented yet" << std::endl;
 	}

@@ -171,7 +171,7 @@ IValue	*Matrix::operator*(const IValue *rhs) const
 		for (size_t i = 0; i < _size[0]; ++i)
 		{
 			for (size_t j = 0; j < _size[1]; ++j)
-				new_Matrix->_array[i][j] *= r_var->getvalue();
+				new_Matrix->_array[i][j] *= r_var->get_value();
 		}
 		return(new_Matrix);
 	}
@@ -262,6 +262,11 @@ void	Matrix::display(void) const
 		}
 		std::cout << ']' << std::endl;
 	}
+}
+
+const std::vector<std::vector<double> >	&Matrix::get_arr(void) const
+{
+	return (_array);
 }
 
 std::ostream	&operator<<(std::ostream &o, const Matrix &rhs)

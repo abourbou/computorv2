@@ -30,7 +30,7 @@ class Rational : public IValue
 		Rational &operator=(const Rational &rhs);
 
 		//getter - setter
-		double	getvalue(void) const;
+		double	get_value(void) const;
 
 		//math operations
 		virtual IValue *operator+(const IValue *rhs) const;

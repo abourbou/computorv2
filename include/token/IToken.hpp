@@ -35,5 +35,5 @@ class	IToken {
 		virtual std::string	to_string(void) const = 0;
 		virtual IToken		*clone(void) const = 0;
 		token_type		get_type(void) const;
-		virtual const IValue	*get_value(void) const = 0;
+		virtual const IValue	*get_value(void)= 0;
 };

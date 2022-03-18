@@ -57,7 +57,7 @@ IValue *Complex::operator+(const IValue *rhs) const
 	if (rhs->get_type() == variable_type::rational)
 	{
 		r_var = static_cast<const Rational*>(rhs);
-		real_part = this->_real_part + r_var->getvalue();
+		real_part = this->_real_part + r_var->get_value();
 		imag_part = this->_imag_part;
 	}
 	else if (rhs->get_type() == variable_type::complex)
@@ -83,7 +83,7 @@ IValue *Complex::operator-(const IValue *rhs) const
 	if (rhs->get_type() == variable_type::rational)
 	{
 		r_var = static_cast<const Rational*>(rhs);
-		real_part = this->_real_part - r_var->getvalue();
+		real_part = this->_real_part - r_var->get_value();
 		imag_part = this->_imag_part;
 	}
 	else if (rhs->get_type() == variable_type::complex)
@@ -108,8 +108,8 @@ IValue *Complex::operator*(const IValue *rhs) const
 	if (rhs->get_type() == variable_type::rational)
 	{
 		r_var = static_cast<const Rational*>(rhs);
-		real_part = this->_real_part * r_var->getvalue();
-		imag_part = this->_imag_part * r_var->getvalue();
+		real_part = this->_real_part * r_var->get_value();
+		imag_part = this->_imag_part * r_var->get_value();
 	}
 	else if (rhs->get_type() == variable_type::complex)
 	{
@@ -134,10 +134,10 @@ IValue *Complex::operator/(const IValue *rhs) const
 	if (rhs->get_type() == variable_type::complex)
 	{
 		r_var = static_cast<const Rational*>(rhs);
-		if (r_var->getvalue() == 0)
+		if (r_var->get_value() == 0)
 			throw std::runtime_error("cannot divide by zero");
-		real_part = this->_real_part / r_var->getvalue();
-		imag_part = this->_imag_part / r_var->getvalue();
+		real_part = this->_real_part / r_var->get_value();
+		imag_part = this->_imag_part / r_var->get_value();
 	}
 	else if (rhs->get_type() == variable_type::rational)
 	{

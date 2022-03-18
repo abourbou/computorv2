@@ -8,6 +8,7 @@ class Token_parenth : public IToken
 {
 	private:
 		std::list<token_ptr>	_content;
+		IValue *_buffer_result = 0;
 
 	public:
 		Token_parenth(void) = delete;
@@ -20,5 +21,5 @@ class Token_parenth : public IToken
 		std::string	to_string(void) const;
 		const std::list<token_ptr>	&get_content(void) const;
 		IToken	*clone(void) const;
-		const IValue	*get_value(void) const;
+		const IValue	*get_value(void);
 };

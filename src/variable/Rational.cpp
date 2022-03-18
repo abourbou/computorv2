@@ -49,7 +49,7 @@ Rational	&Rational::operator=(const Rational &rhs)
 }
 
 //getter - setter
-double	Rational::getvalue(void) const
+double	Rational::get_value(void) const
 {
 	return(this->_value);
 }
@@ -171,14 +171,14 @@ IValue	*Rational::operator%(const IValue *rhs) const
 IValue	*Rational::operator^(const IValue *rhs) const
 {
 	const Rational *r_var;
-	float result = 1;
+	double result = 1;
 
 	if (rhs->get_type() == variable_type::rational)
 	{
 		r_var = static_cast<const Rational*>(rhs);
 		if (!is_an_int(r_var->_value))
-			throw(std::runtime_error("^ operation with float is not implemented yet"));
-		else if (r_var->getvalue() < 0)
+			throw(std::runtime_error("^ operation with double is not implemented yet"));
+		else if (r_var->get_value() < 0)
 			throw(std::runtime_error("^ operation with negatives number is not implemented yet"));
 		else
 		{

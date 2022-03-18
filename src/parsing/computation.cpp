@@ -47,23 +47,9 @@ IValue *do_operation(std::list<token_ptr>::iterator priority_it)
 	IValue *result_operation = 0;
 
 	std::unique_ptr<Token_operator> operator_it(static_cast<Token_operator *>((*priority_it)->clone()));
-	try{
-		left_value = (*std::prev(priority_it))->get_value();
-		right_value = (*std::next(priority_it))->get_value();
-		result_operation = operator_it->operation(left_value, right_value);
-	}
-	catch(const std::exception& e)
-	{
-		if ((*std::prev(priority_it))->get_type() == token_type::parenthesis && left_value)
-			delete left_value;
-		if ((*std::next(priority_it))->get_type() == token_type::parenthesis && right_value)
-			delete right_value;
-		throw(std::runtime_error(e.what()));
-	}
-	if ((*std::prev(priority_it))->get_type() == token_type::parenthesis)
-		delete left_value;
-	if ((*std::next(priority_it))->get_type() == token_type::parenthesis)
-		delete right_value;
+	left_value = (*std::prev(priority_it))->get_value();
+	right_value = (*std::next(priority_it))->get_value();
+	result_operation = operator_it->operation(left_value, right_value);
 
 	return (result_operation);
 }
