@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <cmath>
 #include <algorithm>
 #include "IValue.hpp"
 #include "Complex.hpp"

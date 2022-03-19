@@ -21,6 +21,7 @@ Map_variable::Map_variable(void)
 	//const values
 	insert_var("i", new Complex(0, 1), Reserved);
 	insert_var("pi", new Rational(3.141592653), Reserved);
+	insert_var("e", new Rational(2.71828182846), Reserved);
 
 	//const function
 	insert_var("sqrt", new Explic_fct("sqrt", fct_sqrt), Reserved);
@@ -28,6 +29,9 @@ Map_variable::Map_variable(void)
 	insert_var("sin", new Explic_fct("sin", fct_sin), Reserved);
 	insert_var("cos", new Explic_fct("cos", fct_cos), Reserved);
 	insert_var("tan", new Explic_fct("tan", fct_tan), Reserved);
+	insert_var("exp", new Explic_fct("exp", fct_exp), Reserved);
+	insert_var("ln", new Explic_fct("ln", fct_ln), Reserved);
+	insert_var("log", new Explic_fct("log", fct_log), Reserved);
 }
 
 Map_variable::~Map_variable(void)

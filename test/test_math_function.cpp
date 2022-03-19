@@ -6,7 +6,12 @@ void	compare_true_function(std::string name_fct, double d, double (*true_fct)(do
 	double	true_f = true_fct(d);
 	double	mine_f = my_fct(d);
 
-	if (ft_abs(true_f - mine_f) <= 0.000005)
+	if (ft_abs((true_f - mine_f) / true_f) <= 0.000005)
+	{
+		std::cout << "OK" << std::endl;
+		return ;
+	}
+	else if (true_f == 0 && ft_abs(mine_f) <= 0.000005)
 	{
 		std::cout << "OK" << std::endl;
 		return ;
@@ -115,10 +120,80 @@ void	test_tan(void)
 	unit_test_tan(40);
 }
 
+void	unit_test_exp(double d) {compare_true_function("exp", d, exp, ft_exp);}
+
+void	test_exp(void)
+{
+	std::cout << "TEST EXP" << std::endl;
+	unit_test_exp(0);
+	unit_test_exp(1);
+	unit_test_exp(2);
+	unit_test_exp(10);
+	unit_test_exp(10.25);
+	unit_test_exp(10.5);
+	unit_test_exp(10.75);
+	unit_test_exp(15);
+	unit_test_exp(20);
+	unit_test_exp(25);
+	unit_test_exp(-1);
+	unit_test_exp(-2);
+	unit_test_exp(-10);
+	unit_test_exp(-20);
+	unit_test_exp(-25);
+}
+
+
+void	unit_test_ln(double d) {compare_true_function("ln", d, log, ft_ln);}
+
+void	test_ln(void)
+{
+	std::cout << "TEST LN" << std::endl;
+	try {ft_ln(-10); std::cout << "ERROR : NO EXCEPTION FOR NEGATIF NUMBER" << std::endl;}
+	catch (const std::exception& e){std::cout << "OK" << std::endl;}
+	unit_test_ln(0.0000003);
+	unit_test_ln(0.007);
+	unit_test_ln(1);
+	unit_test_ln(2);
+	unit_test_ln(10);
+	unit_test_ln(100);
+	unit_test_ln(150);
+	unit_test_ln(750);
+	unit_test_ln(1000);
+	unit_test_ln(20000);
+	unit_test_ln(250000);
+	unit_test_ln(500000);
+	unit_test_ln(25000000);
+}
+
+void	unit_test_log(double d) {compare_true_function("log", d, log10, ft_log);}
+
+void	test_log(void)
+{
+	std::cout << "TEST LOG" << std::endl;
+	try {ft_log(-10); std::cout << "ERROR : NO EXCEPTION FOR NEGATIF NUMBER" << std::endl;}
+	catch (const std::exception& e){std::cout << "OK" << std::endl;}
+	unit_test_log(0.0000003);
+	unit_test_log(0.007);
+	unit_test_log(1);
+	unit_test_log(2);
+	unit_test_log(10);
+	unit_test_log(100);
+	unit_test_log(150);
+	unit_test_log(750);
+	unit_test_log(1000);
+	unit_test_log(20000);
+	unit_test_log(250000);
+	unit_test_log(500000);
+	unit_test_log(25000000);
+}
+
 void test_math_function(void)
 {
 	test_sqrt();
 	test_cos();
 	test_sin();
 	test_tan();
+	test_exp();
+	test_ln();
+	test_log();
 }
