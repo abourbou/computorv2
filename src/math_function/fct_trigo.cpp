@@ -1,5 +1,4 @@
 
-#include<cmath>
 #include "math_function.hpp"
 #include "Singleton.hpp"
 
@@ -30,7 +29,9 @@ double	ft_sin(double nb)
 	else
 	{
 		nb = nb * PI / 180;
-		return (nb - nb*nb*nb/6 + nb*nb*nb*nb*nb/120 - nb*nb*nb*nb*nb*nb*nb/5040);
+		double nb_sqr = nb * nb;
+		double nb_quad = nb_sqr * nb_sqr;
+		return (nb - nb*nb_sqr/6 + nb_quad*nb/120 - nb*nb_sqr*nb_quad/5040);
 	}
 	//developpement limité : x - x^3 / 6 + x ^ 5 / 120 - x ^7 / 5040
 }
@@ -62,7 +63,9 @@ double	ft_cos(double nb)
 	else
 	{
 		nb = nb * PI / 180;
-		return (1 - nb*nb / 2 + nb*nb*nb*nb / 24 - nb*nb*nb*nb*nb*nb / 720);
+		double nb_sqr = nb * nb;
+		double nb_quad = nb_sqr * nb_sqr;
+		return (1 - nb_sqr / 2 + nb_quad / 24 - nb_sqr * nb_quad / 720);
 	}
 	//developpement limité 1 - x^2/2 + x^4/24 - x^6/720
 }
@@ -119,7 +122,7 @@ IValue	*fct_tan(const IValue *var)
 		if (glob_var->is_radian())
 			value = value * RAD_TO_DEG;
 		double result = ft_tan(value);
-		if (!std::isfinite(result))
+		if (result == INF || result == NINF)
 			throw std::runtime_error("tan is not defined");
 		return (new Rational(result));
 	}
