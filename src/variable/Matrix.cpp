@@ -256,7 +256,9 @@ void	Matrix::display(void) const
 		std::cout << '[';
 		for(size_t j = 0; j < _size[1]; ++j)
 		{
-			std::cout << ' ' + vect_str[i][j];
+			if (j != 0)
+				std::cout << ' ';
+			std::cout << vect_str[i][j];
 			if (j < _size[1] - 1)
 				std::cout << ',';
 		}

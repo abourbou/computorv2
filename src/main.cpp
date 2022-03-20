@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	// test_syntax();
 	//test_token();
 	//test_value();
-	test_math_function();
+	//test_math_function();
 	//TEST
 
 	if (argc == 2)

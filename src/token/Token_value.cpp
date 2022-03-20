@@ -15,7 +15,16 @@ Token_value::Token_value(std::string str): IToken(str, token_type::value)
 	else if (str.find('[') != std::string::npos || str.find(']') != std::string::npos)
 		_value = new Matrix(str);
 	else if (str.back() == 'i')
+	{
 		_value = new Complex(str);
+		const Complex *c = static_cast<const Complex *>(_value);
+		if (c->get_imagpart() == 0)
+		{
+			double real_val = c->get_realpart();
+			delete _value;
+			_value = new Rational(real_val);
+		}
+	}
 	else
 		_value = new Rational(str);
 	_lit = _value->to_string();

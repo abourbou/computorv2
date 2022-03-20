@@ -168,6 +168,13 @@ double		Complex::get_imagpart(void) const
 	return(this->_imag_part);
 }
 
+bool		Complex::need_parenth(void) const
+{
+	if (_real_part != 0 && _imag_part != 0)
+		return true;
+	return false;
+}
+
 IVariable *Complex::clone(void) const
 {
 	return (new Complex(*this));
@@ -179,7 +186,6 @@ std::string	Complex::to_string(void) const
 
 	if (this->_real_part && this->_imag_part)
 	{
-		str += '(';
 		str += double_to_string(this->_real_part);
 		if (this->_imag_part)
 		{
@@ -188,7 +194,7 @@ std::string	Complex::to_string(void) const
 			else
 				str += " - ";
 			str += double_to_string(ft_abs(this->_imag_part));
-			str += "i)";
+			str += "i";
 		}
 	}
 	else

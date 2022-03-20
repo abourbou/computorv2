@@ -61,7 +61,19 @@ std::string	Comput_fct::to_string(void) const
 	{
 		if (it != _expr.begin())
 			ret += " ";
-		ret += (*it)->to_string();
+		if (_expr.size() > 1 && (*it)->get_type() == token_type::value
+			&& (*it)->get_value()->get_type() == variable_type::complex)
+		{
+			const Complex *c = static_cast<const Complex *>((*it)->get_value());
+			if (c->need_parenth())
+				ret += "(";
+			ret += (*it)->to_string();
+			if (c->need_parenth())
+				ret += ")";
+		}
+		else
+			ret += (*it)->to_string();
+
 	}
 	return(ret);
 }

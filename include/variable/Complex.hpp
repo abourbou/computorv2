@@ -33,6 +33,7 @@ class Complex : public IValue
 		//members
 		double			get_realpart(void) const;
 		double			get_imagpart(void) const;
+		bool			need_parenth(void) const;
 		virtual IVariable	*clone(void) const;
 		virtual std::string	to_string(void) const;
 		virtual void		display(void) const;
