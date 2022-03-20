@@ -1,5 +1,6 @@
 #pragma once
 
+#include <list>
 #include "IToken.hpp"
 #include "IValue.hpp"
 #include "Singleton.hpp"
@@ -9,6 +10,7 @@
 #include "Matrix.hpp"
 #include "Explic_fct.hpp"
 #include "IFunction.hpp"
+#include "parsing.hpp"
 
 /**
  * @brief Token_function token with [fct(var / expr)]

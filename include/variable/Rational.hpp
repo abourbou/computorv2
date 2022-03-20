@@ -7,6 +7,7 @@
 #include "Matrix.hpp"
 #include "math_utility.hpp"
 #include "string_function.hpp"
+#include "math_function.hpp"
 
 class Matrix;
 

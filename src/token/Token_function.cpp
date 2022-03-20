@@ -9,21 +9,10 @@
  */
 IValue	*expr_to_value(std::string expr)
 {
-	static Map_variable	&map_var = Singleton::GetInstance()->get_map_variable();
-	const IVariable *buffer_var;
+	std::list<token_ptr> token_list;
+	lexer_computation(expr, token_list);
 
-	if (is_alpha(expr))
-	{
-		buffer_var = map_var.get_var(expr);
-		if (buffer_var->get_type() == variable_type::function)
-			throw(std::runtime_error("expression in the function must not be a function"));
-		return (static_cast<IValue*>(buffer_var->clone()));
-	}
-	else if (expr.find('[') != std::string::npos || expr.find(']') != std::string::npos)
-		return(new Matrix(expr));
-	else if (expr.find('i') != std::string::npos)
-		return(new Complex(expr));
-	return (new Rational(expr));
+	return (computation(token_list));
 }
 
 /**
@@ -43,7 +32,7 @@ const IValue *compute(std::string _fct, std::string _expr)
 		throw(std::runtime_error("the function isn't a function"));
 	f = static_cast<const IFunction *>(buffer_var);
 
-	//get the value of the fct if it is a variable, call its value from the map
+	//get the value of the fct
 	std::shared_ptr<IValue> value(expr_to_value(_expr));
 	const IValue *result = f->fct_computation(value.get());
 	return(result);
@@ -70,7 +59,7 @@ Token_function::Token_function(std::string str): IToken(str, token_type::math_fu
 		throw std::runtime_error("unknown function in function token");
 
 	//find expr
-	end = str.find(")");
+	end = str.find_last_of(")");
 	if (end == std::string::npos || end <= start + 1 || end != str.size() - 1)
 		throw std::runtime_error("unvalid function syntax");
 	_expr = str.substr(start + 1, end - start - 1);

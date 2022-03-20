@@ -48,7 +48,7 @@ void	exec_assign_fct(std::string line)
 		throw std::runtime_error("unvalid function syntax");
 	name_fct = expr1.substr(0, start);
 
-	size_t end = expr1.find(")");
+	size_t end = expr1.find_last_of(")");
 	if (end == std::string::npos || end <= start + 1 || end != expr1.size() - 1)
 		throw std::runtime_error("unvalid function syntax");
 	var_name = expr1.substr(start + 1, end - start - 1);

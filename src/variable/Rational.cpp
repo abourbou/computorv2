@@ -176,16 +176,14 @@ IValue	*Rational::operator^(const IValue *rhs) const
 	if (rhs->get_type() == variable_type::rational)
 	{
 		r_var = static_cast<const Rational*>(rhs);
-		if (!is_an_int(r_var->_value))
-			throw(std::runtime_error("^ operation with double is not implemented yet"));
-		else if (r_var->get_value() < 0)
-			throw(std::runtime_error("^ operation with negatives number is not implemented yet"));
-		else
+		if (is_an_int(r_var->_value) && r_var->_value > 0)
 		{
 			for(int i = r_var->_value; i > 0; --i)
 				result *= this->_value;
 			return(new Rational(result));
 		}
+		else
+			return (new Rational(ft_exp(r_var->_value * ft_ln(_value))));
 	}
 	else
 		throw(std::runtime_error("invalid type for pow"));
