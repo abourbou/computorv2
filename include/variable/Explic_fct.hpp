@@ -29,5 +29,4 @@ class Explic_fct: public IFunction
 		std::string			to_string(void) const;
 		virtual IVariable	*clone(void) const;
 		const IValue		*fct_computation(const IValue *value) const;
-		virtual void		display(void) const;
 };

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <stdexcept>
+#include <iostream>
 #include "IVariable.hpp"
 
 class	IValue : public IVariable
@@ -21,6 +22,9 @@ class	IValue : public IVariable
 		virtual IValue *operator%(const IValue *rhs) const;
 		virtual IValue *operator^(const IValue *rhs) const;
 		virtual IValue *Matrix_mult(const IValue *rhs) const;
+
+	//methods
+		virtual void		display(void) const;
 };
 
 std::ostream	&operator<<(std::ostream &o, const IValue &rhs);

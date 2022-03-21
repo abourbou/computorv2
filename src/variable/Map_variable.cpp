@@ -50,19 +50,19 @@ void	Map_variable::add_var(std::string name, const IVariable *pvar)
 	to_upper(caps_name);
 
 	if (!is_alpha(name))
-		throw(std::runtime_error("Variable must be only alphabetic caracters"));
+		throw(std::runtime_error("variable must be only alphabetic caracters"));
 	auto it = _map_var.find(caps_name);
 	if (it != _map_var.end())
 	{
 		if (it->second.secu_lvl == Forbidden)
 		{
 			delete buffer_info.var;
-			throw(std::runtime_error("Forbidden name for variable"));
+			throw(std::runtime_error("forbidden name for variable"));
 		}
 		else if (it->second.secu_lvl == Reserved)
 		{
 			delete buffer_info.var;
-			throw(std::runtime_error("Reserved name for variable"));
+			throw(std::runtime_error("reserved name for variable"));
 		}
 		else
 		{
@@ -89,18 +89,20 @@ void	Map_variable::remove_var(std::string name)
 
 const IVariable *Map_variable::get_var(std::string name) const
 {
+	if (name.empty())
+		throw std::runtime_error("empty variable");
 	if (!is_alpha(name))
-		throw(std::runtime_error("Variable must be only alphabetic caracters"));
+		throw(std::runtime_error("variable must be only alphabetic caracters"));
 	to_upper(name);
 	auto it = _map_var.find(name);
 	if (it != _map_var.end())
 	{
 		if (it->second.secu_lvl == Forbidden)
-			throw(std::runtime_error("Forbidden name for variable"));
+			throw(std::runtime_error("forbidden name for variable"));
 		return(it->second.var);
 	}
 	else
-		throw(std::runtime_error("Unknow variable"));
+		throw(std::runtime_error("unknow variable"));
 }
 
 /**
@@ -112,7 +114,7 @@ const IVariable *Map_variable::get_var(std::string name) const
 bool		Map_variable::is_var(std::string name) const
 {
 	if (!is_alpha(name))
-		throw(std::runtime_error("Variable must be only alphabetic caracters"));
+		throw(std::runtime_error("variable must be only alphabetic caracters"));
 	to_upper(name);
 	auto it = _map_var.find(name);
 	if (it != _map_var.end())
@@ -130,8 +132,12 @@ void	Map_variable::show_map(void) const
 	{
 		if (it->second.secu_lvl != Forbidden)
 		{
-			std::cout << it->second.name << " : " << it->second.var->to_string();
-			std::cout << std::endl;
+			std::cout << BWhite << it->second.name << "\t" Color_Off;
+			if (it->second.var->get_type() == variable_type::function)
+				std::cout<< BBlue;
+			else
+				std::cout << BYellow;
+			std::cout << it->second.var->to_string() << Color_Off << std::endl;
 		}
 	}
 }

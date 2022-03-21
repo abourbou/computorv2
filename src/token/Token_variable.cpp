@@ -35,6 +35,6 @@ const IValue *Token_variable::get_value(void)
 
 	buffer_variable = ref_map.get_var(_lit);
 	if (buffer_variable->get_type() == variable_type::function)
-		throw(std::runtime_error("error : variable must be a value not a function"));
+		throw(std::runtime_error("value is used as a function"));
 	return(static_cast<const IValue *>(buffer_variable));
 }

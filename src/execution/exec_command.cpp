@@ -15,17 +15,15 @@ void	exec_command(std::string line)
 	else if (line == "LIST-VARIABLE")
 		map.show_map();
 	else if (line == "TEST")
-		std::cout << "this is a test command" << std::endl;
+		std::cout << BGreen "this is a test command" Color_Off << std::endl;
 	else if (line == "CHG-ANGLE-MOD")
 	{
 		glob_var->change_angle_mod();
 		if (glob_var->is_radian())
-			std::cout << "Angle is in radians now" << std::endl;
+			std::cout << BWhite "Angle is in radians now" Color_Off << std::endl;
 		else
-			std::cout << "Angle is in degrees now" << std::endl;
+			std::cout << BWhite "Angle is in degrees now" Color_Off << std::endl;
 	}
 	else
-	{
-		throw(std::runtime_error("Unvalid command"));
-	}
+		throw std::runtime_error("unknown command");
 }

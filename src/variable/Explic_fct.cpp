@@ -32,8 +32,3 @@ const IValue	*Explic_fct::fct_computation(const IValue *value) const
 {
 	return(_f(value));
 }
-
-void	Explic_fct::display(void) const
-{
-	std::cout << this->to_string();
-}

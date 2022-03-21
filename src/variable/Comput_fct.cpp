@@ -12,15 +12,12 @@
 Comput_fct::Comput_fct(std::string var, std::string expr) : IFunction()
 {
 	_var = var;
-	lexer_computation(expr, _expr);
+	lexer(expr, _expr);
 
-	//for (auto it = _expr.begin(); it != _expr.end(); ++it)
 	for (const auto &token : _expr)
 	{
 		if (token->get_type() == token_type::variable && token->to_string() != _var)
-		{
-			throw std::runtime_error("unknown variable in computable function");
-		}
+			throw std::runtime_error("unknown variable");
 	}
 }
 
@@ -76,11 +73,6 @@ std::string	Comput_fct::to_string(void) const
 
 	}
 	return(ret);
-}
-
-void	Comput_fct::display(void) const
-{
-	std::cout << this->to_string() << std::endl;
 }
 
 const IValue	*Comput_fct::fct_computation(const IValue *value) const

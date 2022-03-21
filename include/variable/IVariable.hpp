@@ -2,6 +2,7 @@
 
 #include <string>
 #include <stdexcept>
+#include "color_code.hpp"
 
 enum class variable_type
 {

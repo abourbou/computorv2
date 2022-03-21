@@ -68,7 +68,6 @@ IValue *computation(const std::list<token_ptr>& list_token)
 		std::list<token_ptr>::iterator	priority_it = find_priority_operator(copy_list);
 		if (priority_it == copy_list.end())
 		{
-			//std::cout << "no more operator" << std::endl;
 			IValue *result = static_cast<IValue*>(copy_list.front()->get_value()->clone());
 			return (result);
 		}

@@ -7,6 +7,7 @@
 #include "test.hpp"
 #include "execution.hpp"
 #include "Singleton.hpp"
+#include "color_code.hpp"
 
 void signal_handler(int signal_num)
 {
@@ -49,7 +50,8 @@ int	main(int argc, char **argv)
 		return(0);
 	}
 
-	std::cout << "Welcome to computorv2!" << std::endl << std::endl;
+	std::cout << "Welcome to computorv2!" << std::endl;
+	std::cout << "Type " Yellow "help" Color_Off " to understand what the program can do" << std::endl << std::endl;
 	while(!glob_var->get_exit())
 	{
 		std::cout << "> ";

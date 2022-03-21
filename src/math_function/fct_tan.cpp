@@ -23,7 +23,7 @@ IValue	*fct_tan(const IValue *var)
 			value = value * RAD_TO_DEG;
 		double result = ft_tan(value);
 		if (result == INF || result == NINF)
-			throw std::runtime_error("tan is not defined");
+			throw std::runtime_error("tan is not defined for this value");
 		return (new Rational(result));
 	}
 	else

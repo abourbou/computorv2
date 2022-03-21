@@ -18,7 +18,7 @@ Complex::Complex(std::string str) : IValue(variable_type::complex)
 	if (str[pos] == '+' || str[pos] == '-')
 		++pos;
 	if (pos == std::string::npos || (!isdigit(str[pos]) && str[pos] != 'i'))
-		throw(std::runtime_error("invalid string for Complex creation"));
+		throw(std::runtime_error("syntax error complex"));
 	this->_real_part = 0;
 	this->_imag_part = 1 * sign;
 	if (str[pos] != 'i')
@@ -26,7 +26,7 @@ Complex::Complex(std::string str) : IValue(variable_type::complex)
 	pos = str.find_first_not_of(" \f\n\r\t\v", pos);
 	if (pos == std::string::npos || str[pos] != 'i'
 		|| str.find_first_not_of(" \f\n\r\t\v", pos + 1) != std::string::npos)
-		throw(std::runtime_error("invalid string for Complex creation"));
+		throw(std::runtime_error("syntax error complex"));
 }
 
 Complex::Complex(double real_part, double imag_part) : IValue(variable_type::complex), _real_part(real_part), _imag_part(imag_part)
@@ -123,6 +123,7 @@ IValue *Complex::operator*(const IValue *rhs) const
 		return(new Rational(real_part));
 	return(new Complex(real_part, imag_part));
 }
+
 IValue *Complex::operator/(const IValue *rhs) const
 {
 	const Rational	*r_var;
@@ -207,12 +208,6 @@ std::string	Complex::to_string(void) const
 
 	return(str);
 }
-
-void		Complex::display(void) const
-{
-	std::cout << this->to_string() << std::endl;
-}
-
 
 std::ostream	&operator<<(std::ostream &o, const Complex &rhs)
 {

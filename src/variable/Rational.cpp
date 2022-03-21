@@ -16,7 +16,7 @@ Rational::Rational(std::string str) : IValue(variable_type::rational)
 	for	(auto it = str.end(); std::isspace(*it); --it)
 		--length;
 	if (length == 0)
-		throw(std::runtime_error("empty string"));
+		throw(std::runtime_error("invalid rational"));
 	idx = str.find_first_not_of(" \f\n\r\t\v");
 	if (!isdigit(str[idx]) && str[idx] != '+' && str[idx] != '-')
 		throw(std::runtime_error("invalid rational"));
@@ -198,11 +198,6 @@ IVariable		*Rational::clone(void) const
 std::string	Rational::to_string(void) const
 {
 	return(double_to_string(this->_value));
-}
-
-void		Rational::display(void) const
-{
-	std::cout << this->to_string() << std::endl;
 }
 
 std::ostream	&operator<<(std::ostream &o, const Rational &rhs)

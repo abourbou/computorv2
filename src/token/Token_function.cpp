@@ -10,7 +10,7 @@
 IValue	*expr_to_value(std::string expr)
 {
 	std::list<token_ptr> token_list;
-	lexer_computation(expr, token_list);
+	lexer(expr, token_list);
 
 	return (computation(token_list));
 }
@@ -29,7 +29,7 @@ const IValue *compute(std::string _fct, std::string _expr)
 	//get the fct from the map
 	buffer_var = map_var.get_var(_fct);
 	if (buffer_var->get_type() != variable_type::function)
-		throw(std::runtime_error("the function isn't a function"));
+		throw(std::runtime_error("value is used as a function"));
 	f = static_cast<const IFunction *>(buffer_var);
 
 	//get the value of the fct

@@ -20,7 +20,7 @@ double ft_sqrt(double number)
 	if (is_zero(number))
 		return(0);
 	if (is_less(number, 0))
-	      throw std::domain_error("Can't calculate negative square");
+	      throw std::domain_error("sqrt is not defined for negative values");
 	while (number > buffer)
 	{
 		buffer *= 100;

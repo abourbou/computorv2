@@ -9,7 +9,7 @@ Token_value::Token_value(std::string str): IToken(str, token_type::value)
 	{
 		const IVariable	*var = map_var.get_var(str);
 		if (var->get_type() == variable_type::function)
-			throw std::runtime_error("cannot use a function as a value");
+			throw std::runtime_error("function is used as a value");
 		_value = static_cast<IValue*>(var->clone());
 	}
 	else if (str.find('[') != std::string::npos || str.find(']') != std::string::npos)

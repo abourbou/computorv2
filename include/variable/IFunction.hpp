@@ -16,4 +16,5 @@ class	IFunction: public IVariable
 
 		virtual const IValue	*fct_computation(const IValue *value) const = 0;
 		std::string		get_var(void) const;
+		virtual void		display(void) const;
 };

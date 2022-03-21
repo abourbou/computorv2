@@ -110,7 +110,7 @@ IValue	*Matrix::operator+(const IValue *rhs) const
 	{
 		m_var = static_cast<const Matrix *>(rhs);
 		if (m_var->_size[0] != _size[0] || m_var->_size[1] != _size[1])
-			throw(std::runtime_error("different size matrices, can't add"));
+			throw(std::runtime_error("can't add different size matrices"));
 		new_Matrix = new Matrix(*this);
 		for (size_t i = 0; i < _size[0]; ++i)
 		{
@@ -132,7 +132,7 @@ IValue	*Matrix::operator-(const IValue *rhs) const
 	{
 		m_var = static_cast<const Matrix *>(rhs);
 		if (m_var->_size[0] != _size[0] || m_var->_size[1] != _size[1])
-			throw(std::runtime_error("different size matrices, can't sub"));
+			throw(std::runtime_error("can't sub different size matrices"));
 		new_Matrix = new Matrix(*this);
 		for (size_t i = 0; i < _size[0]; ++i)
 		{
@@ -155,7 +155,7 @@ IValue	*Matrix::operator*(const IValue *rhs) const
 	{
 		m_var = static_cast<const Matrix *>(rhs);
 		if (m_var->_size[0] != _size[0] || m_var->_size[1] != _size[1])
-			throw(std::runtime_error("matrices of different size, can't mult"));
+			throw(std::runtime_error("can't mult term to term matrices of different size"));
 		new_Matrix = new Matrix(*this);
 		for (size_t i = 0; i < _size[0]; ++i)
 		{
@@ -251,6 +251,7 @@ void	Matrix::display(void) const
 		for (size_t i = 0; i < _size[0]; ++i)
 			vect_str[i][j] = std::string(max_size[j] - vect_str[i][j].size(), ' ') + vect_str[i][j];
 	//display the matrix
+	std::cout << BYellow;
 	for (size_t i = 0; i < _size[0]; ++i)
 	{
 		std::cout << '[';
@@ -264,6 +265,7 @@ void	Matrix::display(void) const
 		}
 		std::cout << ']' << std::endl;
 	}
+	std::cout << Color_Off;
 }
 
 const std::vector<std::vector<double> >	&Matrix::get_arr(void) const

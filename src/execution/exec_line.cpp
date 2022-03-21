@@ -3,6 +3,7 @@
 #include "execution.hpp"
 #include "parsing.hpp"
 #include "string_function.hpp"
+#include "color_code.hpp"
 
 /**
  * @brief check if the line doesn't have forbidden character + put it in a correct way
@@ -21,7 +22,7 @@ std::string	regulate_string(std::string line)
 	{
 		char &c = *it;
 		if (!isalnum(c) && allowed_symboles.find(c) == std::string::npos)
-			throw(std::runtime_error("Forbidden character"));
+			throw(std::runtime_error("forbidden character"));
 		++it;
 	}
 	return(line);
@@ -44,7 +45,7 @@ Task	compt_or_getvar(std::string str)
 	//find expr
 	end = str.find(")");
 	if (end == std::string::npos || end <= start + 1 || end != str.size() - 1)
-		throw std::runtime_error("unvalid syntax");
+		throw std::runtime_error("unvalid function syntax");
 	var = str.substr(start + 1, end - start - 1);
 
 	const IVariable *Ivar = map.get_var(fct);
@@ -107,7 +108,7 @@ Task		find_task(std::string line)
 	}
 	else
 	{
-		throw(std::runtime_error("More than one equal sign"));
+		throw(std::runtime_error("more than one equal sign"));
 	}
 	return (Assign_func);
 }
@@ -118,7 +119,7 @@ void	exec_line(std::string line)
 {
 	static std::string	list_task[] = {"command","variable assignation",
 						"function assignation", "computation",
-						"get variable", "polynom resolution"};
+						"access variable", "polynom resolution"};
 	Task		n_task;
 	std::string current_task = "parsing";
 
@@ -131,17 +132,13 @@ void	exec_line(std::string line)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Error in the " + current_task << std::endl;
+		std::cerr << BRed "Error during " + current_task+ " : " << Color_Off;
 		std::cerr << e.what() << std::endl;
 	}
 }
 
 void	exec_task(Task task, std::string line)
 {
-	//TODO erase it
-	static std::string	list_task[] = {"command","variable assignation",
-						"function assignation", "computation",
-						"get variable", "polynom resolution"};
 	if (task == Command)
 		exec_command(line);
 	else if (task == Assign_var)
@@ -155,7 +152,5 @@ void	exec_task(Task task, std::string line)
 	else if (task == Resolv_Polyn)
 		exec_polyn(line);
 	else
-	{
-		std::cout << "Cannot executate task n" << task << " for now" << std::endl;
-	}
+		throw std::runtime_error("unknown task");
 }

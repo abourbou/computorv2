@@ -17,13 +17,15 @@ void	exec_assign_var(std::string line)
 	std::string expr1(line.begin(), it_equal);
 	std::string expr2(++it_equal, line.end());
 
-	if (expr1.empty() || expr2.empty())
-		throw(std::runtime_error("empty expression"));
+	if (expr1.empty())
+		throw std::runtime_error("empty name variable");
+	else if (expr2.empty())
+		throw(std::runtime_error("no expression"));
 	else if (!is_alpha(expr1))
 		throw(std::runtime_error("variable must only contain alphabetic characters"));
 
 	std::list<token_ptr> list_token;
-	lexer_computation(expr2, list_token);
+	lexer(expr2, list_token);
 	std::shared_ptr<IValue>	result(computation(list_token));
 	map.add_var(expr1, result.get());
 	result->display();

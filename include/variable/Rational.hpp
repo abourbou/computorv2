@@ -43,7 +43,6 @@ class Rational : public IValue
 		//methods to visualize the value
 		IVariable			*clone(void) const;
 		virtual std::string	to_string(void) const;
-		virtual void		display(void) const;
 };
 
 std::ostream	&operator<<(std::ostream &o, const Rational &rhs);

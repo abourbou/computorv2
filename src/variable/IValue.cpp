@@ -14,43 +14,49 @@ IValue &IValue::operator=(const IValue &rhs)
 IValue *IValue::operator+(const IValue *rhs) const
 {
 	(void)rhs;
-	throw(std::runtime_error("+ is invalid operation"));
+	throw(std::runtime_error("+ is an invalid operation"));
 }
 
 IValue *IValue::operator-(const IValue *rhs) const
 {
 	(void)rhs;
-	throw(std::runtime_error("- is invalid operation"));
+	throw(std::runtime_error("- is an invalid operation"));
 }
 
 IValue *IValue::operator*(const IValue *rhs) const
 {
 	(void)rhs;
-	throw(std::runtime_error("* is invalid operation"));
+	throw(std::runtime_error("* is an invalid operation"));
 }
 
 IValue *IValue::operator/(const IValue *rhs) const
 {
 	(void)rhs;
-	throw(std::runtime_error("/ is invalid operation"));
+	throw(std::runtime_error("/ is an invalid operation"));
 }
 
 IValue *IValue::operator%(const IValue *rhs) const
 {
 	(void)rhs;
-	throw(std::runtime_error("% is invalid operation"));
+	throw(std::runtime_error("% is an invalid operation"));
 }
 
 IValue *IValue::operator^(const IValue *rhs) const
 {
 	(void)rhs;
-	throw(std::runtime_error("^ is invalid operation"));
+	throw(std::runtime_error("^ is an invalid operation"));
 }
 
 IValue *IValue::Matrix_mult(const IValue *rhs) const
 {
 	(void)rhs;
-	throw(std::runtime_error("** is invalid operation"));
+	throw(std::runtime_error("** is an invalid operation"));
+}
+
+void		IValue::display(void) const
+{
+	std::cout << BYellow << this->to_string() << Color_Off << std::endl;
+
 }
 
 std::ostream	&operator<<(std::ostream &o, const IValue &rhs)

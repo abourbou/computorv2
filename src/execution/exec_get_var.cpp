@@ -29,7 +29,7 @@ void	exec_get_var(std::string line)
 		
 		const IVariable *value = map.get_var(fct_str);
 		if (value->get_type() != variable_type::function)
-			throw std::runtime_error(fct_str + " is a variable");
+			throw std::runtime_error(fct_str + " is not a function");
 		const IFunction *fct = static_cast<const IFunction *>(map.get_var(fct_str));
 		if (fct->get_var() != var)
 			throw std::runtime_error("unvalid argument for the function");

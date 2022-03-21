@@ -22,7 +22,7 @@ void	test_token(std::string str)
 	erase_white_space(str);
 	std::cout << "test: {" + str + "}" << std::endl;
 	try {
-		lexer_computation(str, my_list);
+		lexer(str, my_list);
 		print_list_token(my_list);
 		const IValue *buffer_value = computation(my_list);
 		std::cout << "result : " << buffer_value->to_string() << std::endl;

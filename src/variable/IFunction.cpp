@@ -22,3 +22,8 @@ std::string	IFunction::get_var(void) const
 {
 	return (_var);
 }
+
+void		IFunction::display(void) const
+{
+	std::cout << BBlue << this->to_string() << Color_Off << std::endl;
+}
