@@ -16,10 +16,10 @@ Rational::Rational(std::string str) : IValue(variable_type::rational)
 	for	(auto it = str.end(); std::isspace(*it); --it)
 		--length;
 	if (length == 0)
-		throw(std::runtime_error("invalid rational"));
+		throw(std::runtime_error("invalid value"));
 	idx = str.find_first_not_of(" \f\n\r\t\v");
 	if (!isdigit(str[idx]) && str[idx] != '+' && str[idx] != '-')
-		throw(std::runtime_error("invalid rational"));
+		throw(std::runtime_error("invalid value"));
 	if(str[idx] == '+' || str[idx] == '-')
 	{
 		if (str[idx] == '-')
@@ -28,7 +28,7 @@ Rational::Rational(std::string str) : IValue(variable_type::rational)
 	}
 	this->_value = std::stod(str, &idx);
 	if (idx != length)
-		throw(std::runtime_error("invalid rational"));
+		throw(std::runtime_error("invalid value"));
 }
 
 Rational::Rational(double value) : IValue(variable_type::rational), _value(value)
@@ -157,7 +157,7 @@ IValue	*Rational::operator%(const IValue *rhs) const
 	{
 		r_var = static_cast<const Rational*>(rhs);
 		if (!is_an_int(this->_value) || !is_an_int(r_var->_value))
-			throw("modulo can be applied only with 2 integers");
+			throw std::runtime_error("modulo can be applied only with 2 integers");
 		a = this->_value;
 		b = r_var->_value;
 		if (b == 0)

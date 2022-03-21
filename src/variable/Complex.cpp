@@ -194,7 +194,8 @@ std::string	Complex::to_string(void) const
 				str += " + ";
 			else
 				str += " - ";
-			str += double_to_string(ft_abs(this->_imag_part));
+			if (this->_imag_part != 1)
+				str += double_to_string(ft_abs(this->_imag_part));
 			str += "i";
 		}
 	}

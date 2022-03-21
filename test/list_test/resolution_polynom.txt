@@ -1,8 +1,8 @@
 //resolution
 
-4X + 3 = -5 ?
+4* X + 3 = -5 ?
 
-4exit + 23exit = 45 ? //error exit can't be a variable
+4*exit + 23*exit = 45 ?
 
 4W^2 - 3 ? = 4
 
