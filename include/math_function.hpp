@@ -16,6 +16,7 @@
 double		ft_sqrt(double number);
 IValue		*fct_sqrt(const IValue *value);
 IValue		*fct_norm(const IValue *value);
+IValue		*fct_abs(const IValue *value);
 
 //trigo
 double		ft_sin(double nb);
@@ -26,9 +27,9 @@ IValue		*fct_cos(const IValue *value);
 IValue		*fct_tan(const IValue *value);
 
 //exp, log and pow
-double	ft_exp(double nb); 
-double	ft_ln(double nb);
-double ft_log(double nb);
+double		ft_exp(double nb); 
+double		ft_ln(double nb);
+double		ft_log(double nb);
 IValue		*fct_exp(const IValue *value);
 IValue		*fct_ln(const IValue *value);
 IValue		*fct_log(const IValue *value);

@@ -17,6 +17,7 @@ Map_variable::Map_variable(void)
 	//forbidden values
 	insert_var("exit", 0, Forbidden);
 	insert_var("test", 0, Forbidden);
+	insert_var("help", 0, Forbidden);
 
 	//const values
 	insert_var("i", new Complex(0, 1), Reserved);
@@ -25,6 +26,7 @@ Map_variable::Map_variable(void)
 
 	//const function
 	insert_var("sqrt", new Explic_fct("sqrt", fct_sqrt), Reserved);
+	insert_var("abs", new Explic_fct("abs", fct_abs), Reserved);
 	insert_var("norm", new Explic_fct("norm", fct_norm), Reserved);
 	insert_var("sin", new Explic_fct("sin", fct_sin), Reserved);
 	insert_var("cos", new Explic_fct("cos", fct_cos), Reserved);

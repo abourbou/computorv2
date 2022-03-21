@@ -13,3 +13,5 @@
 4z / (3z - 1) - 0 ? //error not autorized
 
 4z - 3u = 0 ? //error more than one variable
+
+x^2 - x = 5?
