@@ -1,4 +1,4 @@
-# computorv2
+# 🤖 computorv2 🤖
 An elaborate calculator with differents types of variable, operators, commands and functions.
 
 ### It supports :
